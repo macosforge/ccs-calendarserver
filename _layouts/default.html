@@ -1,3 +1,6 @@
+{% assign page_url_parts = page.url | split: '/' %}
+{% assign page_url_level = page_url_parts | size %}
+{% capture relative_root_url %}{% if page_url_level < 2 %}.{% else %}{% for i in (2..page_url_level) %}..{% if i < page_url_level %}/{% endif %}{% endfor %}{% endif %}{% endcapture %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page.title }}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{{ '/styles.css' | prepend: relative_root_url }}" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
@@ -26,7 +30,7 @@
         </div>
       </div>
     </div>
-    <footer>
+    <footer class="sticky-footer">
       <div class="container">
         <p class="text-muted">Copyright &copy; {{ 'now' | date: "%Y" }} Apple Inc. All rights reserved.</p>
       </div>
