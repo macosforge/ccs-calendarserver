@@ -5,5 +5,10 @@ defaults:
       path: ""
     values:
       layout: "default"
+exclude:
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - README.md
 title: "Calendar and Contact Server"
 url: "https://www.calendarserver.org"
