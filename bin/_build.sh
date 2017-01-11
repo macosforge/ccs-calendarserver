@@ -777,7 +777,9 @@ macos_oracle () {
 
 bootstrap_virtualenv () {
   mkdir -p "${py_ve_tools}";
-  export PYTHONUSERBASE="${py_ve_tools}"
+  export PYTHONUSERBASE="${py_ve_tools}";
+  # If we're already in a venv, don't use --user flag for pip install
+  if [ -z ${VIRTUAL_ENV:-} ]; then NESTED="--user" ; else NESTED=""; fi
 
   for pkg in             \
       setuptools==18.5    \
@@ -785,7 +787,7 @@ bootstrap_virtualenv () {
       virtualenv==15.0.2  \
   ; do
       ruler "Installing ${pkg}";
-      "${bootstrap_python}" -m pip install -I --user "${pkg}";
+      "${bootstrap_python}" -m pip install -I ${NESTED} "${pkg}";
   done;
 }
 
