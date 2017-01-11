@@ -1,9 +1,11 @@
 language: python
-python:
-  - "2.7"
+python: 2.7
+# UTF-8 encoding is required
+before_install:
+- export LANG=en_US.UTF-8
 # command to install dependencies
-install: "bin/develop"
+install: bin/develop
 # command to run tests
 script:
-- "bin/test"
-- "bin/testserver"
+- bin/test
+- bin/testserver
