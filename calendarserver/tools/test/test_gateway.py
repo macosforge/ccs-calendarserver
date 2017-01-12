@@ -210,7 +210,7 @@ class GatewayTestCase(RunCommandTestCase):
         self.assertEquals(results["result"]["RecordName"], ["createdlocation01"])
         self.assertEquals(
             results["result"]["RealName"],
-            "Created Location 01 %s %s" % (unichr(208), u"\ud83d\udca3"))
+            "Created Location 01 %s %s" % (unichr(208), u"\U0001f4a3"))
         # self.assertEquals(results["result"]["Comment"], "Test Comment")
         self.assertEquals(results["result"]["AutoScheduleMode"], u"acceptIfFree")
         self.assertEquals(results["result"]["AutoAcceptGroup"], "E5A6142C-4189-4E9E-90B0-9CD0268B314B")
@@ -248,7 +248,7 @@ class GatewayTestCase(RunCommandTestCase):
         record = yield self.directory.recordWithUID("C701069D-9CA1-4925-A1A9-5CD94767B74B")
         self.assertEquals(
             record.displayName,
-            "Created Address 01 %s %s" % (unichr(208), u"\ud83d\udca3")
+            "Created Address 01 %s %s" % (unichr(208), u"\U0001f4a3")
         )
 
         self.assertEquals(record.abbreviatedName, "Addr1")
@@ -286,7 +286,7 @@ class GatewayTestCase(RunCommandTestCase):
         record = yield self.directory.recordWithUID("836B1B66-2E9A-4F46-8B1C-3DD6772C20B2")
         self.assertEquals(
             record.fullNames[0],
-            u"Created Location 01 %s %s" % (unichr(208), u"\ud83d\udca3"))
+            u"Created Location 01 %s %s" % (unichr(208), u"\U0001f4a3"))
 
         self.assertNotEquals(record, None)
         # self.assertEquals(record.autoScheduleMode, "")
@@ -475,7 +475,7 @@ class GatewayTestCase(RunCommandTestCase):
         self.assertEquals(results["result"]["EnableCardDAV"], False)
         self.assertEquals(results["result"]["EnableSSL"], True)
         self.assertEquals(results["result"]["Notifications"]["Services"]["APNS"]["Enabled"], True)
-        hostName = "hostname_%s_%s" % (unichr(208), u"\ud83d\udca3")
+        hostName = "hostname_%s_%s" % (unichr(208), u"\U0001f4a3")
         self.assertTrue(results["result"]["ServerHostName"].endswith(hostName))
 
         # The static plist should still have EnableCalDAV = True
@@ -533,7 +533,7 @@ command_createAddress = """<?xml version="1.0" encoding="UTF-8"?>
         <string>geo:37.331,-122.030</string>
 </dict>
 </plist>
-""" % (unichr(208), u"\ud83d\udca3")
+""" % (unichr(208), u"\U0001f4a3")
 
 
 command_createLocation = """<?xml version="1.0" encoding="UTF-8"?>
@@ -578,7 +578,7 @@ command_createLocation = """<?xml version="1.0" encoding="UTF-8"?>
         </array>
 </dict>
 </plist>
-""" % (unichr(208), u"\ud83d\udca3")
+""" % (unichr(208), u"\U0001f4a3")
 
 
 command_createLocationMinimal = """<?xml version="1.0" encoding="UTF-8"?>
@@ -962,4 +962,4 @@ command_writeConfig = """<?xml version="1.0" encoding="UTF-8"?>
         </dict>
 </dict>
 </plist>
-""" % (unichr(208), u"\ud83d\udca3")
+""" % (unichr(208), u"\U0001f4a3")
