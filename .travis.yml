@@ -1,11 +1,10 @@
 language: python
 python: 2.7
-# UTF-8 encoding is required
-before_install:
-- export LANG=en_US.UTF-8
 # command to install dependencies
 install: bin/develop > /dev/null
-# command to run tests
+# Configure separate jobs for unit tests and CalDAVTester
+env:
+    - TEST_SUITE=bin/test
+    - TEST_SUITE=bin/testserver
 script:
-- bin/test
-- bin/testserver
+    - $TEST_SUITE
