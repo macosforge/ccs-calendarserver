@@ -4,7 +4,9 @@ python: 2.7
 install: bin/develop > /dev/null
 # Configure separate jobs for unit tests and CalDAVTester
 env:
-    - TEST_SUITE=bin/test
-    - TEST_SUITE=bin/testserver
+    - TEST_SUITE="type -a initdb postgres"
+    - TEST_SUITE=bin/testsim
+#    - TEST_SUITE=bin/test
+#    - TEST_SUITE=bin/testserver
 script:
     - $TEST_SUITE
