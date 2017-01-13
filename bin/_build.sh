@@ -403,11 +403,12 @@ jmake () {
       ;;
   esac;
 
-  if [ -n "${ncpu:-}" ] && [[ "${ncpu}" =~ ^[0-9]+$ ]]; then
-    make -j "${ncpu}" "$@";
-  else
-    make "$@";
-  fi;
+  case "${ncpu}" in
+    ''|*[!0-9]*)
+      make "$@" ;;
+    *)
+      make -j "${ncpu}" "$@" ;;
+  esac;
 }
 
 # Declare a dependency on a C project built with autotools.
