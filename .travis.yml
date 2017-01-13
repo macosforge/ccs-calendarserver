@@ -1,11 +1,11 @@
 language: python
 python: 2.7
 # command to install dependencies
-install: bin/develop > /dev/null
+install: bin/develop
 # Configure separate jobs for unit tests and CalDAVTester
 env:
     - TEST_SUITE="type -a initdb postgres"
-    - TEST_SUITE=bin/testsim
+#    - TEST_SUITE=bin/testsim
 #    - TEST_SUITE=bin/test
 #    - TEST_SUITE=bin/testserver
 script:
