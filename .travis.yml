@@ -1,12 +1,16 @@
 language: python
 python: 2.7
+
 # command to install dependencies
-install: bin/develop
-# Configure separate jobs for unit tests and CalDAVTester
+# redirect to /dev/null to stay under travis' 10k line limit
+install: bin/develop > /dev/null
+
+# Configure separate jobs for each test suite
 env:
-    - TEST_SUITE="type -a initdb postgres"
+# TODO - not yet passing cleanly in the travis environment, so disabled for now
 #    - TEST_SUITE=bin/testsim
 #    - TEST_SUITE=bin/test
-#    - TEST_SUITE=bin/testserver
+
+    - TEST_SUITE=bin/testserver
 script:
     - $TEST_SUITE
