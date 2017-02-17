@@ -144,7 +144,7 @@ class ConfigTestCase(RunCommandTestCase):
         self.assertEquals(results["result"]["EnableCardDAV"], False)
         self.assertEquals(results["result"]["EnableSSL"], True)
         self.assertEquals(results["result"]["Notifications"]["Services"]["APNS"]["Enabled"], True)
-        hostName = "hostname_%s_%s" % (unichr(208), u"\ud83d\udca3")
+        hostName = "hostname_%s_%s" % (unichr(208), u"\U0001f4a3")
         self.assertTrue(results["result"]["ServerHostName"].endswith(hostName))
 
         # We tried to modify ServerRoot, but make sure our change did not take
@@ -480,7 +480,7 @@ command_writeConfig = """<?xml version="1.0" encoding="UTF-8"?>
         </dict>
 </dict>
 </plist>
-""" % (unichr(208), u"\ud83d\udca3")
+""" % (unichr(208), u"\U0001f4a3")
 
 command_bogusCommand = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
