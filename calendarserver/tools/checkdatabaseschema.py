@@ -303,6 +303,10 @@ def main():
         else:
             raise NotImplementedError(opt)
 
+    if not os.access(PSQL, os.X_OK):
+        sys.stderr.write("Executable copy of PSQL not found at {}. Exiting\n".format(PSQL))
+        sys.exit(0)
+        
     # Retrieve the db_version number of the installed schema
     try:
         db_version = getSchemaVersion(verbose=verbose)
