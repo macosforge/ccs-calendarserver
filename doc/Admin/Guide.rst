@@ -80,9 +80,10 @@ Ubuntu 13.10 server:
 ::
 
  sudo apt-get install build-essential git python-setuptools curl \
- libssl-dev libreadline6-dev python-dev libkrb5-dev
+ libssl-dev libreadline6-dev python-dev libkrb5-dev libffi-dev \
+ libldap2-dev libsasl2-dev zlib1g-dev
 
-Next, run ``bin/develop`` to get the remaining dependencies
+Next, run ``bin/develop`` to get the remaining dependencies (note that for some releases on some distributions it may be necessary to run ``/bin/bash bin/develop`` to force the script to run under the bash shell)
 
 (to be continued...)
 
