@@ -1285,11 +1285,13 @@ class TestSharingSync(MultiStoreConduitTest):
     }
 
     @inlineCallbacks
-    def _createShare(self, shareFrom, shareTo, accept=True):
+    def _createShare(self, shareFrom, shareTo, accept=True, name="calendar"):
         # Invite
         txnindex = 1 if shareFrom[0] == "p" else 0
         home = yield self.homeUnderTest(txn=self.theTransactionUnderTest(txnindex), name=shareFrom, create=True)
-        calendar = yield home.childWithName("calendar")
+        if name != "calendar":
+            yield home.createChildWithName(name)
+        calendar = yield home.childWithName(name)
         shareeView = yield calendar.inviteUIDToShare(shareTo, _BIND_MODE_READ, "summary")
         yield self.commitTransaction(txnindex)
 
@@ -1323,6 +1325,7 @@ class TestSharingSync(MultiStoreConduitTest):
 
         # Shared to migrating user
         shared_name_04 = yield self._createShare("user04", "user01")
+        shared_name_04a = yield self._createShare("user04", "user01", True, "shared")
         shared_name_05 = yield self._createShare("puser05", "user01")
 
         # Sync from remote side
@@ -1333,7 +1336,7 @@ class TestSharingSync(MultiStoreConduitTest):
         changes = yield syncer.sharedByCollectionsReconcile()
         self.assertEqual(changes, 2)
         changes = yield syncer.sharedToCollectionsReconcile()
-        self.assertEqual(changes, 2)
+        self.assertEqual(changes, 3)
 
         # Local calendar exists with shares
         home1 = yield self.homeUnderTest(txn=self.theTransactionUnderTest(1), name="user01", status=_HOME_STATUS_MIGRATING)
