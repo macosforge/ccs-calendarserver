@@ -203,7 +203,7 @@ init_build () {
   fi;
 
   default_requirements="${wd}/requirements-default.txt";
-  use_openssl="true";
+  use_openssl="false";
 
   # Use SecureTransport instead of OpenSSL if possible, unless told otherwise
   if [ -z "${USE_OPENSSL-}" ]; then 
