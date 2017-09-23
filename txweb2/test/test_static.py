@@ -93,9 +93,10 @@ Content-Type: %s\r
 -----weeboundary--\r
 """ % (fieldname, filename, mimetype, content))
 
-    def _CbAssertInResponse(self, (code, headers, data, failed),
+    def _CbAssertInResponse(self, xxx_todo_changeme,
                             expected_response, expectedFailure=False):
 
+        (code, headers, data, failed) = xxx_todo_changeme
         expected_code, expected_headers, expected_data = expected_response
         self.assertEquals(code, expected_code)
 

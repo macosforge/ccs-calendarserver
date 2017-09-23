@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 ##
 # Copyright (c) 2010-2017 Apple Inc. All rights reserved.
 #
@@ -16,7 +17,7 @@
 
 from twisted.trial.unittest import TestCase
 
-from benchmarks.event_change_date import replaceTimestamp
+from .benchmarks.event_change_date import replaceTimestamp
 
 calendarHead = """\
 BEGIN:VCALENDAR

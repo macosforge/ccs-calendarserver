@@ -175,7 +175,7 @@ def doToEachHomeNotAtVersion(store, homeSchema, version, doIt, logStr, filterOwn
                 Where=homeSchema.RESOURCE_ID == homeResourceID,
             ).on(txn)
             yield txn.commit()
-        except RuntimeError, e:
+        except RuntimeError as e:
             f = Failure()
             logUpgradeError(
                 logStr,

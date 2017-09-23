@@ -76,7 +76,7 @@ def timed(f):
         """
         startTime = time.time()
         d = f(self, *args, **kwds)
-        d.addBoth(recordTiming, f.func_name, startTime)
+        d.addBoth(recordTiming, f.__name__, startTime)
         return d
 
     return timingWrapper

@@ -43,6 +43,7 @@ sample is shown below:
     }
 }
 """
+from __future__ import print_function
 
 from argparse import HelpFormatter, SUPPRESS, OPTIONAL, ZERO_OR_MORE, \
     ArgumentParser

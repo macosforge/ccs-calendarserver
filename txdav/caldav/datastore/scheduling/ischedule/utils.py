@@ -61,7 +61,7 @@ def lookupServerViaSRV(domain, service="_ischedules"):
     log.debug("DNS SRV: lookup: {l}", l=lookup)
     try:
         answers = (yield DebugResolver.lookupService(lookup))[0]
-    except (DomainError, AuthoritativeDomainError), e:
+    except (DomainError, AuthoritativeDomainError) as e:
         log.debug("DNS SRV: lookup failed: {exc}", exc=e)
         returnValue(None)
 
@@ -123,7 +123,7 @@ def lookupDataViaTXT(domain, prefix=""):
     log.debug("DNS TXT: lookup: {l}", l=lookup)
     try:
         answers = (yield DebugResolver.lookupText(lookup))[0]
-    except (DomainError, AuthoritativeDomainError), e:
+    except (DomainError, AuthoritativeDomainError) as e:
         log.debug("DNS TXT: lookup failed: {exc}", exc=e)
         answers = ()
 

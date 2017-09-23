@@ -215,7 +215,7 @@ class DigestAuthTestCase(TestCase):
     def assertRaisesDeferred(self, exception, f, *args, **kwargs):
         try:
             result = (yield f(*args, **kwargs))
-        except exception, inst:
+        except exception as inst:
             returnValue(inst)
         except:
             raise self.failureException('%s raised instead of %s:\n %s'
@@ -598,7 +598,7 @@ class DigestAuthTestCase(TestCase):
                 self.fail("Nonce should have timed out")
             except error.LoginFailed:
                 self.assertTrue(hasattr(request.remoteAddr, "stale"))
-            except Exception, e:
+            except Exception as e:
                 self.fail("Invalid exception from nonce timeout: %s" % e)
             challenge = (yield factory.getChallenge(request.remoteAddr))
             self.assertTrue(challenge.get("stale") == "true")

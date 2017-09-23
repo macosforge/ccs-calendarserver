@@ -497,7 +497,7 @@ Connection:close
                 TestPublicKeyLookup.PublicKeyLookup_Testing.flushCache()
                 try:
                     yield verifier.verify()
-                except Exception, e:
+                except Exception as e:
                     if result:
                         self.fail("DKIMVerifier:verify failed: %s" % (e,))
                 else:

@@ -95,7 +95,7 @@ def main():
     masterPassword = ""
     try:
         (optargs, args) = getopt(sys.argv[1:], "hn:p:u:", ["help"])
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     for opt, arg in optargs:
@@ -150,7 +150,7 @@ def main():
                     print("Failed to set password for %s: %s" % (recordName, error))
                 else:
                     print("Successfully set password for %s" % (recordName,))
-            except ODError, e:
+            except ODError as e:
                 print("Failed to create user %s: %s" % (recordName, e))
         else:
             print("User %s already exists" % (recordName,))

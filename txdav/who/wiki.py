@@ -390,7 +390,7 @@ def uidForAuthToken(token, descriptor):
     jsonResponse = (yield _getPage(url, descriptor))
     try:
         response = json.loads(jsonResponse)
-    except Exception, e:
+    except Exception as e:
         log.error(
             "Error parsing JSON response from webauth: {resp} {error}",
             resp=jsonResponse, error=str(e)

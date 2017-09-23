@@ -265,7 +265,7 @@ def report_urn_ietf_params_xml_ns_caldav_calendar_query(self, request, calendar_
     try:
         depth = request.headers.getHeader("depth", "0")
         yield report_common.applyToCalendarCollections(self, request, request.uri, depth, doQuery, (davxml.Read(),))
-    except TooManyInstancesError, ex:
+    except TooManyInstancesError as ex:
         log.error("Too many instances need to be computed in calendar-query report")
         raise HTTPError(ErrorResponse(
             responsecode.FORBIDDEN,
@@ -279,13 +279,13 @@ def report_urn_ietf_params_xml_ns_caldav_calendar_query(self, request, calendar_
             davxml.NumberOfMatchesWithinLimits(),
             "Too many components",
         ))
-    except TimeRangeLowerLimit, e:
+    except TimeRangeLowerLimit as e:
         raise HTTPError(ErrorResponse(
             responsecode.FORBIDDEN,
             caldavxml.MinDateTime(),
             "Time-range value too far in the past. Must be on or after %s." % (str(e.limit),)
         ))
-    except TimeRangeUpperLimit, e:
+    except TimeRangeUpperLimit as e:
         raise HTTPError(ErrorResponse(
             responsecode.FORBIDDEN,
             caldavxml.MaxDateTime(),

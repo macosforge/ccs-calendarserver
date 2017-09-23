@@ -277,7 +277,7 @@ class Table(object):
             colData = ""
 
         columnFormat = format[column] if format and column < len(format) else Table.ColumnFormat()
-        if type(colData) in types.StringTypes:
+        if type(colData) in (str,):
             text = colData
         else:
             text = columnFormat.format % colData

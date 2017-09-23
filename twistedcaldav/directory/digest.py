@@ -164,7 +164,7 @@ class QopDigestCredentialFactory(DigestCredentialFactory):
         c = challenge['nonce']
 
         # Make sure it is not a duplicate
-        result = (yield self.db.has_key(c))  # @IgnorePep8
+        result = (yield c in self.db)  # @IgnorePep8
         if result:
             raise AssertionError("nonce value already cached in credentials database: %s" % (c,))
 

@@ -77,6 +77,6 @@ if __name__ == "__main__":
             cal.parse(open(arg))
             print(str(cal.serialize()))
 
-    except Exception, e:
+    except Exception as e:
         sys.exit(str(e))
         print(traceback.print_exc())

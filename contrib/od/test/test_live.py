@@ -59,7 +59,7 @@ if moduleImported:
                 result = yield func(self)
                 returnValue(result)
             else:
-                print("OD not populated, skipping {}".format(func.func_name))
+                print("OD not populated, skipping {}".format(func.__name__))
         return checkThenRun
 
     class LiveOpenDirectoryServiceTestCase(unittest.TestCase):

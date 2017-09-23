@@ -18,6 +18,7 @@
 """
 SQL Table definitions.
 """
+from __future__ import print_function
 
 from twisted.python.modules import getModule
 from twext.enterprise.dal.syntax import SchemaSyntax, QueryGenerator
@@ -444,13 +445,13 @@ if __name__ == '__main__':
     version = sys.argv[1] if len(sys.argv) == 2 else None
     current, extras, out = _schemaFiles(version)
 
-    print "Reading from {}".format(current.path)
-    print "Extras from  {}".format(extras.path) if extras.exists() else "No extras"
-    print "Writing to   {}".format(out.path)
+    print("Reading from {}".format(current.path))
+    print("Extras from  {}".format(extras.path) if extras.exists() else "No extras")
+    print("Writing to   {}".format(out.path))
 
     with out.open("w") as outfd:
         schema = _populateSchema(current)
         _translateSchema(outfd, schema=schema)
         _schemaExtras(outfd, extras)
 
-    print "Done"
+    print("Done")

@@ -16,6 +16,7 @@
 # limitations under the License.
 ##
 
+from __future__ import print_function
 import getopt
 import os
 import sys
@@ -37,7 +38,7 @@ if __name__ == "__main__":
         elif option == "-d":
             document_root = os.path.abspath(value)
         else:
-            print "Unrecognized option: %s" % (option,)
+            print("Unrecognized option: %s" % (option,))
             raise ValueError
 
     for ctr in (xrange(user_one, user_one + 1) if user_one else xrange(1, user_max + 1)):
@@ -55,7 +56,7 @@ if __name__ == "__main__":
 
         for calendar in calendars:
             if not os.path.isdir(os.path.join(path, calendar)):
-                print "Expanding %s to %s" % (calendar, path)
+                print("Expanding %s to %s" % (calendar, path))
                 cmd = "tar -C %r -zx -f %r" % (path,
                                                os.path.join(wd,
                                                             calendar + ".tgz"))

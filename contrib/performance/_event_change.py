@@ -17,6 +17,7 @@
 """
 Benchmark a server's handling of event summary changes.
 """
+from __future__ import absolute_import
 
 from itertools import count
 
@@ -28,12 +29,12 @@ from twisted.web.client import Agent
 from twisted.web.http_headers import Headers
 from twisted.web.http import NO_CONTENT
 
-from httpauth import AuthHandlerAgent
-from httpclient import StringProducer
+from .httpauth import AuthHandlerAgent
+from .httpclient import StringProducer
 
-from benchlib import initialize, sample
+from .benchlib import initialize, sample
 
-from _event_create import makeEvent
+from ._event_create import makeEvent
 
 
 @inlineCallbacks

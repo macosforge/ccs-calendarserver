@@ -164,7 +164,7 @@ class ValidService(WorkerService, object):
             if fixed:
                 print("Calendar data had fixable problems:\n  %s" % ("\n  ".join(fixed),))
 
-        except ValueError, e:
+        except ValueError as e:
             result = False
             message = str(e)
             if message.startswith(errorPrefix):
@@ -187,7 +187,7 @@ class ValidService(WorkerService, object):
             component.validCalendarData(doFix=False, validateRecurrences=True)
             component.validCalendarForCalDAV(methodAllowed=True)
             component.validOrganizerForScheduling(doFix=False)
-        except ValueError, e:
+        except ValueError as e:
             result = False
             message = str(e)
             if message.startswith(errorPrefix):
@@ -208,12 +208,12 @@ def main(argv=sys.argv, stderr=sys.stderr, reactor=None):
     options.parseOptions(argv[1:])
     try:
         output = options.openOutput()
-    except IOError, e:
+    except IOError as e:
         stderr.write("Unable to open output file for writing: %s\n" % (e))
         sys.exit(1)
     try:
         input = options.openInput()
-    except IOError, e:
+    except IOError as e:
         stderr.write("Unable to open input file for reading: %s\n" % (e))
         sys.exit(1)
 

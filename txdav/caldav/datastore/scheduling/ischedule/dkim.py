@@ -89,7 +89,7 @@ class DKIMUtils(object):
             try:
                 with open(config.Scheduling.iSchedule.DKIM.PrivateKeyFile) as f:
                     key_data = f.read()
-            except IOError, e:
+            except IOError as e:
                 msg = "DKIM: Cannot read private key file: %s %s" % (config.Scheduling.iSchedule.DKIM.PrivateKeyFile, e,)
                 log.error(msg)
                 raise ConfigurationError(msg)
@@ -103,7 +103,7 @@ class DKIMUtils(object):
             try:
                 with open(config.Scheduling.iSchedule.DKIM.PublicKeyFile) as f:
                     key_data = f.read()
-            except IOError, e:
+            except IOError as e:
                 msg = "DKIM: Cannot read public key file: %s %s" % (config.Scheduling.iSchedule.DKIM.PublicKeyFile, e,)
                 log.error(msg)
                 raise ConfigurationError(msg)
@@ -118,7 +118,7 @@ class DKIMUtils(object):
                 if not os.path.exists(config.Scheduling.iSchedule.DKIM.PrivateExchanges):
                     try:
                         os.makedirs(config.Scheduling.iSchedule.DKIM.PrivateExchanges)
-                    except IOError, e:
+                    except IOError as e:
                         msg = "DKIM: Cannot create public key private exchange directory: %s" % (config.Scheduling.iSchedule.DKIM.PrivateExchanges,)
                         log.error(msg)
                         raise ConfigurationError(msg)
@@ -911,7 +911,7 @@ class PublicKeyLookup_PrivateExchange(PublicKeyLookup):
         try:
             with open(keyfile) as f:
                 keys = f.read()
-        except IOError, e:
+        except IOError as e:
             log.debug("DKIM: Failed private-exchange lookup: could not read {path} {ex}", path=keyfile, ex=e)
             return succeed(())
 
@@ -944,7 +944,7 @@ class DomainKeyResource (SimpleResource):
         try:
             with open(pubkeyfile) as f:
                 key_data = f.read()
-        except IOError, e:
+        except IOError as e:
             log.error("DKIM: Unable to open the public key file: {path} because of {ex}", path=pubkeyfile, ex=e)
             raise
 

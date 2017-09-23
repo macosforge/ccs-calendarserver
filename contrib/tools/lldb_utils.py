@@ -50,6 +50,7 @@ pylocals - generate a list of the name and values of all locals in the current
     python frame (only works when the currently selected frame is a Python call
     frame as found by the pybt command).
 """
+from __future__ import print_function
 
 import lldb  # @UnresolvedImport
 

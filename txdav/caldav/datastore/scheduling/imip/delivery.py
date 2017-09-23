@@ -120,7 +120,7 @@ class ScheduleViaIMip(DeliveryService):
                         enqueueOp
                     )
 
-                except Exception, e:
+                except Exception as e:
                     # Generated failed response for this recipient
                     log.debug(
                         "iMIP request {req} failed for recipient {r}: {exc}",
@@ -137,7 +137,7 @@ class ScheduleViaIMip(DeliveryService):
                         reqstatus=iTIPRequestStatus.MESSAGE_SENT
                     )
 
-        except Exception, e:
+        except Exception as e:
             # Generated failed responses for each recipient
             log.debug("iMIP request {req} failed: {exc}", req=self, exc=e)
             for recipient in self.recipients:

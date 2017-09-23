@@ -15,12 +15,13 @@
 ##
 
 from __future__ import print_function
-from benchlib import select
+from __future__ import absolute_import
+from .benchlib import select
 from twisted.internet import reactor
 from twisted.internet.task import coiterate
 from twisted.python.log import err
 from twisted.python.usage import UsageError
-from upload import UploadOptions, upload
+from .upload import UploadOptions, upload
 import sys
 import pickle
 
@@ -41,7 +42,7 @@ def main():
     options = MassUploadOptions()
     try:
         options.parseOptions(sys.argv[1:])
-    except UsageError, e:
+    except UsageError as e:
         print(e)
         return 1
 

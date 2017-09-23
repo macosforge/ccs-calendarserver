@@ -16,6 +16,7 @@
 ##
 
 
+from __future__ import print_function
 from caldavclientlibrary.client.httpshandler import SmartHTTPConnection
 from multiprocessing import Process, Value
 import getopt
@@ -81,7 +82,7 @@ def httploop(ctr, config, complete):
     iter = itertools.cycle(server_details)
     while not complete.value:
 
-        server = iter.next()
+        server = next(iter)
         count += 1
 
         http = SmartHTTPConnection(server.host, server.port, server.use_ssl, False)
@@ -239,14 +240,14 @@ if __name__ == '__main__':
     print("  Effective request rate: {} req/sec".format(effective_rate))
     print("  Jobs per request: {}".format(config["jobs"]))
     print("  Effective job rate: {} jobs/sec".format(effective_rate * config["jobs"]))
-    print("  Total number of requests: {}").format(config["limit"] if config["limit"] != 0 else "unlimited")
+    print(("  Total number of requests: {}").format(config["limit"] if config["limit"] != 0 else "unlimited"))
     print("")
     print("Work details:")
-    print("  Priority: {}").format(config["priority"])
-    print("  Weight: {}").format(config["weight"])
-    print("  Start delay: {} s").format(config["when"])
-    print("  Execution time: {} ms").format(config["delay"])
-    print("  Average queue depth: {}").format((effective_rate * config["delay"]) / 1000)
+    print(("  Priority: {}").format(config["priority"]))
+    print(("  Weight: {}").format(config["weight"]))
+    print(("  Start delay: {} s").format(config["when"]))
+    print(("  Execution time: {} ms").format(config["delay"]))
+    print(("  Average queue depth: {}").format((effective_rate * config["delay"]) / 1000))
     print("")
     print("Starting up...")
 

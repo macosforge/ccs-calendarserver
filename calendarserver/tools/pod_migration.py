@@ -263,7 +263,7 @@ def main(argv=sys.argv, stderr=sys.stderr, reactor=None):
 
     try:
         output = options.openOutput()
-    except IOError, e:
+    except IOError as e:
         stderr.write("Unable to open output file for writing: %s\n" % (e))
         sys.exit(1)
 

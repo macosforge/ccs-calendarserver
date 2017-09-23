@@ -888,7 +888,7 @@ class DBInspectService(WorkerService, object):
         try:
             yield cmd().doIt(txn)
             yield txn.commit()
-        except Exception, e:
+        except Exception as e:
             traceback.print_exc()
             print("Command '%s' failed because of: %s" % (cmd.name(), e,))
             yield txn.abort()

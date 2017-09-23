@@ -96,7 +96,7 @@ def validateCalendarComponent(calendarObject, calendar, component, inserting, mi
         component.validCalendarForCalDAV(methodAllowed=calendar.name() == 'inbox')
         if migrating:
             component.validOrganizerForScheduling(doFix=True)
-    except InvalidICalendarDataError, e:
+    except InvalidICalendarDataError as e:
         raise InvalidObjectResourceError(e)
 
 
@@ -110,7 +110,7 @@ def normalizationLookup(cuaddr, recordFunction, config):
     """
     try:
         record = yield recordFunction(cuaddr)
-    except Exception, e:
+    except Exception as e:
         log.debug("Lookup of {cuaddr} failed: {ex}", cuaddr=cuaddr, ex=e)
         record = None
 
@@ -201,7 +201,7 @@ def _migrateCalendar(inCalendar, outCalendar, getComponent, merge=False):
     for calendarObject in (yield inCalendar.calendarObjects()):
         try:
             ctype = yield calendarObject.componentType()
-        except Exception, e:  # Don't stop for any error
+        except Exception as e:  # Don't stop for any error
             log.error(
                 "  Failed to migrate calendar object: {home}/{cal}/{rsrc} (ex)",
                 home=inCalendar.ownerHome().name(),
@@ -273,7 +273,7 @@ def _migrateCalendar(inCalendar, outCalendar, getComponent, merge=False):
             )
             bad_count += 1
 
-        except Exception, e:
+        except Exception as e:
             log.error(
                 "  {ex}: Failed to migrate calendar object: {home}/{cal}/{rsrc}",
                 ex=str(e),

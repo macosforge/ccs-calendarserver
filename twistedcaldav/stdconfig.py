@@ -189,7 +189,7 @@ DEFAULT_CONFIG = {
         "Unsecured": "unsecured.sock",  # Socket file to listen for insecure requests on
         "Owner": "",
         "Group": "",
-        "Permissions": 0770,
+        "Permissions": 0o770,
     },
     "SocketRoot": "/tmp/calendarserver",
 
@@ -993,7 +993,7 @@ DEFAULT_CONFIG = {
     },
 
     # Umask
-    "umask": 0022,
+    "umask": 0o022,
 
     # A TCP port used for communication between the child and master
     # processes (bound to 127.0.0.1). Specify 0 to let OS assign a port.
@@ -1644,7 +1644,7 @@ def _updateRejectClients(configDict, reloading=False):
     #
     try:
         configDict.RejectClients = [re.compile(x) for x in configDict.RejectClients if x]
-    except re.error, e:
+    except re.error as e:
         raise ConfigurationError("Invalid regular expression in RejectClients: %s" % (e,))
 
 
@@ -1656,7 +1656,7 @@ def _updateClientFixes(configDict, reloading=False):
         configDict.ClientFixesCompiled = {}
         for key, expressions in configDict.ClientFixes.items():
             configDict.ClientFixesCompiled[key] = [re.compile("^{}$".format(x)) for x in expressions]
-    except re.error, e:
+    except re.error as e:
         raise ConfigurationError("Invalid regular expression in ClientFixes: %s" % (e,))
 
 
@@ -1682,7 +1682,7 @@ def _updateLogLevels(configDict, reloading=False):
                     namespace, LogLevel.levelWithName(levelName)
                 )
 
-    except InvalidLogLevelError, e:
+    except InvalidLogLevelError as e:
         raise ConfigurationError("Invalid log level: %s" % (e.level))
 
 

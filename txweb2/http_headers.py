@@ -392,7 +392,7 @@ def parseKeyValue(val):
 
 def parseArgs(field):
     args = split(field, Token(';'))
-    val = args.next()
+    val = next(args)
     args = [parseKeyValue(arg) for arg in args]
     return val, args
 
@@ -656,7 +656,7 @@ def parseContentDisposition(header):
 def parseContentMD5(header):
     try:
         return base64.decodestring(header)
-    except Exception, e:
+    except Exception as e:
         raise ValueError(e)
 
 
@@ -864,7 +864,8 @@ def parseCacheControl(kv):
     return k, v
 
 
-def generateCacheControl((k, v)):
+def generateCacheControl(xxx_todo_changeme):
+    (k, v) = xxx_todo_changeme
     if v is None:
         return str(k)
     else:

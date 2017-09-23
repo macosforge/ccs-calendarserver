@@ -160,7 +160,7 @@ class Server(object):
         # Need to cache IP addresses
         try:
             ips = getIPsFromHost(parsed_uri.hostname)
-        except socket.gaierror, e:
+        except socket.gaierror as e:
             msg = "Unable to lookup ip-addr for server '{}': {}".format(parsed_uri.hostname, str(e))
             log.error(msg)
             if ignoreIPLookupFailures:
@@ -174,7 +174,7 @@ class Server(object):
             if not isIPAddress(item) and not isIPv6Address(item):
                 try:
                     ips = getIPsFromHost(item)
-                except socket.gaierror, e:
+                except socket.gaierror as e:
                     msg = "Unable to lookup ip-addr for allowed-from '{}': {}".format(item, str(e))
                     log.error(msg)
                     if not ignoreIPLookupFailures:
@@ -273,7 +273,7 @@ class ServersParser(object):
         # Read in XML
         try:
             _ignore_tree, servers_node = readXML(xmlFile, ELEMENT_SERVERS)
-        except ValueError, e:
+        except ValueError as e:
             raise RuntimeError("XML parse error for '{}' because: {}".format(xmlFile, e,))
 
         for child in servers_node:

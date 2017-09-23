@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 ##
 # Copyright (c) 2012-2017 Apple Inc. All rights reserved.
 #
@@ -15,7 +16,7 @@
 ##
 
 from twisted.trial.unittest import TestCase
-from httpauth import AuthHandlerAgent
+from .httpauth import AuthHandlerAgent
 
 
 class HTTPAuthTests(TestCase):

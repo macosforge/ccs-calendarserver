@@ -14,6 +14,7 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 import pickle
 from time import time
@@ -24,8 +25,8 @@ from twisted.web.http_headers import Headers
 from twisted.python.log import msg
 from twisted.web.http import NO_CONTENT, NOT_FOUND
 
-from stats import Duration
-from httpclient import StringProducer, readBody
+from .stats import Duration
+from .httpclient import StringProducer, readBody
 
 
 class CalDAVAccount(object):
@@ -161,7 +162,7 @@ def sample(dtrace, sampleTime, agent, paramgen, responseCode, concurrency=1):
     while requests:
         try:
             _ignore_result, index = yield DeferredList(requests, fireOnOneCallback=True, fireOnOneErrback=True)
-        except FirstError, e:
+        except FirstError as e:
             e.subFailure.raiseException()
 
         # Get rid of the completed Deferred

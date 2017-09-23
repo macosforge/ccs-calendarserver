@@ -265,12 +265,12 @@ class HTTPClientPool(object):
 
                 response = (yield self._submitRequest(request, args, kwargs))
 
-            except (ConnectionLost, ConnectionDone, ConnectError), e:
+            except (ConnectionLost, ConnectionDone, ConnectError) as e:
                 self.log.error("HTTP pooled client connection error (attempt: {ctr}) - retrying: {ex}", ctr=ctr + 1, ex=e)
                 continue
 
             # TODO: find the proper cause of these assertions and fix
-            except (AssertionError,), e:
+            except (AssertionError,) as e:
                 self.log.error("HTTP pooled client connection assertion error (attempt: {ctr}) - retrying: {ex}", ctr=ctr + 1, ex=e)
                 continue
 

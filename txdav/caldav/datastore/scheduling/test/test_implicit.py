@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 # Copyright (c) 2005-2017 Apple Inc. All rights reserved.
 #
@@ -1054,7 +1055,7 @@ END:VCALENDAR
         try:
             doAction, isScheduleObject = (yield scheduler.testImplicitSchedulingPUT(calendar_collection, calresource, calendarNew, False))
         except Exception as e:
-            print e
+            print(e)
             self.fail("Exception must not be raised")
         self.assertTrue(doAction)
         self.assertTrue(isScheduleObject)

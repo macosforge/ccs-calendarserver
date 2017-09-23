@@ -17,11 +17,12 @@
 """
 Unit tests for L{benchmark}.
 """
+from __future__ import absolute_import
 
 from twisted.trial.unittest import TestCase
 from twisted.python.usage import UsageError
 
-from benchmark import BenchmarkOptions
+from .benchmark import BenchmarkOptions
 
 
 class BenchmarkOptionsTests(TestCase):

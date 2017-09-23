@@ -77,7 +77,7 @@ class KerberosCredentialFactoryBase(object):
             # the realm and a service principal value for later use.
             try:
                 principal = kerberos.getServerPrincipalDetails(serviceType, hostname)
-            except kerberos.KrbError, ex:
+            except kerberos.KrbError as ex:
                 self.log.error("getServerPrincipalDetails: {ex}", ex=ex[0])
                 raise ValueError('Authentication System Failure: %s' % (ex[0],))
 
@@ -181,7 +181,7 @@ class BasicKerberosCredentialsChecker(object):
         if isinstance(creds, BasicKerberosCredentials):
             try:
                 kerberos.checkPassword(creds.username, creds.password, creds.service, creds.default_realm)
-            except kerberos.BasicAuthError, ex:
+            except kerberos.BasicAuthError as ex:
                 self.log.error("{ex}", ex=ex[0])
                 raise error.UnauthorizedLogin("Bad credentials for: %s (%s: %s)" % (pcreds.authnURI, ex[0], ex[1],))
             else:
@@ -236,18 +236,18 @@ class NegotiateCredentialFactory(KerberosCredentialFactoryBase):
         # name that is case-insenstive as some clients will use "http" instead of "HTTP"
         try:
             _ignore_result, context = kerberos.authGSSServerInit("")
-        except kerberos.GSSError, ex:
+        except kerberos.GSSError as ex:
             self.log.error("authGSSServerInit: {ex0}({ex1})", ex0=ex[0][0], ex1=ex[1][0])
             raise error.LoginFailed('Authentication System Failure: %s(%s)' % (ex[0][0], ex[1][0],))
 
         # Do the GSSAPI step and get response and username
         try:
             kerberos.authGSSServerStep(context, base64data)
-        except kerberos.GSSError, ex:
+        except kerberos.GSSError as ex:
             self.log.error("authGSSServerStep: {ex0}(ex1)", ex0=ex[0][0], ex1=ex[1][0])
             kerberos.authGSSServerClean(context)
             raise error.UnauthorizedLogin('Bad credentials: %s(%s)' % (ex[0][0], ex[1][0],))
-        except kerberos.KrbError, ex:
+        except kerberos.KrbError as ex:
             self.log.error("authGSSServerStep: {ex}", ex=ex[0])
             kerberos.authGSSServerClean(context)
             raise error.UnauthorizedLogin('Bad credentials: %s' % (ex[0],))
@@ -283,7 +283,7 @@ class NegotiateCredentialFactory(KerberosCredentialFactoryBase):
         # Close the context
         try:
             kerberos.authGSSServerClean(context)
-        except kerberos.GSSError, ex:
+        except kerberos.GSSError as ex:
             self.log.error("authGSSServerClean: {ex0}({ex1})", ex0=ex[0][0], ex1=ex[1][0])
             raise error.LoginFailed('Authentication System Failure %s(%s)' % (ex[0][0], ex[1][0],))
 

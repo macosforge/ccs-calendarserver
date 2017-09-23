@@ -422,7 +422,7 @@ def main():
     options = BenchmarkOptions()
     try:
         options.parseOptions(sys.argv[1:])
-    except UsageError, e:
+    except UsageError as e:
         print(e)
         return 1
 

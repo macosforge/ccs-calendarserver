@@ -164,7 +164,7 @@ class IScheduleScheduler(RemoteScheduler):
                 # when DKIM is not enabled, so that any local policy via remoteservers.xml can be used.
                 pass
 
-            except DKIMVerificationError, e:
+            except DKIMVerificationError as e:
                 # If DKIM is enabled and there was a DKIM header present, then fail
                 msg = "Failed to verify DKIM signature"
                 _debug_msg = str(e)
@@ -335,7 +335,7 @@ class IScheduleScheduler(RemoteScheduler):
                         else:
                             continue
                         break
-                except socket.herror, e:
+                except socket.herror as e:
                     log.debug(
                         "iSchedule cannot lookup client ip '{ip}': {exc}",
                         ip=clientip,
@@ -393,7 +393,7 @@ class IScheduleScheduler(RemoteScheduler):
                     if ip == clientip:
                         matched = True
                         break
-            except socket.herror, e:
+            except socket.herror as e:
                 log.debug(
                     "iSchedule cannot lookup client ip '{ip}': {exc}",
                     ip=clientip,

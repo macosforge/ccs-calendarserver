@@ -444,7 +444,7 @@ class CalendarObject(CommonObjectResource, CalendarObjectBase):
         text = self._text()
         try:
             component = VComponent.fromString(text)
-        except InvalidICalendarDataError, e:
+        except InvalidICalendarDataError as e:
             # This is a really bad situation, so do raise
             raise InternalDataStoreError(
                 "File corruption detected (%s) in file: %s"
@@ -483,7 +483,7 @@ class CalendarObject(CommonObjectResource, CalendarObjectBase):
 
         try:
             fh = self._path.open()
-        except IOError, e:
+        except IOError as e:
             if e[0] == ENOENT:
                 raise ConcurrentModification()
             else:

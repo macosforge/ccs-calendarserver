@@ -19,6 +19,7 @@
 """
 This tool allows any necessary upgrade to complete, then exits.
 """
+from __future__ import print_function
 
 import os
 import sys
@@ -208,12 +209,12 @@ def main(argv=sys.argv, stderr=sys.stderr, reactor=None):
     options = UpgradeOptions()
     try:
         options.parseOptions(argv[1:])
-    except UsageError, e:
+    except UsageError as e:
         usage(e)
 
     try:
         output = options.openOutput()
-    except IOError, e:
+    except IOError as e:
         stderr.write("Unable to open output file for writing: %s\n" % (e))
         sys.exit(1)
 

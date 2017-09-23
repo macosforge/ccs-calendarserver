@@ -113,7 +113,7 @@ class ImplicitProcessor(object):
             except ImplicitProcessorException:
                 # These we always pass up
                 raise
-            except Exception, e:
+            except Exception as e:
                 # We attempt to recover from this. That involves trying to re-write the attendee data
                 # to match that of the organizer assuming we have the organizer's full data available, then
                 # we try the processing operation again.
@@ -124,7 +124,7 @@ class ImplicitProcessor(object):
                     log.error("ImplicitProcessing - originator '{orig}' to recipient '{recip}' with UID: '{uid}' - restored organizer's copy", orig=self.originator.cuaddr, recip=self.recipient.cuaddr, uid=self.uid)
                     try:
                         result = (yield self.doImplicitAttendee())
-                    except Exception, e:
+                    except Exception as e:
                         log.failure("{processor}.doImplicitAttendee()", processor=self)
                         log.error("ImplicitProcessing - originator '{orig}' to recipient '{recip}' with UID: '{uid}' - exception raised after fix: {ex}", orig=self.originator.cuaddr, recip=self.recipient.cuaddr, uid=self.uid, ex=e)
                         raise ImplicitProcessorException("5.1;Service unavailable")

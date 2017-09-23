@@ -23,6 +23,7 @@
 # Dedicated to Amir.
 #
 
+from __future__ import print_function
 import sys
 import csv
 import datetime
@@ -73,7 +74,7 @@ reader = csv.reader(file(csv_filename, "rb"))
 calendar = Component("VCALENDAR")
 
 # Ignore first line
-reader.next()
+next(reader)
 
 priorities = {
     "High": "1",
@@ -110,4 +111,4 @@ for row in reader:
 
     calendar.addComponent(event)
 
-print calendar
+print(calendar)

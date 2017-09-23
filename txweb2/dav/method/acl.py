@@ -64,7 +64,7 @@ def http_ACL(self, request):
     yield doc
     try:
         doc = doc.getResult()
-    except ValueError, e:
+    except ValueError as e:
         log.error("Error while handling ACL body: %s" % (e,))
         raise HTTPError(StatusResponse(responsecode.BAD_REQUEST, str(e)))
 

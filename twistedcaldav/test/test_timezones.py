@@ -68,8 +68,8 @@ class TimezoneProblemTest (twistedcaldav.test.util.TestCase):
 
         self.doTest(
             "TruncatedApr01.ics",
-            DateTime(2007, 04, 01, 16, 0, 0, Timezone.UTCTimezone),
-            DateTime(2007, 04, 01, 17, 0, 0, Timezone.UTCTimezone)
+            DateTime(2007, 0o4, 0o1, 16, 0, 0, Timezone.UTCTimezone),
+            DateTime(2007, 0o4, 0o1, 17, 0, 0, Timezone.UTCTimezone)
         )
 
     def test_truncatedDec(self):
@@ -96,8 +96,8 @@ class TimezoneProblemTest (twistedcaldav.test.util.TestCase):
 
         self.doTest(
             "TruncatedApr01.ics",
-            DateTime(2007, 04, 01, 16, 0, 0, Timezone.UTCTimezone),
-            DateTime(2007, 04, 01, 17, 0, 0, Timezone.UTCTimezone),
+            DateTime(2007, 0o4, 0o1, 16, 0, 0, Timezone.UTCTimezone),
+            DateTime(2007, 0o4, 0o1, 17, 0, 0, Timezone.UTCTimezone),
         )
         self.doTest(
             "TruncatedDec10.ics",
@@ -115,8 +115,8 @@ class TimezoneProblemTest (twistedcaldav.test.util.TestCase):
 
         self.doTest(
             "TruncatedApr01.ics",
-            DateTime(2007, 04, 01, 16, 0, 0, Timezone.UTCTimezone),
-            DateTime(2007, 04, 01, 17, 0, 0, Timezone.UTCTimezone),
+            DateTime(2007, 0o4, 0o1, 16, 0, 0, Timezone.UTCTimezone),
+            DateTime(2007, 0o4, 0o1, 17, 0, 0, Timezone.UTCTimezone),
         )
         self.doTest(
             "TruncatedDec10.ics",
@@ -139,8 +139,8 @@ class TimezoneProblemTest (twistedcaldav.test.util.TestCase):
         )
         self.doTest(
             "TruncatedApr01.ics",
-            DateTime(2007, 04, 01, 16, 0, 0, Timezone.UTCTimezone),
-            DateTime(2007, 04, 01, 17, 0, 0, Timezone.UTCTimezone)
+            DateTime(2007, 0o4, 0o1, 16, 0, 0, Timezone.UTCTimezone),
+            DateTime(2007, 0o4, 0o1, 17, 0, 0, Timezone.UTCTimezone)
         )
 
 
@@ -199,8 +199,8 @@ END:VCALENDAR
             instance = instances[key]
             start = instance.start
             end = instance.end
-            self.assertEqual(start, DateTime(2007, 12, 25, 05, 0, 0, Timezone.UTCTimezone))
-            self.assertEqual(end, DateTime(2007, 12, 25, 06, 0, 0, Timezone.UTCTimezone))
+            self.assertEqual(start, DateTime(2007, 12, 25, 0o5, 0, 0, Timezone.UTCTimezone))
+            self.assertEqual(end, DateTime(2007, 12, 25, 0o6, 0, 0, Timezone.UTCTimezone))
             break
 
     def test_getTZExtrasPath(self):

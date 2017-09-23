@@ -219,7 +219,7 @@ class DirectoryPrincipalPropertySearchMixIn(object):
                 try:
                     fieldName, match = principalCollection.propertyToField(
                         prop, match)
-                except ValueError, e:
+                except ValueError as e:
                     raise HTTPError(StatusResponse(responsecode.BAD_REQUEST, str(e)))
                 if fieldName:
                     fields.append((fieldName, match, matchFlags, matchType))
@@ -839,7 +839,7 @@ class DAVFile (WebDAVServerInfoMixIn, SuperDAVFile, DirectoryRenderingMixIn):
 
         try:
             f = self.fp.open()
-        except IOError, e:
+        except IOError as e:
             import errno
             if e[0] == errno.EACCES:
                 return responsecode.FORBIDDEN
@@ -958,7 +958,7 @@ class CachingPropertyStore (object):
 
         try:
             cache = self._cache()
-        except HTTPError, e:
+        except HTTPError as e:
             if e.response.code == responsecode.NOT_FOUND:
                 return False
             else:

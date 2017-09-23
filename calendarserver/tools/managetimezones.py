@@ -223,7 +223,7 @@ def _runInReactor(tzdb):
         print("New:           {}".format(new,))
         print("Changed:       {}".format(changed,))
         print("Current total: {}".format(len(tzdb.timezones),))
-    except Exception, e:
+    except Exception as e:
         print("Could not sync with server: {}".format(str(e),))
     finally:
         reactor.stop()
@@ -362,7 +362,7 @@ def main():
         usage("A configuration file must be specified")
     try:
         loadConfig(configFileName)
-    except ConfigurationError, e:
+    except ConfigurationError as e:
         sys.stdout.write("{}\n".format(e,))
         sys.exit(1)
 

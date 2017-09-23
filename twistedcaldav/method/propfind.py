@@ -71,7 +71,7 @@ def http_PROPFIND(self, request):
     #
     try:
         doc = (yield davXMLFromStream(request.stream))
-    except ValueError, e:
+    except ValueError as e:
         log.error("Error while handling PROPFIND body: {ex}", ex=e)
         raise HTTPError(StatusResponse(responsecode.BAD_REQUEST, str(e)))
 

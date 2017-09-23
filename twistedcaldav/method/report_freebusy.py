@@ -98,13 +98,13 @@ def report_urn_ietf_params_xml_ns_caldav_free_busy_query(self, request, freebusy
             davxml.NumberOfMatchesWithinLimits(),
             "Too many components"
         ))
-    except TimeRangeLowerLimit, e:
+    except TimeRangeLowerLimit as e:
         raise HTTPError(ErrorResponse(
             responsecode.FORBIDDEN,
             caldavxml.MinDateTime(),
             "Time-range value too far in the past. Must be on or after %s." % (str(e.limit),)
         ))
-    except TimeRangeUpperLimit, e:
+    except TimeRangeUpperLimit as e:
         raise HTTPError(ErrorResponse(
             responsecode.FORBIDDEN,
             caldavxml.MaxDateTime(),

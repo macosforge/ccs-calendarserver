@@ -14,12 +14,13 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 import sys
 
-import stats
+from . import stats
 
-from benchlib import load_stats
+from .benchlib import load_stats
 
 try:
     from scipy.stats import ttest_1samp

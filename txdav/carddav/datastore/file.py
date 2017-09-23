@@ -219,7 +219,7 @@ class AddressBookObject(CommonObjectResource):
         text = self._text()
         try:
             component = VComponent.fromString(text)
-        except InvalidVCardDataError, e:
+        except InvalidVCardDataError as e:
             # This is a really bad situation, so do raise
             raise InternalDataStoreError(
                 "File corruption detected (%s) in file: %s"
@@ -243,7 +243,7 @@ class AddressBookObject(CommonObjectResource):
 
         try:
             fh = self._path.open()
-        except IOError, e:
+        except IOError as e:
             if e[0] == ENOENT:
                 raise NoSuchObjectResourceError(self)
             else:

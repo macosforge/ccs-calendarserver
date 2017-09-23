@@ -96,7 +96,7 @@ def http_MKCOL(self, request):
     #
     try:
         doc = (yield davXMLFromStream(request.stream))
-    except ValueError, e:
+    except ValueError as e:
         log.error("Error while handling MKCOL: {ex}", ex=e)
         # TODO: txweb2.dav 'MKCOL' tests demand this particular response
         # code, but should we really be looking at the XML content or the

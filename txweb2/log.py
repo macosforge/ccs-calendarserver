@@ -139,7 +139,7 @@ class BaseCommonAccessLoggingObserver(object):
     logFormat = '%s - %s [%s] "%s" %s %d "%s" "%s"'
 
     def logMessage(self, message):
-        raise NotImplemented, 'You must provide an implementation.'
+        raise NotImplemented('You must provide an implementation.')
 
     def computeTimezoneForLog(self, tz):
         if tz > 0:

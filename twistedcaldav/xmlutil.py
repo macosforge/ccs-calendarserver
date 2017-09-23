@@ -47,7 +47,7 @@ def readXML(xmlfile, expectedRootTag=None):
     # Read in XML
     try:
         etree = XML.ElementTree(file=xmlfile)
-    except XMLParseError, e:
+    except XMLParseError as e:
         raise ValueError("Unable to parse file '%s' because: %s" % (xmlfile, e,))
 
     if expectedRootTag:

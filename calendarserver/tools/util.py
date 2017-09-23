@@ -17,6 +17,7 @@
 """
 Utility functionality shared between calendarserver tools.
 """
+from __future__ import print_function
 
 __all__ = [
     "loadConfig",
@@ -74,7 +75,7 @@ def loadConfig(configFileName):
     return config
 
 
-class UsageError (StandardError):
+class UsageError (Exception):
     pass
 
 
@@ -167,7 +168,7 @@ def checkDirectory(dirpath, description, access=None, create=None, wait=False):
                                          % (description, dirpath))
             try:
                 os.mkdir(dirpath)
-            except (OSError, IOError), e:
+            except (OSError, IOError) as e:
                 print("Could not create %s: %s" % (dirpath, e))
                 raise ConfigurationError(
                     "%s does not exist and cannot be created: %s"
@@ -187,7 +188,7 @@ def checkDirectory(dirpath, description, access=None, create=None, wait=False):
             try:
                 os.chmod(dirpath, mode)
                 os.chown(dirpath, uid, gid)
-            except (OSError, IOError), e:
+            except (OSError, IOError) as e:
                 print("Unable to change mode/owner of %s: %s" % (dirpath, e))
 
             print("Created directory: %s" % (dirpath,))

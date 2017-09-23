@@ -753,7 +753,7 @@ class CalVerifyService(WorkerService, object):
             self.results.setdefault("Fix remove", set()).add((home.name(), calendar.name(), objname,))
 
             returnValue(True)
-        except Exception, e:
+        except Exception as e:
             print("Failed to remove resource whilst fixing: %d\n%s" % (resid, e,))
             returnValue(False)
 
@@ -1038,7 +1038,7 @@ class BadDataService(CalVerifyService):
         for owner, resid, uid, calname, _ignore_md5, _ignore_organizer, _ignore_created, _ignore_modified in rows:
             try:
                 result, message = yield self.validCalendarData(resid, calname == "inbox")
-            except Exception, e:
+            except Exception as e:
                 result = False
                 message = "Exception for validCalendarData"
                 if self.options["verbose"]:
@@ -1147,7 +1147,7 @@ class BadDataService(CalVerifyService):
             if self.options["ical"]:
                 self.attendeesWithoutOrganizer(component, doFix=False)
 
-        except ValueError, e:
+        except ValueError as e:
             result = False
             message = str(e)
             if message.startswith(self.errorPrefix):
@@ -1293,7 +1293,7 @@ class BadDataService(CalVerifyService):
                 # Use _migrating to ignore possible overridden instance errors - we are either correcting or ignoring those
                 self.txn._migrating = True
                 component = yield calendarObj._setComponentInternal(component, internal_state=ComponentUpdateState.RAW)
-            except Exception, e:
+            except Exception as e:
                 print(e, component)
                 print(traceback.print_exc())
                 result = False
@@ -1943,7 +1943,7 @@ class SchedulingMismatchService(CalVerifyService):
 
             returnValue(True)
 
-        except Exception, e:
+        except Exception as e:
             print("Failed to fix resource: %d for attendee: %s\n%s" % (orgresid, attendee, e,))
             returnValue(False)
 
@@ -2888,7 +2888,7 @@ class MissingLocationService(CalVerifyService):
         # Write out fix, commit and get a new transaction
         try:
             yield calendarObj.setComponent(component)
-        except Exception, e:
+        except Exception as e:
             print(e, component)
             print(traceback.print_exc())
             result = False
@@ -3116,7 +3116,7 @@ class UpgradeDataService(CalVerifyService):
                         yield calendarObj.component(doUpdate=True)
 
                 result = True
-            except Exception, e:
+            except Exception as e:
                 result = False
                 message = "Exception when reading resource"
                 if self.options["verbose"]:
@@ -3191,12 +3191,12 @@ def main(argv=sys.argv, stderr=sys.stderr, reactor=None):
     options = CalVerifyOptions()
     try:
         options.parseOptions(argv[1:])
-    except usage.UsageError, e:
+    except usage.UsageError as e:
         printusage(e)
 
     try:
         output = options.openOutput()
-    except IOError, e:
+    except IOError as e:
         stderr.write("Unable to open output file for writing: %s\n" % (e))
         sys.exit(1)
 

@@ -396,7 +396,7 @@ class Client(local):
                     write("delete %s\r\n" % key)
             try:
                 server.send_cmds(''.join(bigcmd))
-            except socket.error, msg:
+            except socket.error as msg:
                 rc = 0
                 if isinstance(msg, tuple):
                     msg = msg[1]
@@ -411,7 +411,7 @@ class Client(local):
             try:
                 for key in keys:
                     server.expect("DELETED")
-            except socket.error, msg:
+            except socket.error as msg:
                 if isinstance(msg, tuple):
                     msg = msg[1]
                 server.mark_dead(msg)
@@ -438,7 +438,7 @@ class Client(local):
         try:
             server.send_cmd(cmd)
             server.expect("DELETED")
-        except socket.error, msg:
+        except socket.error as msg:
             if isinstance(msg, tuple):
                 msg = msg[1]
             server.mark_dead(msg)
@@ -493,7 +493,7 @@ class Client(local):
             server.send_cmd(cmd)
             line = server.readline()
             return int(line)
-        except socket.error, msg:
+        except socket.error as msg:
             if isinstance(msg, tuple):
                 msg = msg[1]
             server.mark_dead(msg)
@@ -664,7 +664,7 @@ class Client(local):
                     store_info = self._val_to_store_info(mapping[prefixed_to_orig_key[key]], min_compress_len)
                     write("set %s %d %d %d\r\n%s\r\n" % (key, store_info[0], time, store_info[1], store_info[2]))
                 server.send_cmds(''.join(bigcmd))
-            except socket.error, msg:
+            except socket.error as msg:
                 if isinstance(msg, tuple):
                     msg = msg[1]
                 server.mark_dead(msg)
@@ -687,7 +687,7 @@ class Client(local):
                         continue
                     else:
                         notstored.append(prefixed_to_orig_key[key])  # un-mangle.
-            except (_Error, socket.error), msg:
+            except (_Error, socket.error) as msg:
                 if isinstance(msg, tuple):
                     msg = msg[1]
                 server.mark_dead(msg)
@@ -774,7 +774,7 @@ class Client(local):
 
             return False
 
-        except socket.error, msg:
+        except socket.error as msg:
             if isinstance(msg, tuple):
                 msg = msg[1]
             server.mark_dead(msg)
@@ -799,7 +799,7 @@ class Client(local):
                 return None
             value = self._recv_value(server, flags, rlen)
             server.expect("END")
-        except (_Error, socket.error), msg:
+        except (_Error, socket.error) as msg:
             if isinstance(msg, tuple):
                 msg = msg[1]
             server.mark_dead(msg)
@@ -825,7 +825,7 @@ class Client(local):
                 return (None, None)
             value = self._recv_value(server, flags, rlen)
             server.expect("END")
-        except (_Error, socket.error), msg:
+        except (_Error, socket.error) as msg:
             if isinstance(msg, tuple):
                 msg = msg[1]
             server.mark_dead(msg)
@@ -879,7 +879,7 @@ class Client(local):
         for server in server_keys.iterkeys():
             try:
                 server.send_cmd("get %s" % " ".join(server_keys[server]))
-            except socket.error, msg:
+            except socket.error as msg:
                 if isinstance(msg, tuple):
                     msg = msg[1]
                 server.mark_dead(msg)
@@ -903,7 +903,7 @@ class Client(local):
                         except KeyError:
                             pass
                     line = server.readline()
-            except (_Error, socket.error), msg:
+            except (_Error, socket.error) as msg:
                 if isinstance(msg, tuple):
                     msg = msg[1]
                 server.mark_dead(msg)
@@ -924,7 +924,7 @@ class Client(local):
         for server in server_keys.iterkeys():
             try:
                 server.send_cmd("gets %s" % " ".join(server_keys[server]))
-            except socket.error, msg:
+            except socket.error as msg:
                 if isinstance(msg, tuple):
                     msg = msg[1]
                 server.mark_dead(msg)
@@ -948,7 +948,7 @@ class Client(local):
                         except KeyError:
                             pass
                     line = server.readline()
-            except (_Error, socket.error), msg:
+            except (_Error, socket.error) as msg:
                 if isinstance(msg, tuple):
                     msg = msg[1]
                 server.mark_dead(msg)
@@ -1004,7 +1004,7 @@ class Client(local):
                 if self.persistent_load:
                     unpickler.persistent_load = self.persistent_load
                 val = unpickler.load()
-            except Exception, e:
+            except Exception as e:
                 self.debuglog('Pickle error: %s\n' % e)
                 val = None
         else:
@@ -1165,7 +1165,7 @@ class _Host:
     _SOCKET_TIMEOUT = 3  # number of seconds before sockets timeout.
 
     def __init__(self, host, debugfunc=None):
-        if isinstance(host, types.TupleType):
+        if isinstance(host, tuple):
             host, self.weight = host
         else:
             self.weight = 1
@@ -1228,11 +1228,11 @@ class _Host:
             s.settimeout(self._SOCKET_TIMEOUT)
         try:
             s.connect(self.address)
-        except socket.timeout, msg:
+        except socket.timeout as msg:
             log.error("Memcacheclient _get_socket() connection timed out ({m})", m=msg)
             self.mark_dead("connect: %s" % msg)
             return None
-        except socket.error, msg:
+        except socket.error as msg:
             if isinstance(msg, tuple):
                 msg = msg[1]
             log.error("Memcacheclient _get_socket() connection error ({m})", m=msg)
@@ -1286,7 +1286,7 @@ class _Host:
             foo = self_socket_recv(4096)
             buf += foo
             if len(foo) == 0:
-                raise _Error, (
+                raise _Error(
                     'Read %d bytes, expecting %d, '
                     'read returned 0 length bytes' % (len(buf), rlen))
         self.buffer = buf[rlen:]
@@ -1318,23 +1318,23 @@ def check_key(key, key_extra_len=0):
     if isinstance(key, tuple):
         key = key[1]
     if not key:
-        raise Client.MemcachedKeyNoneError, ("Key is None")
+        raise Client.MemcachedKeyNoneError(("Key is None"))
     if isinstance(key, unicode):
-        raise Client.MemcachedStringEncodingError, (
+        raise Client.MemcachedStringEncodingError(
             "Keys must be str()'s, not "
             "unicode.  Convert your unicode strings using "
             "mystring.encode(charset)!")
     if not isinstance(key, str):
-        raise Client.MemcachedKeyTypeError, ("Key must be str()'s")
+        raise Client.MemcachedKeyTypeError(("Key must be str()'s"))
 
     if isinstance(key, basestring):
         if len(key) + key_extra_len > SERVER_MAX_KEY_LENGTH:
-            raise Client.MemcachedKeyLengthError, (
+            raise Client.MemcachedKeyLengthError(
                 "Key length is > %s"
                 % SERVER_MAX_KEY_LENGTH)
         for char in key:
             if ord(char) < 32 or ord(char) == 127:
-                raise Client.MemcachedKeyCharacterError, "Control characters not allowed"
+                raise Client.MemcachedKeyCharacterError("Control characters not allowed")
 
 
 def _doctest():
@@ -1349,7 +1349,7 @@ if __name__ == "__main__":
     print("Testing docstrings...")
     _doctest()
     print("Running tests:")
-    print
+    print()
     serverList = [["127.0.0.1:11211"]]
     if '--do-unix' in sys.argv:
         serverList.append([os.path.join(os.getcwd(), 'memcached.socket')])
@@ -1358,7 +1358,7 @@ if __name__ == "__main__":
         mc = Client(servers, debug=1)
 
         def to_s(val):
-            if not isinstance(val, types.StringTypes):
+            if not isinstance(val, str):
                 return "%s (%s)" % (val, type(val))
             return "%s" % val
 
@@ -1421,7 +1421,7 @@ if __name__ == "__main__":
         print("Testing sending spaces...", end="")
         try:
             x = mc.set("this has spaces", 1)
-        except Client.MemcachedKeyCharacterError, msg:
+        except Client.MemcachedKeyCharacterError as msg:
             print("OK")
         else:
             print("FAIL")
@@ -1429,7 +1429,7 @@ if __name__ == "__main__":
         print("Testing sending control characters...", end="")
         try:
             x = mc.set("this\x10has\x11control characters\x02", 1)
-        except Client.MemcachedKeyCharacterError, msg:
+        except Client.MemcachedKeyCharacterError as msg:
             print("OK")
         else:
             print("FAIL")
@@ -1437,7 +1437,7 @@ if __name__ == "__main__":
         print("Testing using insanely long key...", end="")
         try:
             x = mc.set('a' * SERVER_MAX_KEY_LENGTH + 'aaaa', 1)
-        except Client.MemcachedKeyLengthError, msg:
+        except Client.MemcachedKeyLengthError as msg:
             print("OK")
         else:
             print("FAIL")
@@ -1445,7 +1445,7 @@ if __name__ == "__main__":
         print("Testing sending a unicode-string key...", end="")
         try:
             x = mc.set(u'keyhere', 1)
-        except Client.MemcachedStringEncodingError, msg:
+        except Client.MemcachedStringEncodingError as msg:
             print("OK", end="")
         else:
             print("FAIL", end="")

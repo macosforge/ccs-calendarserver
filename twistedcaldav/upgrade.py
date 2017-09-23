@@ -149,7 +149,7 @@ def upgradeCalendarCollection(calPath, directory, cuaCache):
                 if fixed:
                     log.warn("Fixing bad quotes in {path}", path=resPath)
                     needsRewrite = True
-            except Exception, e:
+            except Exception as e:
                 log.error(
                     "Error while fixing bad quotes in {path}: {ex}",
                     path=resPath, ex=e,
@@ -162,7 +162,7 @@ def upgradeCalendarCollection(calPath, directory, cuaCache):
                 if fixed:
                     log.warn("Removing illegal characters in {path}", path=resPath)
                     needsRewrite = True
-            except Exception, e:
+            except Exception as e:
                 log.error(
                     "Error while removing illegal characters in {path}: {ex}",
                     path=resPath, ex=e,
@@ -175,7 +175,7 @@ def upgradeCalendarCollection(calPath, directory, cuaCache):
                 if fixed:
                     log.debug("Normalized CUAddrs in {path}", path=resPath)
                     needsRewrite = True
-            except Exception, e:
+            except Exception as e:
                 log.error(
                     "Error while normalizing {path}: {ex}",
                     path=resPath, ex=e,
@@ -191,7 +191,7 @@ def upgradeCalendarCollection(calPath, directory, cuaCache):
             md5value = zlib.compress(md5value)
             try:
                 xattr.setxattr(resPath, xattrname("{http:%2F%2Ftwistedmatrix.com%2Fxml_namespace%2Fdav%2F}getcontentmd5"), md5value)
-            except IOError, ioe:
+            except IOError as ioe:
                 if ioe.errno == errno.EOPNOTSUPP:
                     # On non-native xattr systems we cannot do this,
                     # but those systems will typically not be migrating
@@ -207,7 +207,7 @@ def upgradeCalendarCollection(calPath, directory, cuaCache):
         ctagValue = zlib.compress(ctagValue)
         try:
             xattr.setxattr(calPath, xattrname("{http:%2F%2Fcalendarserver.org%2Fns%2F}getctag"), ctagValue)
-        except IOError, ioe:
+        except IOError as ioe:
             if ioe.errno == errno.EOPNOTSUPP:
                 # On non-native xattr systems we cannot do this,
                 # but those systems will typically not be migrating
@@ -251,7 +251,7 @@ def upgradeCalendarHome(homePath, directory, cuaCache):
                             if value is not None:
                                 # Need to write the xattr back to disk
                                 xattr.setxattr(calPath, attr, value)
-                except IOError, ioe:
+                except IOError as ioe:
                     if ioe.errno == errno.EOPNOTSUPP:
                         # On non-native xattr systems we cannot do this,
                         # but those systems will typically not be migrating
@@ -259,7 +259,7 @@ def upgradeCalendarHome(homePath, directory, cuaCache):
                         pass
                 except:
                     raise
-    except Exception, e:
+    except Exception as e:
         log.error("Failed to upgrade calendar home {path}: {ex}", path=homePath, ex=e)
         raise
 
@@ -305,7 +305,7 @@ def upgrade_to_1(config, directory):
                 shutil.copy2(oldDbPath, newDbPath)
                 os.remove(oldDbPath)
 
-        except Exception, e:
+        except Exception as e:
             raise UpgradeError(
                 "Upgrade Error: unable to move the old calendar user proxy database at '%s' to '%s' due to %s."
                 % (oldDbPath, newDbPath, str(e))
@@ -579,7 +579,7 @@ def upgrade_to_2(config, directory):
                     log.warn("Regular collection hidden: {path}", path=calPath)
                     os.rename(calPath, os.path.join(calHome, ".collection." + os.path.basename(calPath)))
 
-        except Exception, e:
+        except Exception as e:
             log.error("Failed to upgrade calendar home {path}: {ex}", path=calHome, ex=e)
             return succeed(False)
 
@@ -741,7 +741,7 @@ def upgradeData(config, directory):
             # Migrate locations/resources now because upgrade_to_1 depends
             # on them being in resources.xml
             yield migrateFromOD(directory)
-        except Exception, e:
+        except Exception as e:
             raise UpgradeError("Unable to migrate locations and resources from OD: %s" % (e,))
 
     docRoot = config.DocumentRoot
@@ -1239,7 +1239,7 @@ class PostDBImportStep(object):
                                         uuid,
                                         uri
                                     )
-                                except Exception, e:
+                                except Exception as e:
                                     log.error(
                                         "Error processing inbox item: {item} ({ex})",
                                         item=inboxItem, ex=e,
@@ -1257,7 +1257,7 @@ class PostDBImportStep(object):
 
             # FIXME: Some generic exception handlers to deal with unexpected errors that for some reason
             # we are not logging properly.
-            except Exception, e:
+            except Exception as e:
                 log.error("Exception during inbox item processing: {ex}", ex=e)
 
             except:

@@ -290,7 +290,7 @@ class ShellProtocol(ReceiveLineProtocol):
                 return
             try:
                 completions = tuple((yield m(tokens)))
-            except Exception, e:
+            except Exception as e:
                 self.handleFailure(Failure(e))
                 return
             log.info("COMPLETIONS: {comp}", comp=completions)
@@ -299,7 +299,7 @@ class ShellProtocol(ReceiveLineProtocol):
             completions = tuple(self.commands.complete_commands(cmd))
 
         if len(completions) == 1:
-            for c in completions.__iter__().next():
+            for c in next(completions.__iter__()):
                 self.characterReceived(c, True)
 
             # FIXME: Add a space only if we know we've fully completed the term.
@@ -405,7 +405,7 @@ def main(argv=sys.argv, stderr=sys.stderr, reactor=None):
     options = ShellOptions()
     try:
         options.parseOptions(argv[1:])
-    except UsageError, e:
+    except UsageError as e:
         usage(e)
 
     def makeService(store):

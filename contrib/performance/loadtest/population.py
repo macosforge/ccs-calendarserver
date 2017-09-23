@@ -240,7 +240,7 @@ class CalendarClientSimulator(object):
             number = self._nextUserNumber()
 
             for _ignore_peruser in range(clientsPerUser):
-                clientType = self._pop.next()
+                clientType = next(self._pop)
                 if (number % self.workerCount) != self.workerIndex:
                     # If we're in a distributed work scenario and we are worker N,
                     # we have to skip all but every Nth request (since every node

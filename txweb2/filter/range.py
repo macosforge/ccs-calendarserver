@@ -12,14 +12,13 @@ class UnsatisfiableRangeRequest(Exception):
     pass
 
 
-def canonicalizeRange((start, end), size):
+def canonicalizeRange(xxx_todo_changeme, size):
     """Return canonicalized (start, end) or raises UnsatisfiableRangeRequest
     exception.
 
     NOTE: end is the last byte *inclusive*, which is not the usual convention
     in python! Be very careful! A range of 0,1 should return 2 bytes."""
-
-    # handle "-500" ranges
+    (start, end) = xxx_todo_changeme
     if start is None:
         start = max(0, size - end)
         end = None

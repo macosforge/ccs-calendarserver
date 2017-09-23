@@ -58,7 +58,7 @@ def http_REPORT(self, request):
     #
     try:
         doc = (yield davXMLFromStream(request.stream))
-    except ValueError, e:
+    except ValueError as e:
         log.error("Error while handling REPORT body: {err}", err=str(e))
         raise HTTPError(StatusResponse(responsecode.BAD_REQUEST, str(e)))
 

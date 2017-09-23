@@ -129,7 +129,7 @@ def utilityMain(
         if loadTimezones:
             TimezoneCache.create()
 
-    except (ConfigurationError, OSError), e:
+    except (ConfigurationError, OSError) as e:
         sys.stderr.write("Error: %s\n" % (e,))
         return
 
@@ -145,7 +145,7 @@ class WorkerService(Service):
         try:
             from twistedcaldav.config import config
             rootResource = getRootResource(config, self.store)
-        except OSError, e:
+        except OSError as e:
             if e.errno == ENOENT:
                 # Trying to re-write resources.xml but its parent directory does
                 # not exist.  The server's never been started, so we're missing
@@ -174,9 +174,9 @@ class WorkerService(Service):
                 yield self.doWork()
             else:
                 yield self.doWorkWithoutStore()
-        except ConfigurationError, ce:
+        except ConfigurationError as ce:
             sys.stderr.write("Error: %s\n" % (str(ce),))
-        except Exception, e:
+        except Exception as e:
             sys.stderr.write("Error: %s\n" % (e,))
             raise
         finally:

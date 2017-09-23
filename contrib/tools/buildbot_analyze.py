@@ -16,6 +16,7 @@
 # limitations under the License.
 ##
 
+from __future__ import print_function
 from bz2 import BZ2File
 from getopt import getopt
 import os
@@ -108,6 +109,6 @@ if __name__ == "__main__":
         if do_qos:
             qos()
 
-    except Exception, e:
+    except Exception as e:
         raise
         sys.exit(str(e))

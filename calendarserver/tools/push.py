@@ -57,7 +57,7 @@ def main():
 @inlineCallbacks
 def displayAPNSubscriptions(store, directory, root, users):
     for user in users:
-        print
+        print()
         record = yield directory.recordWithShortName(RecordType.user, user)
         if record is not None:
             print("User %s (%s)..." % (user, record.uid))
@@ -69,7 +69,7 @@ def displayAPNSubscriptions(store, directory, root, users):
                 for apnrecord in subscriptions:
                     byKey.setdefault(apnrecord.resourceKey, []).append(apnrecord)
                 for key, apnsrecords in byKey.iteritems():
-                    print
+                    print()
                     protocol, _ignore_host, path = key.strip("/").split("/", 2)
                     resource = {
                         "CalDAV": "calendar",

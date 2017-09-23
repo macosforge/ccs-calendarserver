@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 ##
 # Copyright (c) 2010-2017 Apple Inc. All rights reserved.
 #
@@ -19,7 +20,7 @@ import sys
 from matplotlib import pyplot
 import numpy
 
-from benchlib import load_stats
+from .benchlib import load_stats
 
 
 def main():

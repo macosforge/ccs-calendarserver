@@ -50,7 +50,7 @@ def main():
                 "help",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     #

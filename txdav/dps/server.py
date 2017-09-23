@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 # Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 #
@@ -859,7 +860,7 @@ class DirectoryProxyServiceMaker(object):
                 })
                 manholeService.setServiceParent(multiService)
                 # Using print(because logging isn't ready at this point)
-                print("Manhole access enabled:", portString)
+                print(("Manhole access enabled:", portString))
 
             except ImportError:
                 print(

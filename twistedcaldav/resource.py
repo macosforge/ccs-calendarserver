@@ -942,7 +942,7 @@ class CalDAVResource (
 
         try:
             resourcetype = self.resourceType()
-        except HTTPError, e:
+        except HTTPError as e:
             assert e.response.code == responsecode.NOT_FOUND, (
                 "Unexpected response code: %s" % (e.response.code,)
             )
@@ -1316,7 +1316,7 @@ class CalDAVResource (
                                     etag=etag,
                                     lastModified=last_modified,
                                 )
-                            except HTTPError, e:
+                            except HTTPError as e:
                                 last_exception = e
                             else:
                                 break

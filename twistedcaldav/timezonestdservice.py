@@ -682,7 +682,7 @@ class PrimaryTimezoneDatabase(CommonTimezoneDatabase):
         try:
             with open(os.path.join(self.basepath, "links.txt")) as f:
                 aliases = f.read()
-        except IOError, e:
+        except IOError as e:
             log.error("Unable to read links.txt file: {ex}", ex=str(e))
             aliases = ""
 
@@ -887,7 +887,7 @@ class SecondaryTimezoneDatabase(CommonTimezoneDatabase):
                 os.makedirs(os.path.dirname(tzpath))
             with open(tzpath, "w") as f:
                 f.write(ical)
-        except IOError, e:
+        except IOError as e:
             log.error("Unable to write calendar file for {tzid}: {ex}", tzid=tzinfo.tzid, ex=str(e))
         else:
             self.timezones[tzinfo.tzid] = tzinfo
@@ -897,5 +897,5 @@ class SecondaryTimezoneDatabase(CommonTimezoneDatabase):
         try:
             os.remove(tzpath)
             del self.timezones[tzid]
-        except IOError, e:
+        except IOError as e:
             log.error("Unable to write calendar file for {tzid}: {ex}", tzid=tzid, ex=str(e))

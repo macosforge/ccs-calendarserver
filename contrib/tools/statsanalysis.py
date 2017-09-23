@@ -51,7 +51,7 @@ def analyze(fpath, title):
         dataset[title] = {}
         json = False
         with open(fpath) as f:
-            line = f.next()
+            line = next(f)
             if line.startswith("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"):
                 analyzeTableFormat(f, title)
             elif line.startswith("{"):
@@ -90,7 +90,7 @@ def analyzeTableRecord(liter, title):
     @type title: L{str}
     """
 
-    dt = liter.next()
+    dt = next(liter)
     time = dt[11:]
     seconds = 60 * (60 * int(time[0:2]) + int(time[3:5])) + int(time[6:8])
     for line in liter:

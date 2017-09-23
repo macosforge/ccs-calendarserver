@@ -19,6 +19,7 @@
 A curses (or plain text) based dashboard for viewing various aspects of the
 server as exposed by the L{DashboardProtocol} stats socket.
 """
+from __future__ import print_function
 
 from argparse import HelpFormatter, SUPPRESS, OPTIONAL, ZERO_OR_MORE, \
     ArgumentParser

@@ -49,7 +49,7 @@ def analyze(fpath, noweekends, startDate=None, endDate=None, title=None):
                     digits = line[11:13]
                     if digits in ("05", "06"):
                         for _ignore in range(3):
-                            f.next()
+                            next(f)
                         continue
                     dtstamp = line[:19]
 
@@ -65,15 +65,15 @@ def analyze(fpath, noweekends, startDate=None, endDate=None, title=None):
 
                     lqnon = int(lqnon.split(" ", 1)[0])
 
-                    line = f.next()
+                    line = next(f)
                     cpu = int(line[len("CPU idle %: "):].split(" ", 1)[0])
 
-                    line = f.next()
+                    line = next(f)
                     if line.startswith("Memory"):
-                        line = f.next()
+                        line = next(f)
                     reqs = int(float(line.split(" ", 1)[0]))
 
-                    line = f.next()
+                    line = next(f)
                     resp = line[len("Response time: average "):].split(" ", 1)[0]
                     resp = int(float(resp) / 10.0) * 10
 

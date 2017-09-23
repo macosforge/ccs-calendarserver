@@ -325,7 +325,7 @@ class CommonTests(CommonCommonTests):
         addressbook = yield home.addressbookWithName("addressbook")
         try:
             yield addressbook.rename("some-other-name")
-        except HTTPError, e:
+        except HTTPError as e:
             self.assertEquals(e.response.code, FORBIDDEN)
 
     @inlineCallbacks

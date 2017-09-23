@@ -343,7 +343,7 @@ def serialize(f, work):
 
     def do_serialize(_):
         try:
-            args = work.next()
+            args = next(work)
         except StopIteration:
             d.callback(None)
         else:

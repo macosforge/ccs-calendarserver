@@ -268,7 +268,7 @@ class SQLSplitterTests(TestCase):
         A single sql statement yields a single string
         """
         result = splitSQLString("select * from foo;")
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, "select * from foo")
         self.assertRaises(StopIteration, result.next)
 
@@ -277,9 +277,9 @@ class SQLSplitterTests(TestCase):
         Two simple sql statements yield two separate strings
         """
         result = splitSQLString("select count(*) from baz; select bang from boop;")
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, "select count(*) from baz")
-        r2 = result.next()
+        r2 = next(result)
         self.assertEquals(r2, "select bang from boop")
         self.assertRaises(StopIteration, result.next)
 
@@ -309,7 +309,7 @@ class SQLSplitterTests(TestCase):
                     ) AND
                     I.EMISSION BETWEEN DATE1 AND DATE2;''')
         result = splitSQLString(bigSQL)
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, bigSQL.rstrip(";"))
         self.assertRaises(StopIteration, result.next)
 
@@ -327,7 +327,7 @@ class SQLSplitterTests(TestCase):
                END;''')
         s1 = 'BEGIN\nLOOP\nINSERT INTO T1 VALUES(i,i);i := i+1;EXIT WHEN i>100;END LOOP;END;'
         result = splitSQLString(plsql)
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, s1)
         self.assertRaises(StopIteration, result.next)
 
@@ -355,9 +355,9 @@ class SQLSplitterTests(TestCase):
                END;''')
         s2 = "BEGIN\nFOR i IN 1..10 LOOP\nIF MOD(i,2) = 0 THEN\nINSERT INTO temp VALUES (i, x, 'i is even');ELSE\nINSERT INTO temp VALUES (i, x, 'i is odd');END IF;x := x + 100;END LOOP;COMMIT;END;"
         result = splitSQLString(sql + plsql)
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, sql.rstrip(";"))
-        r2 = result.next()
+        r2 = next(result)
         self.assertEquals(r2, s2)
         self.assertRaises(StopIteration, result.next)
 
@@ -394,11 +394,11 @@ class SQLSplitterTests(TestCase):
                END;''')
         s3 = "BEGIN\nFOR i IN 1..10 LOOP\nIF MOD(i,2) = 0 THEN\nINSERT INTO temp VALUES (i, x, 'i is even');ELSE\nINSERT INTO temp VALUES (i, x, 'i is odd');END IF;x := x + 100;END LOOP;COMMIT;END;"
         result = splitSQLString(sql + sqlfn + plsql)
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, sql.rstrip(";"))
-        r2 = result.next()
+        r2 = next(result)
         self.assertEquals(r2, sqlfn.rstrip(";"))
-        r3 = result.next()
+        r3 = next(result)
         self.assertEquals(r3, s3)
         self.assertRaises(StopIteration, result.next)
 
@@ -456,9 +456,9 @@ for update skip locked;result integer;begin
 open c1;fetch c1 into result;close c1;return result;end;"""
 
         result = splitSQLString(plsql)
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, s1)
-        r2 = result.next()
+        r2 = next(result)
         self.assertEquals(r2, s2)
         self.assertRaises(StopIteration, result.next)
 
@@ -517,12 +517,12 @@ open c1;fetch c1 into result;close c1;return result;end;"""
         s3 = 'create index CALENDAR_OBJECT_ICALE_82e731d5 on CALENDAR_OBJECT (\n    ICALENDAR_UID\n)'
         s4 = "update CALENDARSERVER set VALUE = '17' where NAME = 'VERSION'"
         result = splitSQLString(realsql)
-        r1 = result.next()
+        r1 = next(result)
         self.assertEquals(r1, s1)
-        r2 = result.next()
+        r2 = next(result)
         self.assertEquals(r2, s2)
-        r3 = result.next()
+        r3 = next(result)
         self.assertEquals(r3, s3)
-        r4 = result.next()
+        r4 = next(result)
         self.assertEquals(r4, s4)
         self.assertRaises(StopIteration, result.next)

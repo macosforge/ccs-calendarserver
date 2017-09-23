@@ -26,7 +26,7 @@ from txdav.base.propertystore.test import base
 try:
     from txdav.base.propertystore.xattr import PropertyStore
     from xattr import xattr
-except ImportError, e:
+except ImportError as e:
     PropertyStore = None
     importErrorMessage = str(e)
 

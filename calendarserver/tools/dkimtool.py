@@ -15,6 +15,7 @@
 # limitations under the License.
 ##
 
+from __future__ import print_function
 import os
 import sys
 from Crypto.PublicKey import RSA
@@ -52,7 +53,7 @@ def _doKeyGeneration(options):
             f.write(output)
     else:
         if lineBreak:
-            print
+            print()
         print(output)
         lineBreak = True
 
@@ -60,7 +61,7 @@ def _doKeyGeneration(options):
         output = "".join(output.splitlines()[1:-1])
         txt = "v=DKIM1; p=%s" % (output,)
         if lineBreak:
-            print
+            print()
         print(txt)
 
 
@@ -131,7 +132,7 @@ def _doVerify(options):
 
     try:
         yield dkim.verify()
-    except DKIMVerificationError, e:
+    except DKIMVerificationError as e:
         print("Verification Failed: %s" % (e,))
     else:
         print("Verification Succeeded")
@@ -279,7 +280,7 @@ def _runInReactor(fn, options):
 
     try:
         yield fn(options)
-    except Exception, e:
+    except Exception as e:
         print(e)
     finally:
         reactor.stop()

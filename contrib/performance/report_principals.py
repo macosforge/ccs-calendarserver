@@ -18,6 +18,7 @@
 Benchmark a server's response to a simple displayname startswith
 report.
 """
+from __future__ import absolute_import
 
 from urllib2 import HTTPDigestAuthHandler
 
@@ -26,9 +27,9 @@ from twisted.internet import reactor
 from twisted.web.client import Agent
 from twisted.web.http_headers import Headers
 
-from httpauth import AuthHandlerAgent
-from httpclient import StringProducer
-from benchlib import initialize, sample
+from .httpauth import AuthHandlerAgent
+from .httpclient import StringProducer
+from .benchlib import initialize, sample
 
 body = """\
 <?xml version="1.0" encoding="utf-8" ?>

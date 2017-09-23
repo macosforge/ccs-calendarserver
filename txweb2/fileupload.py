@@ -340,7 +340,7 @@ def parse_urlencoded_stream(
     while still_going:
         try:
             yield input.wait
-            data = input.next()
+            data = next(input)
         except StopIteration:
             pairs = [lastdata]
             still_going = 0

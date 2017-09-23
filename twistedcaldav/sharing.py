@@ -756,7 +756,7 @@ class SharedResourceMixin(object):
         xmldata = (yield allDataFromStream(request.stream))
         try:
             doc = element.WebDAVDocument.fromString(xmldata)
-        except ValueError, e:
+        except ValueError as e:
             self.log.error("Error parsing doc ({ex}) Doc:\n {x}", ex=str(e), x=xmldata)
             raise HTTPError(ErrorResponse(
                 responsecode.FORBIDDEN,

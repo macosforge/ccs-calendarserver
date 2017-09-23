@@ -57,7 +57,7 @@ class ExtendedAttributesPropertyStoreTests(TestCase):
         self.resourcePath.parent().chmod(0)
         # Make sure to restore access to it later so that it can be deleted
         # after the test run is finished.
-        self.addCleanup(self.resourcePath.parent().chmod, 0700)
+        self.addCleanup(self.resourcePath.parent().chmod, 0o700)
 
         # Try to get a property from it - and fail.
         document = self._makeValue()
@@ -76,7 +76,7 @@ class ExtendedAttributesPropertyStoreTests(TestCase):
         self.resourcePath.parent().chmod(0)
         # Make sure to restore access to it later so that it can be deleted
         # after the test run is finished.
-        self.addCleanup(self.resourcePath.parent().chmod, 0700)
+        self.addCleanup(self.resourcePath.parent().chmod, 0o700)
 
         # Try to get a property from it - and fail.
         document = self._makeValue()
@@ -330,7 +330,7 @@ class ExtendedAttributesPropertyStoreTests(TestCase):
         self.resourcePath.parent().chmod(0)
         # Make sure to restore access to it later so that it can be deleted
         # after the test run is finished.
-        self.addCleanup(self.resourcePath.parent().chmod, 0700)
+        self.addCleanup(self.resourcePath.parent().chmod, 0o700)
 
         # Try to get a property from it - and fail.
         self._makeValue()

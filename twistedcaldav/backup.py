@@ -70,13 +70,13 @@ def logFuncCall(func):
         return ''.join(a).strip(', ')
 
     def _(*args, **kwargs):
-        funclog("%s(%s)" % (func.func_name,
+        funclog("%s(%s)" % (func.__name__,
                             ', '.join((printArgs(args),
                                        printKwargs(kwargs))).strip(', ')))
 
         retval = func(*args, **kwargs)
 
-        funclog("%s - > %s" % (func.func_name, retval))
+        funclog("%s - > %s" % (func.__name__, retval))
 
         return retval
 

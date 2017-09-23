@@ -210,7 +210,7 @@ class CommonDataStore(DataStore):
             except:
                 a, b, c = sys.exc_info()
                 yield txn.abort()
-                raise a, b, c
+                raise a(b, c)
             else:
                 yield txn.commit()
 
@@ -615,7 +615,7 @@ class CommonHome(FileMetaDataMixin):
         def createDirectory(path):
             try:
                 path.createDirectory()
-            except (IOError, OSError), e:
+            except (IOError, OSError) as e:
                 if e.errno != EEXIST:
                     # Ignore, in case someone else created the
                     # directory while we were trying to as well.
@@ -767,7 +767,7 @@ class CommonHome(FileMetaDataMixin):
                 c._name = name
                 # FIXME: _lots_ of duplication of work here.
                 props.flush()
-            except (IOError, OSError), e:
+            except (IOError, OSError) as e:
                 if e.errno == EEXIST and childPath.isdir():
                     raise HomeChildNameAlreadyExistsError(name)
                 raise
@@ -1031,7 +1031,7 @@ class CommonHomeChild(FileMetaDataMixin, FancyEqMixin, HomeChildBase):
 
             try:
                 childPath.moveTo(trash)
-            except (IOError, OSError), e:
+            except (IOError, OSError) as e:
                 if e.errno == ENOENT:
                     raise NoSuchHomeChildError(self._name)
                 raise
@@ -1041,7 +1041,7 @@ class CommonHomeChild(FileMetaDataMixin, FancyEqMixin, HomeChildBase):
                     self.retrieveOldIndex()._db_close()  # Must close sqlite file before it is deleted
                     trash.remove()
                     self.properties()._removeResource()
-                except Exception, e:
+                except Exception as e:
                     self.log.error("Unable to delete trashed child at {path}: {ex}", path=trash.fp, ex=e)
 
             self._transaction.addOperation(cleanup, "remove child backup %r" % (self._name,))
@@ -1399,7 +1399,7 @@ class NotificationCollection(CommonHomeChild):
                 c._name = collectionName
                 # FIXME: _lots_ of duplication of work here.
                 props.flush()
-            except (IOError, OSError), e:
+            except (IOError, OSError) as e:
                 if e.errno == EEXIST and childPath.isdir():
                     raise HomeChildNameAlreadyExistsError(collectionName)
                 raise
@@ -1542,7 +1542,7 @@ class NotificationObject(CommonObjectResource):
             return self._notificationdata
         try:
             fh = self._path.open()
-        except IOError, e:
+        except IOError as e:
             if e[0] == ENOENT:
                 raise NoSuchObjectResourceError(self)
             else:

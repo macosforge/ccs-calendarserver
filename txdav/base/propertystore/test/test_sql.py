@@ -33,7 +33,7 @@ from twext.enterprise.ienterprise import AlreadyFinishedError
 
 try:
     from txdav.base.propertystore.sql import PropertyStore
-except ImportError, e:
+except ImportError as e:
     # XXX: when could this ever fail?
     PropertyStore = None
     importErrorMessage = str(e)

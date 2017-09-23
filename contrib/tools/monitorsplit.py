@@ -55,12 +55,12 @@ def split(fpath, outputDir):
             output = ["-----\n"]
             output.append(line)
             try:
-                output.append(f.next())
-                line = f.next()
+                output.append(next(f))
+                line = next(f)
                 if line.startswith("Memory"):
-                    line = f.next()
+                    line = next(f)
                 output.append(line)
-                output.append(f.next())
+                output.append(next(f))
             except StopIteration:
                 break
             outputFile.write("".join(output))

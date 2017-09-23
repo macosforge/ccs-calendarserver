@@ -17,6 +17,7 @@
 """
 Tool that extracts time series data from a dashcollect log.
 """
+from __future__ import print_function
 
 from argparse import SUPPRESS, OPTIONAL, ZERO_OR_MORE, HelpFormatter, \
     ArgumentParser

@@ -61,7 +61,7 @@ def http_PROPPATCH(self, request):
         doc = waitForDeferred(davXMLFromStream(request.stream))
         yield doc
         doc = doc.getResult()
-    except ValueError, e:
+    except ValueError as e:
         log.error("Error while handling PROPPATCH body: %s" % (e,))
         raise HTTPError(StatusResponse(responsecode.BAD_REQUEST, str(e)))
 
@@ -125,7 +125,7 @@ def http_PROPPATCH(self, request):
                     x = waitForDeferred(action(property, request))
                     yield x
                     x.getResult()
-                except KeyError, e:
+                except KeyError as e:
                     # Removing a non-existent property is OK according to WebDAV
                     if removing:
                         responses.add(responsecode.OK, property)

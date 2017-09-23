@@ -393,7 +393,7 @@ class MailReceiver(object):
             if dateString is not None:
                 try:
                     dateSent = dateutil.parser.parse(dateString)
-                except Exception, e:
+                except Exception as e:
                     log.info(
                         "Could not parse date in IMIP email '{date}' ({ex})",
                         date=dateString, ex=e,
@@ -537,7 +537,7 @@ class MailReceiver(object):
 
             return self.processReply(msg)
 
-        except Exception, e:
+        except Exception as e:
             # Don't let a failure of any kind stop us
             log.error("Failed to process message: {error}", error=str(e))
         return succeed(self.UNKNOWN_FAILURE)
@@ -550,7 +550,7 @@ def injectMessage(txn, organizer, attendee, calendar):
         scheduler = IMIPScheduler(txn, None)
         results = (yield scheduler.doSchedulingDirectly("iMIP", attendee, [organizer, ], calendar,))
         log.info("Successfully injected iMIP response from {attendee} to {organizer}", attendee=attendee, organizer=organizer)
-    except Exception, e:
+    except Exception as e:
         log.error("Failed to inject iMIP response ({error})", error=str(e))
         raise
 

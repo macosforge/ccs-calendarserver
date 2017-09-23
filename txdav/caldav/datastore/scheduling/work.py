@@ -443,7 +443,7 @@ class ScheduleOrganizerWork(ScheduleWorkMixin, fromTable(schema.SCHEDULE_ORGANIZ
 
             self._dequeued()
 
-        except Exception, e:
+        except Exception as e:
             log.debug("ScheduleOrganizerWork - exception ID: {id}, UID: '{uid}', {err}", id=self.workID, uid=self.icalendarUID, err=str(e))
             log.debug(traceback.format_exc())
             raise
@@ -592,7 +592,7 @@ class ScheduleOrganizerSendWork(ScheduleWorkMixin, fromTable(schema.SCHEDULE_ORG
 
             self._dequeued()
 
-        except Exception, e:
+        except Exception as e:
             log.debug("ScheduleOrganizerSendWork - exception ID: {id}, UID: '{uid}', {err}", id=self.workID, uid=self.icalendarUID, err=str(e))
             log.debug(traceback.format_exc())
             raise
@@ -710,7 +710,7 @@ class ScheduleReplyWork(ScheduleWorkMixin, fromTable(schema.SCHEDULE_REPLY_WORK)
 
             self._dequeued()
 
-        except Exception, e:
+        except Exception as e:
             # FIXME: calendar may not be set here!
             log.debug("ScheduleReplyWork - exception ID: {id}, UID: '{uid}', {err}", id=self.workID, uid=itipmsg.resourceUID(), err=str(e))
             raise
@@ -901,7 +901,7 @@ class ScheduleRefreshWork(ScheduleWorkMixin, fromTable(schema.SCHEDULE_REFRESH_W
                 yield NamedLock.acquire(self.transaction, "ImplicitUIDLock:%s" % (hashlib.md5(organizer_resource.uid()).hexdigest(),))
 
                 yield self._doRefresh(organizer_resource, attendeesToProcess)
-            except Exception, e:
+            except Exception as e:
                 log.debug("ImplicitProcessing - refresh exception UID: '{uid}', {exc}", uid=organizer_resource.uid(), exc=str(e))
                 raise
             except:
@@ -1061,7 +1061,7 @@ class ScheduleAutoReplyWork(ScheduleWorkMixin, fromTable(schema.SCHEDULE_AUTO_RE
                 from txdav.caldav.datastore.scheduling.implicit import ImplicitScheduler
                 scheduler = ImplicitScheduler()
                 yield scheduler.sendAttendeeReply(self.transaction, resource)
-            except Exception, e:
+            except Exception as e:
                 log.debug("ImplicitProcessing - auto-reply exception UID: '{uid}', {ex}", uid=resource.uid(), ex=str(e))
                 raise
             except:

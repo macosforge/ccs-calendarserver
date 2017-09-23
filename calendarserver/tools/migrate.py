@@ -64,7 +64,7 @@ def main():
                 "help",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     configFileName = None
@@ -81,7 +81,7 @@ def main():
 
     try:
         config = loadConfig(configFileName)
-    except ConfigurationError, e:
+    except ConfigurationError as e:
         sys.stdout.write("%s\n" % (e,))
         sys.exit(1)
 

@@ -185,7 +185,7 @@ class MemCacheTestCase(TestCase):
             )
         except MemcacheLockTimeoutError:
             pass
-        except Exception, e:
+        except Exception as e:
             self.fail("Unknown exception thrown: %s" % (e,))
         else:
             self.fail("No timeout exception thrown")

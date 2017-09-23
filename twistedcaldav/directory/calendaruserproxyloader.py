@@ -115,7 +115,7 @@ class XMLCalendarUserProxyLoader(object):
 
         def expandCount(value, count):
 
-            if type(value) in types.StringTypes:
+            if type(value) in (str,):
                 return value % (count,) if count and "%" in value else value
             else:
                 return value

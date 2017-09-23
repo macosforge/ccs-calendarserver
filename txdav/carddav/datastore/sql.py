@@ -2280,11 +2280,11 @@ class AddressBookObject(CommonObjectResource, AddressBookObjectSharingMixIn):
 
         try:
             component.validVCardData()
-        except InvalidVCardDataError, e:
+        except InvalidVCardDataError as e:
             raise InvalidObjectResourceError(str(e))
         try:
             component.validForCardDAV()
-        except InvalidVCardDataError, e:
+        except InvalidVCardDataError as e:
             raise InvalidComponentForStoreError(str(e))
 
     def _componentResourceKindToKind(self, component):
@@ -2631,7 +2631,7 @@ class AddressBookObject(CommonObjectResource, AddressBookObjectSharingMixIn):
 
                 try:
                     component = VCard.fromString(text)
-                except InvalidVCardDataError, e:
+                except InvalidVCardDataError as e:
                     # This is a really bad situation, so do raise
                     raise InternalDataStoreError(
                         "Data corruption detected (%s) in id: %s"

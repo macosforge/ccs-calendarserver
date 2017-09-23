@@ -15,6 +15,7 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 from StringIO import StringIO
 import collections
@@ -23,7 +24,7 @@ import getopt
 import json
 import socket
 import sys
-import tables
+from . import tables
 import time
 import errno
 
@@ -72,7 +73,7 @@ def printStats(stats, multimode, showMethods, topUsers, showAgents, dumpFile):
         else:
             try:
                 summary = printStat(stats[0], multimode[0], showMethods, topUsers, showAgents)
-            except KeyError, e:
+            except KeyError as e:
                 printFailedStats("Unable to find key '%s' in statistics from server socket" % (e,))
                 sys.exit(1)
 
@@ -101,7 +102,7 @@ def printStat(stats, index, showMethods, topUsers, showAgents):
     else:
         print("Current CPU: Unavailable")
         print("Current Memory Used: Unavailable")
-    print
+    print()
     summary = printRequestSummary(stats)
     printHistogramSummary(stats[index], index)
     if showMethods:

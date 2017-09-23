@@ -398,7 +398,7 @@ class Commands(CommandsBase):
         from twisted.python.log import startLogging
         try:
             f = open(fileName, "w")
-        except (IOError, OSError), e:
+        except (IOError, OSError) as e:
             self.terminal.write("Unable to open file %s: %s\n" % (fileName, e))
             return
 

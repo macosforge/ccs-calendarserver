@@ -81,7 +81,7 @@ class LinkResourceTests(TestCase):
         request = SimpleRequest(self.site, "GET", "/home/link/")
         try:
             yield resource.locateChild(request, ["link", ])
-        except HTTPError, e:
+        except HTTPError as e:
             self.assertEqual(e.response.code, responsecode.NOT_FOUND)
         else:
             self.fail("HTTPError exception not raised")
@@ -98,7 +98,7 @@ class LinkResourceTests(TestCase):
         request = SimpleRequest(self.site, "GET", "/home/link1/")
         try:
             yield resource.locateChild(request, ["link1", ])
-        except HTTPError, e:
+        except HTTPError as e:
             self.assertEqual(e.response.code, responsecode.LOOP_DETECTED)
         else:
             self.fail("HTTPError exception not raised")

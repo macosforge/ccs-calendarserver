@@ -286,7 +286,7 @@ class Component (object):
         errmsg = "Unknown"
         try:
             result = Card.parseData(data, format)
-        except ErrorBase, e:
+        except ErrorBase as e:
             errmsg = "%s: %s" % (e.mReason, e.mData,)
             result = None
         if not result:

@@ -256,7 +256,7 @@ class IScheduleRequest(object):
             else:
                 raise ValueError("Incorrect server response status code: {code}".format(code=response.code))
 
-        except Exception, e:
+        except Exception as e:
             # Check for connection failure
             if isinstance(e, MultiFailure) and not self.scheduler.isfreebusy:
                 all_connections_failed = all([isinstance(err.value, ConnectionRefusedError) for err in e.failures])

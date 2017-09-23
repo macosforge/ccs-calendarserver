@@ -128,7 +128,7 @@ class StaticRenderMixin(resource.RenderMixin, MetaDataMixin):
         """
         try:
             response = yield super(StaticRenderMixin, self).renderHTTP(request)
-        except HTTPError, he:
+        except HTTPError as he:
             response = he.response
 
         response = iweb.IResponse(response)
@@ -436,7 +436,7 @@ class File(StaticRenderMixin):
 
         try:
             f = self.fp.open()
-        except IOError, e:
+        except IOError as e:
             import errno
             if e[0] == errno.EACCES:
                 return responsecode.FORBIDDEN
@@ -467,7 +467,7 @@ class FileSaver(resource.PostableResource):
                     http_headers.MimeType('text', 'html'),
                     http_headers.MimeType('text', 'css'))
 
-    def __init__(self, destination, expectedFields=[], allowedTypes=None, maxBytes=1000000, permissions=0644):
+    def __init__(self, destination, expectedFields=[], allowedTypes=None, maxBytes=1000000, permissions=0o644):
         self.destination = destination
         self.allowedTypes = allowedTypes or self.allowedTypes
         self.maxBytes = maxBytes
@@ -528,7 +528,7 @@ class FileSaver(resource.PostableResource):
                         try:
                             outname = self.writeFile(*finfo)
                             content.append("Saved file %s<br />" % outname)
-                        except IOError, err:
+                        except IOError as err:
                             content.append(str(err) + "<br />")
                 else:
                     content.append("%s is not a valid field" % fieldName)

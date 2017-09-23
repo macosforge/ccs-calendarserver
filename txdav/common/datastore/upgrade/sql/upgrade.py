@@ -321,7 +321,7 @@ class UpgradeDatabaseSchemaStep(UpgradeDatabaseCoreStep):
             sql = fp.getContent()
             yield sqlTxn.execSQLBlock(sql)
             yield sqlTxn.commit()
-        except (RuntimeError, StandardError) as e:
+        except (RuntimeError, Exception) as e:
             if hasattr(e, "stmt"):
                 self.log.error("Apply upgrade failed for '{basename}' on statement: {stmt}\n{err}".format(
                     basename=fp.basename(),

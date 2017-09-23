@@ -15,6 +15,7 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 from gzip import GzipFile
 import collections
@@ -23,7 +24,7 @@ import getopt
 import os
 import socket
 import sys
-import tables
+from . import tables
 import traceback
 import glob
 from calendarserver.logAnalysis import getAdjustedMethodName, METHOD_PUT_ICS, \
@@ -1872,6 +1873,6 @@ if __name__ == "__main__":
                         analyzers[0].analyzeLogFile(arg)
                     analyzers[0].printAll(doTabDelimited, summary)
 
-    except Exception, e:
+    except Exception as e:
         print(traceback.print_exc())
         sys.exit(str(e))

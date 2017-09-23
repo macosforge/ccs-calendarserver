@@ -455,7 +455,7 @@ class Component (object):
         errmsg = "Unknown"
         try:
             result = Calendar.parseData(data, format)
-        except ErrorBase, e:
+        except ErrorBase as e:
             errmsg = "{0}: {1}".format(e.mReason, e.mData,)
             result = None
         if not result:

@@ -41,7 +41,7 @@ class PreconditionTestCase(unittest.TestCase):
 
         try:
             http.checkPreconditions(request, response, **kw)
-        except http.HTTPError, e:
+        except http.HTTPError as e:
             preconditionsPass = False
             self.assertEquals(e.response.code, expectedCode)
         self.assertEquals(preconditionsPass, expectedResult)

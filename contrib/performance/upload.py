@@ -14,6 +14,7 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 import sys
 import pickle
@@ -26,9 +27,9 @@ from twisted.python.usage import UsageError, Options
 from twisted.internet import reactor
 from twisted.web.client import Agent
 
-from stats import median, mad
-from benchlib import select
-from httpclient import StringProducer, readBody
+from .stats import median, mad
+from .benchlib import select
+from .httpclient import StringProducer, readBody
 
 
 class UploadOptions(Options):
@@ -111,7 +112,7 @@ def main():
     options = UploadOptions()
     try:
         options.parseOptions(sys.argv[1:])
-    except UsageError, e:
+    except UsageError as e:
         print(e)
         return 1
 

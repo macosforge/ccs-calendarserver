@@ -16,6 +16,7 @@
 # limitations under the License.
 ##
 
+from __future__ import print_function
 import getopt
 import os
 import sys
@@ -31,7 +32,7 @@ if __name__ == "__main__":
         if option == "-n":
             user_max = int(value)
         else:
-            print "Unrecognized option: %s" % (option,)
+            print("Unrecognized option: %s" % (option,))
             raise ValueError
 
     for ctr in xrange(1, user_max + 1):

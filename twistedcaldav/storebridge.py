@@ -725,7 +725,7 @@ class _CommonHomeChildCollectionMixin(_CommonStoreExceptionHandler):
                 newchild = (yield request.locateResource(newchildURL))
                 changedComponent = (yield self.storeResourceData(newchild, component, returnChangedData=return_changed))
 
-            except HTTPError, e:
+            except HTTPError as e:
                 # Extract the pre-condition
                 code = e.response.code
                 if isinstance(e.response, ErrorResponse):
@@ -870,7 +870,7 @@ class _CommonHomeChildCollectionMixin(_CommonStoreExceptionHandler):
             try:
                 yield self.authorize(request, (davxml.Bind(),))
                 hasPrivilege = True
-            except HTTPError, e:
+            except HTTPError as e:
                 hasPrivilege = e
 
             # get components
@@ -924,7 +924,7 @@ class _CommonHomeChildCollectionMixin(_CommonStoreExceptionHandler):
                 changedComponent = yield self.storeResourceData(updateResource, component, returnChangedData=return_changed)
                 etag = (yield updateResource.etag())
 
-            except HTTPError, e:
+            except HTTPError as e:
                 # Extract the pre-condition
                 code = e.response.code
                 if isinstance(e.response, ErrorResponse):
@@ -974,7 +974,7 @@ class _CommonHomeChildCollectionMixin(_CommonStoreExceptionHandler):
             try:
                 yield self.authorize(request, (davxml.Unbind(),))
                 hasPrivilege = True
-            except HTTPError, e:
+            except HTTPError as e:
                 hasPrivilege = e
 
             for index, href, ifmatch in crudDeleteInfo:
@@ -995,7 +995,7 @@ class _CommonHomeChildCollectionMixin(_CommonStoreExceptionHandler):
 
                     yield deleteResource.storeRemove(request)
 
-                except HTTPError, e:
+                except HTTPError as e:
                     # Extract the pre-condition
                     code = e.response.code
                     if isinstance(e.response, ErrorResponse):
@@ -2077,7 +2077,7 @@ class CalendarAttachment(_NewStoreFileMetaDataHelper, _GetChildHelper):
             log.error("Dropbox cannot be used after migration to managed attachments")
             raise HTTPError(FORBIDDEN)
 
-        except Exception, e:
+        except Exception as e:
             log.error("Unable to store attachment: {ex}", ex=e)
             raise HTTPError(SERVICE_UNAVAILABLE)
 
@@ -2116,7 +2116,7 @@ class CalendarAttachment(_NewStoreFileMetaDataHelper, _GetChildHelper):
                 stream.finish()
         try:
             self._newStoreAttachment.retrieve(StreamProtocol())
-        except IOError, e:
+        except IOError as e:
             log.error("Unable to read attachment: {s!r}, due to: {ex}", s=self, ex=e)
             raise HTTPError(NOT_FOUND)
 
@@ -2655,7 +2655,7 @@ class CalendarObjectResource(_CalendarObjectMetaDataMixin, _CommonObjectResource
                                     etag=etag,
                                     lastModified=last_modified,
                                 )
-                            except HTTPError, e:
+                            except HTTPError as e:
                                 last_exception = e
                             else:
                                 break
@@ -2735,7 +2735,7 @@ class CalendarObjectResource(_CalendarObjectMetaDataMixin, _CommonObjectResource
 
             try:
                 component = Component.fromString(calendardata, format)
-            except ValueError, e:
+            except ValueError as e:
                 log.error(str(e))
                 raise HTTPError(ErrorResponse(
                     responsecode.FORBIDDEN,
@@ -3221,12 +3221,12 @@ class AddressBookCollectionResource(_CommonHomeChildCollectionMixin, CalDAVResou
                 newchild = (yield request.locateResource(newchildURL))
                 changedComponent = (yield self.storeResourceData(newchild, component, returnChangedData=return_changed))
 
-            except GroupWithUnsharedAddressNotAllowedError, e:
+            except GroupWithUnsharedAddressNotAllowedError as e:
                 # save off info and try again below
                 missingUIDs = set(e.message)
                 groupRetries.append((index, component, newchildURL, newchild, missingUIDs,))
 
-            except HTTPError, e:
+            except HTTPError as e:
                 # Extract the pre-condition
                 code = e.response.code
                 if isinstance(e.response, ErrorResponse):
@@ -3292,7 +3292,7 @@ class AddressBookCollectionResource(_CommonHomeChildCollectionMixin, CalDAVResou
             try:
                 yield self.authorize(request, (davxml.Unbind(),))
                 hasPrivilege = True
-            except HTTPError, e:
+            except HTTPError as e:
                 hasPrivilege = e
 
             for index, href, ifmatch in crudDeleteInfo:
@@ -3330,7 +3330,7 @@ class AddressBookCollectionResource(_CommonHomeChildCollectionMixin, CalDAVResou
 
                     yield deleteResource.storeRemove(request)
 
-                except HTTPError, e:
+                except HTTPError as e:
                     # Extract the pre-condition
                     code = e.response.code
                     if isinstance(e.response, ErrorResponse):
@@ -3476,7 +3476,7 @@ class AddressBookObjectResource(_CommonObjectResource):
 
             try:
                 component = VCard.fromString(vcarddata, format)
-            except ValueError, e:
+            except ValueError as e:
                 log.error(str(e))
                 raise HTTPError(ErrorResponse(
                     responsecode.FORBIDDEN,

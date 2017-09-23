@@ -707,7 +707,7 @@ class CalendarIndex (AbstractCalendarIndex):
         try:
             instances = calendar.expandTimeRanges(expand, ignoreInvalidInstances=reCreate)
             recurrenceLimit = instances.limit
-        except InvalidOverriddenInstanceError, e:
+        except InvalidOverriddenInstanceError as e:
             log.error("Invalid instance {rid} when indexing {name} in {rsrc!r}", rid=e.rid, name=name, rsrc=self.resource)
             raise
 
@@ -887,7 +887,8 @@ class MemcachedUIDReserver(CachePoolUserMixIn):
             uid=uid, path=self.index.resource.fp.path,
         )
 
-        def _checkValue((flags, value)):
+        def _checkValue(xxx_todo_changeme):
+            (flags, value) = xxx_todo_changeme
             if value is None:
                 return False
             else:
@@ -920,7 +921,7 @@ class SQLUIDReserver(object):
                 "UID %s already reserved for calendar collection %s."
                 % (uid, self.index.resource)
             )
-        except sqlite.Error, e:
+        except sqlite.Error as e:
             log.error("Unable to reserve UID: {ex}", ex=e)
             self.index._db_rollback()
             raise
@@ -943,7 +944,7 @@ class SQLUIDReserver(object):
                     self.index._db_execute(
                         "delete from RESERVED where UID = :1", uid)
                     self.index._db_commit()
-                except sqlite.Error, e:
+                except sqlite.Error as e:
                     log.error("Unable to unreserve UID: {ex}", ex=e)
                     self.index._db_rollback()
                     raise
@@ -970,7 +971,7 @@ class SQLUIDReserver(object):
                 try:
                     self.index._db_execute("delete from RESERVED where UID = :1", uid)
                     self.index._db_commit()
-                except sqlite.Error, e:
+                except sqlite.Error as e:
                     log.error("Unable to unreserve UID: {ex}", ex=e)
                     self.index._db_rollback()
                     raise
@@ -1066,7 +1067,7 @@ class Index (CalendarIndex):
                 continue
             try:
                 stream = child.open()
-            except (IOError, OSError), e:
+            except (IOError, OSError) as e:
                 log.error("Unable to open resource {name}: {ex}", name=name, ex=e)
                 continue
 
@@ -1174,7 +1175,7 @@ class IndexSchedule (CalendarIndex):
                 continue
             try:
                 stream = child.open()
-            except (IOError, OSError), e:
+            except (IOError, OSError) as e:
                 log.error("Unable to open resource {name}: {ex}", name=name, ex=e)
                 continue
 

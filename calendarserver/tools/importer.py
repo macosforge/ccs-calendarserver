@@ -235,7 +235,7 @@ def importCollectionComponent(store, component):
                 # That event is already in the home
                 print("Skipping since UID already exists: {}".format(uid))
 
-            except Exception, e:
+            except Exception as e:
                 print(
                     "Failed to import due to: {error}\n{comp}".format(
                         error=e,
@@ -357,7 +357,7 @@ class ImporterService(WorkerService, object):
             else:
                 try:
                     input = self.options.openInput()
-                except IOError, e:
+                except IOError as e:
                     sys.stderr.write(
                         "Unable to open input file for reading: %s\n" % (e)
                     )
@@ -396,7 +396,7 @@ def main(argv=sys.argv, reactor=None):
     options = ImportOptions()
     try:
         options.parseOptions(argv[1:])
-    except UsageError, e:
+    except UsageError as e:
         usage(e)
 
     def makeService(store):

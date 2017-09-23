@@ -195,7 +195,7 @@ class CalendarStoreFeatures(object):
             total = len(rows)
             count = 0
             log.warn("{total} dropbox ids to migrate", total=total)
-        except RuntimeError, e:
+        except RuntimeError as e:
             log.error("Dropbox migration failed when cleaning out dropbox ids: {ex}", ex=e)
             yield txn.abort()
             raise
@@ -220,7 +220,7 @@ class CalendarStoreFeatures(object):
                         (yield self._upgradeDropbox(txn, dropbox_id))
                     count += len(rows)
                     log.warn("{count} of {total} dropbox ids migrated", count=count, total=total)
-            except RuntimeError, e:
+            except RuntimeError as e:
                 log.error("Dropbox migration failed for '{id}': {ex}", id=dropbox_id, ex=e)
                 yield txn.abort()
                 raise
@@ -2967,7 +2967,7 @@ class CalendarObject(CommonObjectResource, CalendarObjectBase):
         try:
             if self._txn._migrating:
                 component.validOrganizerForScheduling(doFix=True)
-        except InvalidICalendarDataError, e:
+        except InvalidICalendarDataError as e:
             raise ValidOrganizerError(str(e))
 
     @inlineCallbacks
@@ -3926,7 +3926,7 @@ class CalendarObject(CommonObjectResource, CalendarObjectBase):
                 instances = component.expandTimeRanges(expand, lowerLimit=truncateLowerLimit, ignoreInvalidInstances=reCreate)
                 recurrenceLimit = instances.limit
                 recurrenceLowerLimit = instances.lowerLimit
-            except InvalidOverriddenInstanceError, e:
+            except InvalidOverriddenInstanceError as e:
                 self.log.error(
                     "Invalid instance {rid} when indexing {name} in {cal!r}",
                     rid=e.rid, name=self._name, cal=self._calendar,
@@ -4188,7 +4188,7 @@ class CalendarObject(CommonObjectResource, CalendarObjectBase):
 
             try:
                 component = Component.fromString(text)
-            except InvalidICalendarDataError, e:
+            except InvalidICalendarDataError as e:
                 # This is a really bad situation, so do raise
                 raise InternalDataStoreError(
                     "Data corruption detected ({0}) in id: {1}".format(
@@ -4768,7 +4768,7 @@ class CalendarObject(CommonObjectResource, CalendarObjectBase):
             attachment = (yield self.createManagedAttachment())
             t = attachment.store(content_type, filename)
             yield readStream(stream, t.write)
-        except Exception, e:
+        except Exception as e:
             self.log.error("Unable to store attachment: {ex}", ex=e)
             raise AttachmentStoreFailed
         yield t.loseConnection()
@@ -4838,7 +4838,7 @@ class CalendarObject(CommonObjectResource, CalendarObjectBase):
             attachment = (yield self.updateManagedAttachment(managed_id, oldattachment))
             t = attachment.store(content_type, filename)
             yield readStream(stream, t.write)
-        except Exception, e:
+        except Exception as e:
             self.log.error("Unable to store attachment: {ex}", ex=e)
             raise AttachmentStoreFailed
         yield t.loseConnection()

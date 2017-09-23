@@ -296,7 +296,7 @@ class APNProviderProtocol(Protocol):
                 command, status, identifier = struct.unpack("!BBI", message)
                 if command == self.COMMAND_ERROR:
                     yield fn(status, identifier)
-            except Exception, e:
+            except Exception as e:
                 self.log.warn(
                     "ProviderProtocol could not process error: {code} ({ex})",
                     code=message.encode("hex"), ex=e
@@ -705,7 +705,7 @@ class APNFeedbackProtocol(Protocol):
                     # the token itself
                     return
 
-            except Exception, e:
+            except Exception as e:
                 self.log.warn(
                     "FeedbackProtocol could not process message: ({ex})", ex=e
                 )

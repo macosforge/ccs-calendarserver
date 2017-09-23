@@ -142,7 +142,7 @@ class xattrPropertyStore (object):
                 responsecode.NOT_FOUND,
                 "No such property: %s" % (encodeXMLName(*qname),)
             ))
-        except IOError, e:
+        except IOError as e:
             if e.errno in _ATTR_MISSING or e.errno == errno.ENOENT:
                 raise HTTPError(StatusResponse(
                     responsecode.NOT_FOUND,
@@ -229,7 +229,7 @@ class xattrPropertyStore (object):
                 self.attrs.remove(key)
             except KeyError:
                 pass
-            except IOError, e:
+            except IOError as e:
                 if e.errno not in _ATTR_MISSING:
                     raise
         except:
@@ -256,7 +256,7 @@ class xattrPropertyStore (object):
             self.attrs.get(key)
         except KeyError:
             return False
-        except IOError, e:
+        except IOError as e:
             if e.errno in _ATTR_MISSING or e.errno == errno.ENOENT:
                 return False
             raise HTTPError(StatusResponse(
@@ -280,7 +280,7 @@ class xattrPropertyStore (object):
         prefix = self.deadPropertyXattrPrefix
         try:
             attrs = iter(self.attrs)
-        except IOError, e:
+        except IOError as e:
             if e.errno == errno.ENOENT:
                 return []
             raise HTTPError(StatusResponse(

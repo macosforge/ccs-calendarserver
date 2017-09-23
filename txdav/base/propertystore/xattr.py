@@ -158,7 +158,7 @@ class PropertyStore(AbstractPropertyStore):
         try:
             try:
                 data = self.attrs[self._encodeKey(effectiveKey)]
-            except IOError, e:
+            except IOError as e:
                 if e.errno in [_ERRNO_NO_ATTR, errno.ENOENT]:
                     raise KeyError(key)
                 raise PropertyStoreError(e)
@@ -168,7 +168,7 @@ class PropertyStore(AbstractPropertyStore):
                 try:
                     data = self.attrs[self._encodeKey(effectiveKey,
                                                       compressNamespace=False)]
-                except IOError, e:
+                except IOError as e:
                     raise KeyError(key)
 
                 try:
@@ -176,7 +176,7 @@ class PropertyStore(AbstractPropertyStore):
                     self.attrs[self._encodeKey(effectiveKey)] = data
                     del self.attrs[self._encodeKey(effectiveKey,
                                                    compressNamespace=False)]
-                except IOError, e:
+                except IOError as e:
                     msg = (
                         "Unable to upgrade property "
                         "to compressed namespace: %s" % (key.toString())
@@ -249,7 +249,7 @@ class PropertyStore(AbstractPropertyStore):
 
         try:
             iterattr = iter(self.attrs)
-        except IOError, e:
+        except IOError as e:
             if e.errno != errno.ENOENT:
                 raise
             iterattr = iter(())
@@ -297,7 +297,7 @@ class PropertyStore(AbstractPropertyStore):
                 del attrs[self._encodeKey(key)]
             except KeyError:
                 pass
-            except IOError, e:
+            except IOError as e:
                 if e.errno != _ERRNO_NO_ATTR:
                     raise
 
@@ -320,7 +320,7 @@ class PropertyStore(AbstractPropertyStore):
         """
         try:
             iterattr = iter(other.attrs)
-        except IOError, e:
+        except IOError as e:
             if e.errno != errno.ENOENT:
                 raise
             iterattr = iter(())

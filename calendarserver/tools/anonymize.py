@@ -77,7 +77,7 @@ def main():
                 "node=",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     #
@@ -282,7 +282,7 @@ def anonymizeRoot(directoryMap, sourceDirectory, destDirectory):
 def anonymizeData(directoryMap, data):
     try:
         pyobj = Calendar.parseText(data)
-    except Exception, e:
+    except Exception as e:
         print("Failed to parse (%s): %s" % (e, data))
         return None
 

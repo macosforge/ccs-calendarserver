@@ -187,7 +187,7 @@ def main():
                 "verbose",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     #
@@ -281,7 +281,7 @@ def main():
                     raise ValueError("Unknown auto-schedule mode: {mode}".format(
                         mode=arg))
                 autoScheduleMode = allowedAutoScheduleModes[arg]
-            except ValueError, e:
+            except ValueError as e:
                 abort(e)
 
             principalActions.append((action_setAutoScheduleMode, autoScheduleMode))
@@ -349,13 +349,13 @@ def main():
                     "locations", "resources", "addresses", "users", "groups"
                 ]
             )
-        except ValueError, e:
+        except ValueError as e:
             print(e)
             return
 
         try:
             fullName, shortName, uid = parseCreationArgs(args)
-        except ValueError, e:
+        except ValueError as e:
             print(e)
             return
 
@@ -378,7 +378,7 @@ def main():
                 listPrincipals,
                 ["users", "groups", "locations", "resources", "addresses"]
             )
-        except ValueError, e:
+        except ValueError as e:
             print(e)
             return
 
@@ -423,7 +423,7 @@ def runListPrincipals(service, store, listPrincipals):
             printRecordList(records)
         else:
             print("No records of type %s" % (listPrincipals,))
-    except InvalidDirectoryRecordError, e:
+    except InvalidDirectoryRecordError as e:
         usage(e)
     returnValue(None)
 

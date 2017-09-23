@@ -114,7 +114,7 @@ class ListEntry(object):
     def toFields(self):
         try:
             return tuple(self.fields[fieldName] for fieldName in self.fieldNames)
-        except KeyError, e:
+        except KeyError as e:
             raise AssertionError(
                 "Field %s is not in %r, defined by %s"
                 % (e, self.fields.keys(), self.parent.__name__)
@@ -653,7 +653,7 @@ class CalendarObject(File):
                 self.summary = mainComponent.propertyValue("SUMMARY")
                 self.mainComponent = mainComponent
 
-            except InvalidICalendarDataError, e:
+            except InvalidICalendarDataError as e:
                 log.error("{path}: {ex}", path=self.path, ex=e)
 
                 self.componentType = "?"

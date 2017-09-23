@@ -312,7 +312,7 @@ class MemoryStream(SimpleStream):
         SimpleStream.close(self)
 
 components.registerAdapter(MemoryStream, str, IByteStream)
-components.registerAdapter(MemoryStream, types.BufferType, IByteStream)
+components.registerAdapter(MemoryStream, memoryview, IByteStream)
 
 #
 # CompoundStream
@@ -935,7 +935,7 @@ class _IteratorStream(object):
 
     def read(self):
         try:
-            val = self._gen.next()
+            val = next(self._gen)
         except StopIteration:
             return None
         else:

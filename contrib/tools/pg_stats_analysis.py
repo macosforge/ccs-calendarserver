@@ -14,12 +14,13 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 import sqlparse
 import os
 from gzip import GzipFile
 import collections
-import tables
+from . import tables
 import textwrap
 import sys
 import getopt
@@ -55,7 +56,7 @@ def _substitute(expression, replacement):
 def sqlnormalize(sql):
     try:
         statements = sqlparse.parse(sql)
-    except ValueError, e:
+    except ValueError as e:
         print(e)
     # Replace any literal values with placeholders
     qmark = sqlparse.sql.Token('Operator', '?')
@@ -165,7 +166,7 @@ def parseStats(logFilePath, donormlize=True, verbose=False):
         bits = line.split("|")
         if len(bits) > COLUMN_query:
             while bits[COLUMN_query].endswith("+"):
-                line = f.next()
+                line = next(f)
                 newbits = line.split("|")
                 bits[COLUMN_query] = bits[COLUMN_query][:-1] + newbits[COLUMN_query]
 

@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 # Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 #
@@ -176,7 +177,7 @@ class DirectoryService(BaseDirectoryService, CalendarDirectoryServiceMixin):
         ampProto = (yield self._getConnection())
         try:
             results = (yield ampProto.callRemote(command, **kwds))
-        except Exception, e:
+        except Exception as e:
             log.error("Failed AMP command", error=e)
             #  FIXME: is there a way to hook into ConnectionLost?
             self._connection = None

@@ -86,7 +86,7 @@ def getURL(url, method="GET", redirect=0):
 
     try:
         response = (yield agent.request(method, url, headers, None))
-    except Exception, e:
+    except Exception as e:
         log.error(str(e))
         response = None
     else:

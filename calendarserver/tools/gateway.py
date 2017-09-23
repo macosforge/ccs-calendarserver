@@ -128,7 +128,7 @@ def main():
                 "config=",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     #
@@ -156,7 +156,7 @@ def main():
     rawInput = sys.stdin.read()
     try:
         plist = readPlistFromString(rawInput)
-    except xml.parsers.expat.ExpatError, e:  # @UndefinedVariable
+    except xml.parsers.expat.ExpatError as e:  # @UndefinedVariable
         respondWithError(str(e))
         return
 
@@ -214,7 +214,7 @@ class Runner(object):
                 else:
                     self.respondWithError("Unknown command '%s'" % (commandName,))
 
-        except Exception, e:
+        except Exception as e:
             self.respondWithError("Command failed: '%s'" % (str(e),))
             raise
 
@@ -461,7 +461,7 @@ class Runner(object):
                 writable.set(setKeyPath(ConfigDict(), keyPath, value))
         try:
             writable.save(restart=False)
-        except Exception, e:
+        except Exception as e:
             self.respond(command, {"error": str(e)})
         else:
             self.command_readConfig(command)

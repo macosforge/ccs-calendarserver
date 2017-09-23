@@ -97,7 +97,7 @@ def main():
                 "dbtype=",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     #
@@ -210,7 +210,7 @@ def copyAssignments(assignments, pod, directory, store):
                     recordTypes=delegatorRecordTypes
                 )
                 delegatorRecord = uniqueResult(delegatorRecords)
-            except Exception, e:
+            except Exception as e:
                 print("Failed to look up record for {}: {}".format(delegatorUID, str(e)))
                 continue
 
@@ -240,7 +240,7 @@ def copyAssignments(assignments, pod, directory, store):
                 )
                 delegateRecord = uniqueResult(delegateRecords)
 
-            except Exception, e:
+            except Exception as e:
                 print("Failed to look up record for {}: {}".format(delegateUID, str(e)))
                 continue
 

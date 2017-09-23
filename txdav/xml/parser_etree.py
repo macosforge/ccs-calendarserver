@@ -160,7 +160,7 @@ class WebDAVDocument(AbstractWebDAVDocument):
                 if not data:
                     break
                 parser.feed(data)
-        except XMLParseError, e:
+        except XMLParseError as e:
             raise ValueError(e)
         return parser.close()
 

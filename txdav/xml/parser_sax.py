@@ -121,7 +121,7 @@ class WebDAVContentHandler(xml.sax.handler.ContentHandler):
         # children.
         try:
             element = top["class"](*top["children"], **top["attributes"])
-        except ValueError, e:
+        except ValueError as e:
             e.args = ("%s at %s" % (e.args[0], self.location()),) + e.args[1:]
             raise  # Re-raises modified e, but preserves traceback
 
@@ -161,7 +161,7 @@ class WebDAVDocument(AbstractWebDAVDocument):
 
         try:
             parser.parse(source)
-        except xml.sax.SAXParseException, e:
+        except xml.sax.SAXParseException as e:
             raise ValueError(e)
 
         # handler.dom.root_element.validate()

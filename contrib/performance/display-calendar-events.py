@@ -14,8 +14,9 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
-import eventkitframework as EventKit
+from . import eventkitframework as EventKit
 from Cocoa import NSDate
 
 store = EventKit.EKEventStore.alloc().init()

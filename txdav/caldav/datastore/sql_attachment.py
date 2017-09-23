@@ -634,9 +634,9 @@ class DropBoxAttachment(Attachment):
         }, Return=(att.ATTACHMENT_ID, att.CREATED, att.MODIFIED)).on(txn))
 
         row_iter = iter(rows[0])
-        a_id = row_iter.next()
-        created = parseSQLTimestamp(row_iter.next())
-        modified = parseSQLTimestamp(row_iter.next())
+        a_id = next(row_iter)
+        created = parseSQLTimestamp(next(row_iter))
+        modified = parseSQLTimestamp(next(row_iter))
 
         attachment = cls(txn, a_id, dropboxID, name, ownerHomeID, True)
         attachment._created = created
@@ -793,9 +793,9 @@ class ManagedAttachment(Attachment):
         }, Return=(att.ATTACHMENT_ID, att.CREATED, att.MODIFIED)).on(txn))
 
         row_iter = iter(rows[0])
-        a_id = row_iter.next()
-        created = parseSQLTimestamp(row_iter.next())
-        modified = parseSQLTimestamp(row_iter.next())
+        a_id = next(row_iter)
+        created = parseSQLTimestamp(next(row_iter))
+        modified = parseSQLTimestamp(next(row_iter))
 
         attachment = cls(txn, a_id, ".", None, ownerHomeID, True)
         attachment._managedID = managedID

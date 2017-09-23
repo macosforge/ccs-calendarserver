@@ -71,7 +71,7 @@ class GroupCacherPollingWork(
             startTime = time.time()
             try:
                 yield groupCacher.update(self.transaction)
-            except Exception, e:
+            except Exception as e:
                 log.error(
                     "Failed to update new group membership cache ({error})",
                     error=e
@@ -96,7 +96,7 @@ class GroupRefreshWork(AggregatedWorkItem, fromTable(schema.GROUP_REFRESH_WORK))
                 yield groupCacher.refreshGroup(
                     self.transaction, self.groupUID.decode("utf-8")
                 )
-            except Exception, e:
+            except Exception as e:
                 log.error(
                     "Failed to refresh group {group} {err}",
                     group=self.groupUID, err=e
@@ -127,7 +127,7 @@ class GroupDelegateChangesWork(AggregatedWorkItem, fromTable(schema.GROUP_DELEGA
                     self.readDelegateUID.decode("utf-8"),
                     self.writeDelegateUID.decode("utf-8")
                 )
-            except Exception, e:
+            except Exception as e:
                 log.error(
                     "Failed to apply external delegates for {uid} {err}",
                     uid=self.delegatorUID, err=e

@@ -163,7 +163,7 @@ class AbstractADBAPIDatabase(object):
         if self.initialized:
             try:
                 self.pool.close()
-            except Exception, e:
+            except Exception as e:
                 log.error("Error whilst closing connection pool: {ex}", ex=e)
             self.pool = None
             self.initialized = False
@@ -178,7 +178,7 @@ class AbstractADBAPIDatabase(object):
 
             try:
                 yield self._db_empty_data_tables()
-            except Exception, e:
+            except Exception as e:
                 log.error("Error in database clean: {ex}", ex=e)
                 self.close()
             else:
@@ -194,7 +194,7 @@ class AbstractADBAPIDatabase(object):
 
             try:
                 yield self._db_execute(sql, *query_params)
-            except Exception, e:
+            except Exception as e:
                 log.error("Error in database execute: {ex}", ex=e)
                 self.close()
             else:
@@ -210,7 +210,7 @@ class AbstractADBAPIDatabase(object):
 
             try:
                 yield self._db_execute_script(script)
-            except Exception, e:
+            except Exception as e:
                 log.error("Error in database executescript: {ex}", ex=e)
                 self.close()
             else:
@@ -226,7 +226,7 @@ class AbstractADBAPIDatabase(object):
 
             try:
                 result = (yield self._db_all_values_for_sql(sql, *query_params))
-            except Exception, e:
+            except Exception as e:
                 log.error("Error in database query: {ex}", ex=e)
                 self.close()
             else:
@@ -244,7 +244,7 @@ class AbstractADBAPIDatabase(object):
 
             try:
                 result = (yield self._db_values_for_sql(sql, *query_params))
-            except Exception, e:
+            except Exception as e:
                 log.error("Error in database queryList: {ex}", ex=e)
                 self.close()
             else:
@@ -262,7 +262,7 @@ class AbstractADBAPIDatabase(object):
 
             try:
                 result = (yield self._db_value_for_sql(sql, *query_params))
-            except Exception, e:
+            except Exception as e:
                 log.error("Error in database queryOne: {ex}", ex=e)
                 self.close()
             else:

@@ -570,7 +570,7 @@ class PostgresService(MultiService):
             if self.uid and self.gid:
                 os.chown(self.socketDir.path, self.uid, self.gid)
 
-            os.chmod(self.socketDir.path, 0770)
+            os.chmod(self.socketDir.path, 0o770)
 
         if not self.dataStoreDirectory.isdir():
             log.info("Creating {dir}", dir=self.dataStoreDirectory.path.decode("utf-8"))

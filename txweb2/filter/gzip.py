@@ -30,7 +30,7 @@ def gzipStream(input, compressLevel=6):
         yield input.wait
 
     yield compress.flush()
-    yield struct.pack('<LL', crc & 0xFFFFFFFFL, size & 0xFFFFFFFFL)
+    yield struct.pack('<LL', crc & 0xFFFFFFFF, size & 0xFFFFFFFF)
 gzipStream = stream.generatorToStream(gzipStream)
 
 

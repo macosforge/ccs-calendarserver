@@ -15,7 +15,8 @@
 ##
 
 from __future__ import print_function
-from benchmark import DTraceCollector, instancePIDs
+from __future__ import absolute_import
+from .benchmark import DTraceCollector, instancePIDs
 from twisted.internet import reactor
 from twisted.internet.defer import Deferred, inlineCallbacks
 from twisted.python.failure import Failure

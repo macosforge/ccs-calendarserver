@@ -14,11 +14,12 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 import os
 import sys
-import odframework
-import dsattributes
+from . import odframework
+from . import dsattributes
 from getopt import getopt, GetoptError
 
 # TODO: Nested groups
@@ -300,7 +301,7 @@ def main():
 
     try:
         (optargs, args) = getopt(sys.argv[1:], "h", ["help"])
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     for opt, _ignore_arg in optargs:
@@ -368,7 +369,7 @@ def main():
                         print("Failed to set password for %s: %s" % (recordName, error))
                     else:
                         print("Successfully set password for %s" % (recordName,))
-                except ODError, e:
+                except ODError as e:
                     print("Failed to create user %s: %s" % (recordName, e))
             else:
                 print("User %s already exists" % (recordName,))
@@ -384,12 +385,12 @@ def main():
                 try:
                     record = createRecord(node, dsattributes.kDSStdRecordTypeGroups, recordName, attrs)
                     print("Successfully created group %s" % (recordName,))
-                except ODError, e:
+                except ODError as e:
                     print("Failed to create group %s: %s" % (recordName, e))
             else:
                 print("Group %s already exists" % (recordName,))
 
-        print
+        print()
 
     # Populate SACL groups
     node, error = odframework.ODNode.nodeWithSession_name_error_(session, saclGroupNodeName, None)

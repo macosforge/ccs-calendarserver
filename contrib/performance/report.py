@@ -15,7 +15,8 @@
 ##
 
 from __future__ import print_function
-from benchlib import select
+from __future__ import absolute_import
+from .benchlib import select
 import sys
 import pickle
 

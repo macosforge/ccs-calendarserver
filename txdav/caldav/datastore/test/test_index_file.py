@@ -52,7 +52,7 @@ class MinimalCalendarObjectReplacement(object):
             # Fix any bogus data we can
             component.validCalendarData()
             component.validCalendarForCalDAV(methodAllowed=False)
-        except InvalidICalendarDataError, e:
+        except InvalidICalendarDataError as e:
             raise InternalDataStoreError(
                 "File corruption detected (%s) in file: %s"
                 % (e, self._path.path)

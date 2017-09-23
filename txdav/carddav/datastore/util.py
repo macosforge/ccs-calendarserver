@@ -60,7 +60,7 @@ def validateAddressBookComponent(addressbookObject, vcard, component, inserting)
     try:
         component.validVCardData()
         component.validForCardDAV()
-    except InvalidVCardDataError, e:
+    except InvalidVCardDataError as e:
         raise InvalidObjectResourceError(e)
 
 
@@ -108,7 +108,7 @@ def _migrateAddressbook(inAddressbook, outAddressbook, getComponent):
             )
             bad_count += 1
 
-        except Exception, e:
+        except Exception as e:
             log.error(
                 "  {ex}: Failed to migrate address book object: {home}/{adbk}/{rsrc}",
                 ex=str(e),

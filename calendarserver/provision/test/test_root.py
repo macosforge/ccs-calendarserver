@@ -180,7 +180,7 @@ class SACLTests(RootTests):
             raise AssertionError(
                 "RootResource.locateChild did not return an error"
             )
-        except HTTPError, e:
+        except HTTPError as e:
             self.assertEquals(e.response.code, 403)
 
     @inlineCallbacks
@@ -206,7 +206,7 @@ class SACLTests(RootTests):
             raise AssertionError(
                 "RootResource.locateChild did not return an error"
             )
-        except HTTPError, e:
+        except HTTPError as e:
             self.assertEquals(e.response.code, 401)
 
     @inlineCallbacks
@@ -239,7 +239,7 @@ class SACLTests(RootTests):
             raise AssertionError(
                 "RootResource.locateChild did not return an error"
             )
-        except HTTPError, e:
+        except HTTPError as e:
             self.assertEquals(e.response.code, 401)
 
     def test_DELETE(self):

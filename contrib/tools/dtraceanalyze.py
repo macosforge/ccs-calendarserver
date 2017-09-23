@@ -18,13 +18,14 @@
 ##
 from __future__ import print_function
 from __future__ import with_statement
+from __future__ import absolute_import
 
 import collections
 import getopt
 import os
 import re
 import sys
-import tables
+from . import tables
 
 
 class Dtrace(object):
@@ -450,6 +451,6 @@ if __name__ == "__main__":
 
         Dtrace(filepath).analyze(do_stack, no_collapse)
 
-    except Exception, e:
+    except Exception as e:
         raise
         sys.exit(str(e))

@@ -203,20 +203,20 @@ class SimOptions(Options):
     def postOptions(self):
         try:
             configFile = self['config'].open()
-        except IOError, e:
+        except IOError as e:
             raise UsageError("--config %s: %s" % (
                 self['config'].path, e.strerror))
         try:
             try:
                 self.config = readPlist(configFile)
-            except ExpatError, e:
+            except ExpatError as e:
                 raise UsageError("--config %s: %s" % (self['config'].path, e))
         finally:
             configFile.close()
 
         try:
             clientFile = self['clients'].open()
-        except IOError, e:
+        except IOError as e:
             raise UsageError("--clients %s: %s" % (
                 self['clients'].path, e.strerror))
         try:
@@ -225,7 +225,7 @@ class SimOptions(Options):
                 self.config["clients"] = client_config["clients"]
                 if "arrivalInterval" in client_config:
                     self.config["arrival"]["params"]["interval"] = client_config["arrivalInterval"]
-            except ExpatError, e:
+            except ExpatError as e:
                 raise UsageError("--clients %s: %s" % (self['clients'].path, e))
         finally:
             clientFile.close()
@@ -277,7 +277,7 @@ class LoadSimulator(object):
         options = SimOptions()
         try:
             options.parseOptions(args)
-        except UsageError, e:
+        except UsageError as e:
             raise SystemExit(str(e))
 
         return cls.fromConfig(options.config, options['runtime'], output)

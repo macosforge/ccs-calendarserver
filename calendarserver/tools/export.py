@@ -495,7 +495,7 @@ def main(argv=sys.argv, stderr=sys.stderr, reactor=None):
     options = ExportOptions()
     try:
         options.parseOptions(argv[1:])
-    except UsageError, e:
+    except UsageError as e:
         usage(e)
 
     if options.outputDirectoryName:
@@ -503,7 +503,7 @@ def main(argv=sys.argv, stderr=sys.stderr, reactor=None):
     else:
         try:
             output = options.openOutput()
-        except IOError, e:
+        except IOError as e:
             stderr.write(
                 "Unable to open output file for writing: %s\n" % (e)
             )

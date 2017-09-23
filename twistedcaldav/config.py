@@ -361,7 +361,7 @@ def mergeData(oldData, newData):
     @type newData: ConfigDict
     """
     for key, value in newData.iteritems():
-        if isinstance(value, (dict,)):
+        if isinstance(value, dict):
             if key in oldData:
                 assert isinstance(oldData[key], ConfigDict), \
                     "%r in %r is not a ConfigDict" % (oldData[key], oldData)

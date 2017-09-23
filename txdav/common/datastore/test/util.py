@@ -649,9 +649,9 @@ def assertProvides(testCase, interface, provider):
     """
     try:
         verifyObject(interface, provider)
-    except BrokenMethodImplementation, e:
+    except BrokenMethodImplementation as e:
         testCase.fail(e)
-    except DoesNotImplement, e:
+    except DoesNotImplement as e:
         testCase.fail("%r does not provide %s.%s" %
                       (provider, interface.__module__, interface.getName()))
 

@@ -270,7 +270,8 @@ class BaseCase(unittest.TestCase):
 
         return d
 
-    def _cbGotResponse(self, (code, headers, data, failed), expected_response, expectedfailure=False):
+    def _cbGotResponse(self, xxx_todo_changeme, expected_response, expectedfailure=False):
+        (code, headers, data, failed) = xxx_todo_changeme
         expected_code, expected_headers, expected_data = expected_response
         self.assertEquals(code, expected_code)
         if expected_data is not None:

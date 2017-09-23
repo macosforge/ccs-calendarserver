@@ -75,7 +75,7 @@ def attrsFromFile(fileobj, debugFile=None):
         magic, version, _ignore, nentry = struct.unpack(
             AS_HEADER_FORMAT, header
         )
-    except ValueError, arg:
+    except ValueError as arg:
         raise ValueError("Unpack header error: %s" % (arg,))
     if debugFile is not None:
         debugFile.write('Magic:   0x%8.8x\n' % (magic,))
@@ -97,7 +97,7 @@ def attrsFromFile(fileobj, debugFile=None):
     for hdr in headers:
         try:
             restype, offset, length = struct.unpack(AS_ENTRY_FORMAT, hdr)
-        except ValueError, arg:
+        except ValueError as arg:
             raise ValueError("Unpack entry error: %s" % (arg,))
         if debugFile is not None:
             debugFile.write("\n-- Fork %d, offset %d, length %d\n" %

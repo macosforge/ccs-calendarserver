@@ -169,7 +169,7 @@ class WebCalendarResource (ReadOnlyResourceMixIn, DAVFile):
                 "tzid": tzid,
                 "principalURL": authenticatedPrincipalURL,
             }
-        except IOError, e:
+        except IOError as e:
             self.log.error("Unable to obtain WebCalendar template: %s" % (e,))
             return responsecode.NOT_FOUND
 

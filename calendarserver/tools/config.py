@@ -155,7 +155,7 @@ def main():
                 "logging=",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     configFileName = DEFAULT_CONFIG_FILE
@@ -193,7 +193,7 @@ def main():
 
     try:
         config.load(configFileName)
-    except ConfigurationError, e:
+    except ConfigurationError as e:
         sys.stdout.write("%s\n" % (e,))
         sys.exit(1)
 
@@ -335,7 +335,7 @@ def processArgs(writable, args, restart=True):
         try:
             plist = readPlistFromString(rawInput)
             # Note: values in plist will already be unicode
-        except xml.parsers.expat.ExpatError, e:  # @UndefinedVariable
+        except xml.parsers.expat.ExpatError as e:  # @UndefinedVariable
             respondWithError(str(e))
             return
 
@@ -396,7 +396,7 @@ class Runner(object):
                 else:
                     respondWithError("Unknown command '%s'" % (commandName,))
 
-        except Exception, e:
+        except Exception as e:
             respondWithError("Command failed: '%s'" % (str(e),))
             raise
 
@@ -434,7 +434,7 @@ class Runner(object):
                 writable.set(setKeyPath(ConfigDict(), keyPath, value))
         try:
             writable.save(restart=False)
-        except Exception, e:
+        except Exception as e:
             respond(command, {"error": str(e)})
         else:
             config.reload()

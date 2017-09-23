@@ -17,6 +17,7 @@
 """
 Various helpers for event-creation benchmarks.
 """
+from __future__ import absolute_import
 
 from uuid import uuid4
 from urllib2 import HTTPDigestAuthHandler
@@ -28,9 +29,9 @@ from twisted.web.http import CREATED
 from twisted.web.client import Agent
 from twisted.internet import reactor
 
-from httpauth import AuthHandlerAgent
-from benchlib import initialize, sample
-from httpclient import StringProducer
+from .httpauth import AuthHandlerAgent
+from .benchlib import initialize, sample
+from .httpclient import StringProducer
 
 
 # XXX Represent these as pycalendar objects?  Would make it easier to add more vevents.

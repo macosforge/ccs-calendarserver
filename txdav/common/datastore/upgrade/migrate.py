@@ -263,7 +263,7 @@ class UpgradeToDatabaseStep(object):
                     attrs = xattr.xattr(path.path)
                     try:
                         attrs.get('user.should-not-be-set')
-                    except IOError, ioe:
+                    except IOError as ioe:
                         if ioe.errno == errno.ENODATA:
                             # xattrs are supported and enabled on the filesystem
                             # where the calendar data lives.  this takes some

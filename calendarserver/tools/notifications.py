@@ -86,7 +86,7 @@ def main():
                 "verbose",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     admin = None
@@ -126,7 +126,7 @@ def main():
         # No host specified, so try loading config to look up settings
         try:
             loadConfig(configFileName)
-        except ConfigurationError, e:
+        except ConfigurationError as e:
             print("Error in configuration: %s" % (e,))
             sys.exit(1)
 
@@ -280,7 +280,7 @@ class PubSubClientFactory(xmlstream.XmlStreamFactory):
         try:
             yield iq.send(to=self.service)
             print("OK")
-        except Exception, e:
+        except Exception as e:
             print("Subscription failure: %s %s" % (node, e))
 
     @inlineCallbacks
@@ -296,7 +296,7 @@ class PubSubClientFactory(xmlstream.XmlStreamFactory):
         try:
             yield iq.send(to=self.service)
             print("OK")
-        except Exception, e:
+        except Exception as e:
             print("Unsubscription failure: %s %s" % (node, e))
 
     @inlineCallbacks
@@ -308,7 +308,7 @@ class PubSubClientFactory(xmlstream.XmlStreamFactory):
         print("Requesting list of subscriptions")
         try:
             yield iq.send(to=self.service)
-        except Exception, e:
+        except Exception as e:
             print("Subscription list failure: %s" % (e,))
 
     def rawDataIn(self, buf):
@@ -382,7 +382,7 @@ class PushMonitorService(Service):
                 print("No nodes to monitor")
                 reactor.stop()
 
-        except Exception, e:
+        except Exception as e:
             print("Error:", e)
             reactor.stop()
 
@@ -442,12 +442,12 @@ class PushMonitorService(Service):
                                     if displayName:
                                         name = displayName
 
-            except Exception, e:
+            except Exception as e:
                 print("Unable to parse principal details", e)
                 print(responseBody)
                 raise
 
-        except Exception, e:
+        except Exception as e:
             print("Unable to look up principal details", e)
             raise
 
@@ -498,12 +498,12 @@ class PushMonitorService(Service):
                                             if href:
                                                 proxies.add(href)
 
-            except Exception, e:
+            except Exception as e:
                 print("Unable to parse proxy information", e)
                 print(responseBody)
                 raise
 
-        except Exception, e:
+        except Exception as e:
             print("Unable to look up who %s is a proxy for" % (self.username,))
             raise
 
@@ -588,12 +588,12 @@ class PushMonitorService(Service):
                     if key and key not in nodes:
                         nodes[key] = (href.text, name, kind)
 
-            except Exception, e:
+            except Exception as e:
                 print("Unable to parse push information", e)
                 print(responseBody)
                 raise
 
-        except Exception, e:
+        except Exception as e:
             print("Unable to look up push information for %s" % (self.username,))
             raise
 

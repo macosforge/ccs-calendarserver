@@ -745,7 +745,7 @@ class DAVResource (DAVPropertyMixIn, StaticRenderMixin):
             childpath = joinURL(basepath, urllib.quote(childname))
             try:
                 child = (yield request.locateChildResource(self, childname))
-            except HTTPError, e:
+            except HTTPError as e:
                 log.error("Resource cannot be located: %s" % (str(e),))
                 if unavailablecallback:
                     unavailablecallback(childpath)
@@ -1491,7 +1491,7 @@ class DAVResource (DAVPropertyMixIn, StaticRenderMixin):
 
         try:
             acl = self.readDeadProperty(element.ACL)
-        except HTTPError, e:
+        except HTTPError as e:
             assert e.response.code == responsecode.NOT_FOUND, (
                 "Expected %s response from readDeadProperty() exception, "
                 "not %s"
@@ -1910,7 +1910,7 @@ class DAVResource (DAVPropertyMixIn, StaticRenderMixin):
             def gotPrincipal(principal):
                 try:
                     principal = principal.getResult()
-                except HTTPError, e:
+                except HTTPError as e:
                     assert e.response.code == responsecode.NOT_FOUND, (
                         "%s (!= %s) status from readProperty() exception"
                         % (e.response.code, responsecode.NOT_FOUND)

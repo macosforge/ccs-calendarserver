@@ -87,7 +87,7 @@ def applyToCalendarCollections(resource, request, request_uri, depth, apply, pri
         yield resource.findCalendarCollections(depth, request, lambda x, y: resources.append((x, y)), privileges=privileges)
 
     for calresource, uri in resources:
-        result = (yield apply(calresource, uri))
+        result = (yield calresource(*uri))
         if not result:
             break
 
@@ -125,7 +125,7 @@ def applyToAddressBookCollections(resource, request, request_uri, depth, apply, 
         yield resource.findAddressBookCollections(depth, request, lambda x, y: resources.append((x, y)), privileges=privileges)
 
     for addrresource, uri in resources:
-        result = yield apply(addrresource, uri)
+        result = yield addrresource(*uri)
         if not result:
             break
 

@@ -137,7 +137,7 @@ def emitAccounting(category, record, data, tag=None, filename=None):
 
         return logFilename
 
-    except OSError, e:
+    except OSError as e:
         # No failures in accounting should propagate out
         log.error("Failed to write accounting data due to: {ex}", ex=str(e))
         return None

@@ -485,7 +485,7 @@ class MailSender(object):
             success = (yield self.smtpSender.sendMessage(
                 fromAddr, toAddr, msgId, message))
             returnValue(success)
-        except Exception, e:
+        except Exception as e:
             self.log.error("Failed to send IMIP message ({ex})", ex=str(e))
             returnValue(False)
 
@@ -604,7 +604,7 @@ class MailSender(object):
 
         return msgId, msg.as_string()
 
-    def renderPlainText(self, details, (orgCN, orgEmail), attendees, canceled):
+    def renderPlainText(self, details, xxx_todo_changeme, attendees, canceled):
         """
         Render text/plain message part based on invitation details and a flag
         indicating whether the message is a cancellation.
@@ -613,6 +613,7 @@ class MailSender(object):
 
         @rtype: C{str}
         """
+        (orgCN, orgEmail) = xxx_todo_changeme
         plainAttendeeList = []
         for cn, mailto in attendees:
             if cn:

@@ -249,7 +249,7 @@ class CalDAVOptionsTest(StoreTestCase):
         self.config.parseOptions(argv)
 
         self.assertEquals(self.config.parent["pidfile"], "/dev/null")
-        self.assertEquals(self.config.parent["umask"], 0077)
+        self.assertEquals(self.config.parent["umask"], 0o077)
 
     def test_specifyConfigFile(self):
         """
@@ -336,7 +336,7 @@ class SocketGroupOwnership(StoreTestCase):
             " least two unix groups."
             ))
         socketName = self.mktemp()
-        gous = GroupOwnedUNIXServer(alternateGroup, socketName, ServerFactory(), mode=0660)
+        gous = GroupOwnedUNIXServer(alternateGroup, socketName, ServerFactory(), mode=0o660)
         gous.privilegedStartService()
         self.addCleanup(gous.stopService)
         filestat = os.stat(socketName)
@@ -416,7 +416,7 @@ class ModesOnUNIXSocketsTests(CalDAVServiceMakerTestBase):
         for serviceName in [_CONTROL_SERVICE_NAME]:
             socketService = svc.getServiceNamed(serviceName)
             self.assertIsInstance(socketService, GroupOwnedUNIXServer)
-            m = socketService.kwargs.get("mode", 0666)
+            m = socketService.kwargs.get("mode", 0o666)
             self.assertEquals(
                 m, int("660", 8),
                 "Wrong mode on %s: %s" % (serviceName, oct(m))
@@ -425,7 +425,7 @@ class ModesOnUNIXSocketsTests(CalDAVServiceMakerTestBase):
         for serviceName in ["unix-stats"]:
             socketService = svc.getServiceNamed(serviceName)
             self.assertIsInstance(socketService, GroupOwnedUNIXServer)
-            m = socketService.kwargs.get("mode", 0666)
+            m = socketService.kwargs.get("mode", 0o666)
             self.assertEquals(
                 m, int("660", 8),
                 "Wrong mode on %s: %s" % (serviceName, oct(m))
@@ -1349,7 +1349,7 @@ class SystemIDsTests(StoreTestCase):
             return 45
 
         return type(getSystemIDs)(
-            getSystemIDs.func_code,  # @UndefinedVariable
+            getSystemIDs.__code__,  # @UndefinedVariable
             {
                 "getpwnam": _getpwnam,
                 "getgrnam": _getgrnam,

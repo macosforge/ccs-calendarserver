@@ -1,3 +1,4 @@
+from __future__ import print_function
 import socket
 import sys
 
@@ -17,25 +18,25 @@ else:
     send = s.send
     recv = s.recv
 
-print >> sys.stderr, ">> Making %s request to port %d" % (socket_type, port)
+print(">> Making %s request to port %d" % (socket_type, port), file=sys.stderr)
 
 send("PUT /forbidden HTTP/1.1\r\n")
 send("Host: localhost\r\n")
 
-print >> sys.stderr, ">> Sending lots of data"
+print(">> Sending lots of data", file=sys.stderr)
 send("Content-Length: 100\r\n\r\n")
 send("X" * 100)
 
 send("PUT /forbidden HTTP/1.1\r\n")
 send("Host: localhost\r\n")
 
-print >> sys.stderr, ">> Sending lots of data"
+print(">> Sending lots of data", file=sys.stderr)
 send("Content-Length: 100\r\n\r\n")
 send("X" * 100)
 
 # import time
 # time.sleep(5)
-print >> sys.stderr, ">> Getting data"
+print(">> Getting data", file=sys.stderr)
 data = ''
 while len(data) < 299999:
     try:

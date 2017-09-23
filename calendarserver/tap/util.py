@@ -18,6 +18,7 @@
 """
 Utilities for assembling the service and resource hierarchy.
 """
+from __future__ import print_function
 
 __all__ = [
     "FakeRequest",
@@ -525,7 +526,7 @@ def getRootResource(config, newStore, resources=None):
             try:
                 FilePath(directoryPath).remove()
                 log.info("Deleted: {path}", path=directoryPath)
-            except (OSError, IOError), e:
+            except (OSError, IOError) as e:
                 if e.errno != errno.ENOENT:
                     log.error("Could not delete: {path} : {error}", path=directoryPath, error=e)
 
@@ -977,7 +978,7 @@ class MemoryLimitService(Service, object):
                     pid = proc.pid
                     try:
                         memory = self._memoryForPID(pid, self._residentOnly)
-                    except Exception, e:
+                    except Exception as e:
                         log.error(
                             "Unable to determine memory usage of PID: {pid} ({err})",
                             pid=pid, err=e)
@@ -1017,7 +1018,7 @@ def checkDirectories(config):
             config.DataRoot,
             "Data root",
             access=os.W_OK,
-            create=(0750, config.UserName, config.GroupName),
+            create=(0o750, config.UserName, config.GroupName),
         )
     if config.DocumentRoot.startswith(config.DataRoot + os.sep):
         checkDirectory(
@@ -1025,14 +1026,14 @@ def checkDirectories(config):
             "Document root",
             # Don't require write access because one might not allow editing on /
             access=os.R_OK,
-            create=(0750, config.UserName, config.GroupName),
+            create=(0o750, config.UserName, config.GroupName),
         )
     if config.ConfigRoot.startswith(config.ServerRoot + os.sep):
         checkDirectory(
             config.ConfigRoot,
             "Config root",
             access=os.W_OK,
-            create=(0750, config.UserName, config.GroupName),
+            create=(0o750, config.UserName, config.GroupName),
         )
     if config.SocketFiles.Enabled:
         checkDirectory(
@@ -1050,13 +1051,13 @@ def checkDirectories(config):
         config.LogRoot,
         "Log root",
         access=os.W_OK,
-        create=(0750, config.UserName, config.GroupName),
+        create=(0o750, config.UserName, config.GroupName),
     )
     checkDirectory(
         config.RunRoot,
         "Run root",
         access=os.W_OK,
-        create=(0770, config.UserName, config.GroupName),
+        create=(0o770, config.UserName, config.GroupName),
     )
 
 
@@ -1549,7 +1550,7 @@ class AlertPoster(object):
                     stdout=PIPE,
                     stderr=PIPE,
                 ).communicate()
-            except Exception, e:
+            except Exception as e:
                 log.error(
                     "Could not post alert: {alertType} {args} ({error})",
                     alertType=alertType, args=args, error=e

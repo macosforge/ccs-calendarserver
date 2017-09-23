@@ -89,7 +89,7 @@ def main():
                 "help",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     for opt, _ignore_arg in optargs:

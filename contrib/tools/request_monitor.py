@@ -15,6 +15,7 @@
 # limitations under the License.
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 from dateutil.parser import parse as dateparse
 from subprocess import Popen, PIPE, STDOUT
@@ -25,7 +26,7 @@ import sys
 import time
 import traceback
 import collections
-import tables
+from . import tables
 from cStringIO import StringIO
 
 # Detect which OS this is being run on
@@ -212,7 +213,7 @@ def freemem():
             line = lines[4]
             freed = int(line.split()[0]) * 1024
             return "%d bytes (%.1f GB)" % (freed, freed / (1024.0 * 1024 * 1024),)
-    except Exception, e:
+    except Exception as e:
         if debug:
             print("freemem failure", e)
             print(traceback.print_exc())
@@ -389,7 +390,7 @@ while True:
 
                 try:
                     userId, logTime, method, uri, status, bytes, _ignore_referer, client, extended = parseLine(line)
-                except Exception, e:
+                except Exception as e:
                     parseErrors += 1
 
                     if debug:
@@ -623,7 +624,7 @@ while True:
         os = StringIO()
         table.printTable(os=os)
         print(os.getvalue())
-        print
+        print()
         if errorCount:
             print("Number of 500 errors: %d" % (errorCount,))
         if parseErrors:
@@ -700,13 +701,13 @@ while True:
             except:
                 pass
 
-        print
+        print()
 
         # lineRange => do loop only once
         if lineRange is not None:
             break
 
-    except Exception, e:
+    except Exception as e:
         print("Script failure", e)
         if debug:
             print(traceback.print_exc())

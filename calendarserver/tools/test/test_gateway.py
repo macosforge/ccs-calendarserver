@@ -173,7 +173,7 @@ class RunCommandTestCase(TestCase):
             try:
                 plist = readPlistFromString(output)
                 returnValue(plist)
-            except xml.parsers.expat.ExpatError, e:  # @UndefinedVariable
+            except xml.parsers.expat.ExpatError as e:  # @UndefinedVariable
                 print("Error (%s) parsing (%s)" % (e, output))
                 raise
         else:

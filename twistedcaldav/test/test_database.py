@@ -107,7 +107,7 @@ class Database (twistedcaldav.test.util.TestCase):
             yield f(*args, **kwargs)
         except exc:
             pass
-        except Exception, e:
+        except Exception as e:
             self.fail("Wrong exception raised: %s" % (e,))
         else:
             self.fail("%s not raised" % (exc,))

@@ -66,7 +66,7 @@ class KerberosTests(twistedcaldav.test.util.TestCase):
             yield factory.decode("Bogus Data".encode("base64"), request)
         except (UnauthorizedLogin, LoginFailed):
             pass
-        except Exception, ex:
+        except Exception as ex:
             self.fail(msg="NegotiateCredentialFactory decode failed with exception: %s" % (ex,))
         else:
             self.fail(msg="NegotiateCredentialFactory decode did not fail")

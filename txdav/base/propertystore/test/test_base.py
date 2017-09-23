@@ -32,7 +32,7 @@ class PropertyNameTest(unittest.TestCase):
         name = PropertyName("http://calendarserver.org/", "bleargh")
         try:
             verifyObject(IPropertyName, name)
-        except BrokenMethodImplementation, e:
+        except BrokenMethodImplementation as e:
             self.fail(e)
 
     def test_init(self):

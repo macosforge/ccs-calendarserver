@@ -73,7 +73,7 @@ def http_MKCOL(self, request):
     yield x
     try:
         x.getResult()
-    except ValueError, e:
+    except ValueError as e:
         log.error("Error while handling MKCOL body: %s" % (e,))
         raise HTTPError(responsecode.UNSUPPORTED_MEDIA_TYPE)
 

@@ -273,7 +273,7 @@ class Scheduler(object):
             # Must be a valid calendar
             try:
                 self.calendar.validCalendarData()
-            except ValueError, e:
+            except ValueError as e:
                 log.error(
                     "{method} request calendar component is not valid:{exc} {cal}",
                     method=self.method,

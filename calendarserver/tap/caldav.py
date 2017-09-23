@@ -405,7 +405,7 @@ class CalDAVOptions (Options):
                 self.waitForServerRoot()
             self.loadConfiguration()
             self.checkConfiguration()
-        except ConfigurationError, e:
+        except ConfigurationError as e:
             print("Invalid configuration:", e)
             sys.exit(1)
 
@@ -825,7 +825,7 @@ class CalDAVServiceMaker (object):
 
             try:
                 service = serviceMethod(options)
-            except ConfigurationError, e:
+            except ConfigurationError as e:
                 sys.stderr.write("Configuration error: {}\n".format(e))
                 sys.exit(1)
 
@@ -1111,7 +1111,7 @@ class CalDAVServiceMaker (object):
                 for fdAsStr in config.InheritSSLFDs:
                     try:
                         contextFactory = self.createContextFactory()
-                    except SSLError, e:
+                    except SSLError as e:
                         log.error(
                             "Unable to set up SSL context factory: {error}",
                             error=e
@@ -1140,7 +1140,7 @@ class CalDAVServiceMaker (object):
             else:
                 try:
                     contextFactory = self.createContextFactory()
-                except SSLError, e:
+                except SSLError as e:
                     self.log.error(
                         "Unable to set up SSL context factory: {error}",
                         error=e
@@ -1169,7 +1169,7 @@ class CalDAVServiceMaker (object):
 
                         try:
                             contextFactory = self.createContextFactory()
-                        except SSLError, e:
+                        except SSLError as e:
                             self.log.error(
                                 "Unable to set up SSL context factory: {error}"
                                 "Disabling SSL port: {port}",
@@ -1396,7 +1396,7 @@ class CalDAVServiceMaker (object):
                 stats = DashboardServer(logObserver, None)
                 stats.store = store
                 statsService = GroupOwnedUNIXServer(
-                    gid, config.Stats.UnixStatsSocket, stats, mode=0660
+                    gid, config.Stats.UnixStatsSocket, stats, mode=0o660
                 )
                 statsService.setName("unix-stats")
                 statsService.setServiceParent(result)
@@ -1766,7 +1766,7 @@ class CalDAVServiceMaker (object):
             )
         if config.ControlSocket:
             controlSocketService = GroupOwnedUNIXServer(
-                gid, config.ControlSocket, controlSocket, mode=0660
+                gid, config.ControlSocket, controlSocket, mode=0o660
             )
         else:
             controlSocketService = ControlPortTCPServer(
@@ -1865,7 +1865,7 @@ class CalDAVServiceMaker (object):
         if config.Stats.EnableUnixStatsSocket:
             stats = DashboardServer(logger.observer, cl if config.UseMetaFD else None)
             statsService = GroupOwnedUNIXServer(
-                gid, config.Stats.UnixStatsSocket, stats, mode=0660
+                gid, config.Stats.UnixStatsSocket, stats, mode=0o660
             )
             statsService.setName("unix-stats")
             statsService.setServiceParent(s)

@@ -42,7 +42,7 @@ class NonePropertyStoreTest(unittest.TestCase):
     def test_interface(self):
         try:
             verifyObject(IPropertyStore, self.propertyStore)
-        except BrokenMethodImplementation, e:
+        except BrokenMethodImplementation as e:
             self.fail(e)
 
     def test_delete_none(self):

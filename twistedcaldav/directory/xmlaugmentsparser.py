@@ -79,7 +79,7 @@ class XMLAugmentsParser(object):
         # Read in XML
         try:
             _ignore_tree, augments_node = readXML(self.xmlFile, ELEMENT_AUGMENTS)
-        except ValueError, e:
+        except ValueError as e:
             raise RuntimeError("XML parse error for '%s' because: %s" % (self.xmlFile, e,))
 
         self._parseXML(augments_node)
@@ -135,7 +135,7 @@ class XMLAugmentsParser(object):
 
         def expandCount(value, count):
 
-            if type(value) in types.StringTypes:
+            if type(value) in (str,):
                 return value % (count,) if count and "%" in value else value
             elif type(value) == set:
                 return set([item % (count,) if count and "%" in item else item for item in value])

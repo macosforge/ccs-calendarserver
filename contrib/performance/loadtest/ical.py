@@ -15,6 +15,7 @@
 #
 ##
 from __future__ import print_function
+from __future__ import absolute_import
 
 from caldavclientlibrary.protocol.caldav.definitions import caldavxml
 from caldavclientlibrary.protocol.caldav.definitions import csxml
@@ -2814,7 +2815,7 @@ def main():
 
     addObserver(RequestLogger().observe)
 
-    from sim import _DirectoryRecord
+    from .sim import _DirectoryRecord
     client = OS_X_10_6(
         reactor, 'http://127.0.0.1:8008/',
         _DirectoryRecord(

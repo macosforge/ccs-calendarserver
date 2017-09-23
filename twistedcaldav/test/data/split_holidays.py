@@ -22,6 +22,7 @@
 # These split-up calendars are useable as CalDAV resources.
 #
 
+from __future__ import print_function
 import os
 
 from twistedcaldav.ical import Component
@@ -47,7 +48,7 @@ for subcomponent in calendar.subcomponents():
     uid = subcalendar.resourceUID()
     subcalendar_filename = os.path.join(os.path.dirname(__file__), "Holidays", uid + ".ics")
 
-    print "Writing %s" % (subcalendar_filename,)
+    print("Writing %s" % (subcalendar_filename,))
 
     subcalendar_file = file(subcalendar_filename, "w")
     try:

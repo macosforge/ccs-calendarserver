@@ -18,6 +18,7 @@
 """
 SQL data store.
 """
+from __future__ import print_function
 
 __all__ = [
     "CommonDataStore",
@@ -235,7 +236,7 @@ class CommonDataStore(Service, object):
         except:
             a, b, c = sys.exc_info()
             yield txn.abort()
-            raise a, b, c
+            raise a(b, c)
         else:
             yield txn.commit()
 
@@ -1007,7 +1008,7 @@ class CommonStoreTransaction(
             if not stmt.startswith("--"):
                 try:
                     yield self.execSQL(stmt)
-                except (RuntimeError, StandardError) as e:
+                except (RuntimeError, Exception) as e:
                     e.stmt = "SQLBlock statement failed: {}".format(stmt)
                     raise
 

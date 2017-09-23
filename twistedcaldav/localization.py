@@ -408,7 +408,7 @@ def processLocalizationFiles(settings):
                         log.info("Converting {s} to {m}", s=stringsFile, m=moFile)
                         try:
                             convertStringsFile(stringsFile, moFile)
-                        except Exception, e:
+                        except Exception as e:
                             log.error(
                                 "Failed to convert {s} to {m}: {ex}",
                                 s=stringsFile, m=moFile, ex=e,
@@ -484,7 +484,7 @@ def convertStringsFile(src, dest):
 
     result = struct.pack(
         "Iiiiiii",
-        0x950412DEL,           # magic number
+        0x950412DE,           # magic number
         0,                     # file format revision
         len(originals),        # number of strings
         28,                    # offset of table with original strings

@@ -81,7 +81,7 @@ def main():
                 "server=",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     #

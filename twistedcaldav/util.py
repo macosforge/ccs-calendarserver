@@ -127,14 +127,14 @@ def computeProcessCount(minimum, perCPU, perGB, cpuCount=None, memSize=None):
     if cpuCount is None:
         try:
             cpuCount = getNCPU()
-        except NotImplementedError, e:
+        except NotImplementedError as e:
             log.error("Unable to detect number of CPUs: {ex}", ex=str(e))
             return minimum
 
     if memSize is None:
         try:
             memSize = getMemorySize()
-        except NotImplementedError, e:
+        except NotImplementedError as e:
             log.error("Unable to detect amount of installed RAM: {ex}", ex=str(e))
             return minimum
 
@@ -157,7 +157,7 @@ def submodule(module, name):
 
     try:
         submodule = __import__(fullname)
-    except ImportError, e:
+    except ImportError as e:
         raise ImportError("Unable to import submodule %s from module %s: %s" % (name, module, e))
 
     for m in fullname.split(".")[1:]:

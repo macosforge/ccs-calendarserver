@@ -371,7 +371,7 @@ class WrappingTests(StoreTestCase):
             "x" * deriveQuota(self) * 2)
         try:
             result = yield calendarObject.http_PUT(self.requestUnderTest)
-        except HTTPError, he:
+        except HTTPError as he:
             self.assertEquals(he.response.code, INSUFFICIENT_STORAGE_SPACE)
         else:
             self.fail("Error not raised, %r returned instead." %

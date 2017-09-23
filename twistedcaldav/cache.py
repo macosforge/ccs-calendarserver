@@ -415,7 +415,7 @@ class MemcacheResponseCache(BaseResponseCache, CachePoolUserMixIn):
 
             returnValue(r)
 
-        except URINotFoundException, e:
+        except URINotFoundException as e:
             self.log.debug("Could not locate URI: {e!r}", e=e)
             returnValue(None)
 
@@ -463,7 +463,7 @@ class MemcacheResponseCache(BaseResponseCache, CachePoolUserMixIn):
                 key, cacheEntry, expireTime=config.ResponseCacheTimeout * 60
             )
 
-        except URINotFoundException, e:
+        except URINotFoundException as e:
             self.log.debug("Could not locate URI: {e!r}", e=e)
 
         returnValue(response)

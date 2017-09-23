@@ -65,7 +65,7 @@ def main():
                 "phantom",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     for opt, arg in optargs:

@@ -70,8 +70,8 @@ def measure(host, port, dtrace, attendeeCount, samples):
     dest = cycle([barURI, fooURI])
 
     params = (
-        ('MOVE', source.next(),
-         Headers({"destination": [dest.next()], "overwrite": ["F"]}))
+        ('MOVE', next(source),
+         Headers({"destination": [next(dest)], "overwrite": ["F"]}))
         for i in count(1))
 
     samples = yield sample(dtrace, samples, agent, params.next, CREATED)

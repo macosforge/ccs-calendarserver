@@ -32,7 +32,7 @@ class CProfileCPURunner(CProfileRunner):
         try:
             import cProfile
             import pstats
-        except ImportError, e:
+        except ImportError as e:
             self._reportImportError("cProfile", e)
 
         p = cProfile.Profile(time.clock)

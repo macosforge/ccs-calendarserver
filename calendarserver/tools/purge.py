@@ -318,7 +318,7 @@ class PurgeOldEventsService(WorkerService):
                     "debug",
                 ],
             )
-        except GetoptError, e:
+        except GetoptError as e:
             cls.usage(e)
 
         #
@@ -339,14 +339,14 @@ class PurgeOldEventsService(WorkerService):
             elif opt in ("-d", "--days"):
                 try:
                     days = int(arg)
-                except ValueError, e:
+                except ValueError as e:
                     print("Invalid value for --days: %s" % (arg,))
                     cls.usage(e)
 
             elif opt in ("-b", "--batch"):
                 try:
                     batchSize = int(arg)
-                except ValueError, e:
+                except ValueError as e:
                     print("Invalid value for --batch: %s" % (arg,))
                     cls.usage(e)
 
@@ -744,7 +744,7 @@ class PurgeAttachmentsService(WorkerService):
                     "debug",
                 ],
             )
-        except GetoptError, e:
+        except GetoptError as e:
             cls.usage(e)
 
         #
@@ -768,14 +768,14 @@ class PurgeAttachmentsService(WorkerService):
             elif opt in ("-d", "--days"):
                 try:
                     days = int(arg)
-                except ValueError, e:
+                except ValueError as e:
                     print("Invalid value for --days: %s" % (arg,))
                     cls.usage(e)
 
             elif opt in ("-b", "--batch"):
                 try:
                     batchSize = int(arg)
-                except ValueError, e:
+                except ValueError as e:
                     print("Invalid value for --batch: %s" % (arg,))
                     cls.usage(e)
 
@@ -1088,7 +1088,7 @@ class PurgePrincipalService(WorkerService):
                     "debug",
                 ],
             )
-        except GetoptError, e:
+        except GetoptError as e:
             cls.usage(e)
 
         #
@@ -1290,7 +1290,7 @@ class PurgePrincipalService(WorkerService):
                         try:
                             yield childResource.purge(implicitly=doScheduling)
                             incrementCount = True
-                        except Exception, e:
+                        except Exception as e:
                             print("Exception deleting %s: %s" % (uri, str(e)))
                             retry = True
 
@@ -1300,7 +1300,7 @@ class PurgePrincipalService(WorkerService):
                             try:
                                 yield childResource.purge(implicitly=False)
                                 incrementCount = True
-                            except Exception, e:
+                            except Exception as e:
                                 print("Still couldn't delete %s even with scheduling turned off: %s" % (uri, str(e)))
 
                     if incrementCount:
@@ -1309,7 +1309,7 @@ class PurgePrincipalService(WorkerService):
                     # Commit
                     yield txn.commit()
 
-                except Exception, e:
+                except Exception as e:
                     # Abort
                     yield txn.abort()
                     raise e
@@ -1370,7 +1370,7 @@ class PurgePrincipalService(WorkerService):
             # Commit
             yield txn.commit()
 
-        except Exception, e:
+        except Exception as e:
             # Abort
             yield txn.abort()
             raise e
@@ -1421,7 +1421,7 @@ class PurgePrincipalService(WorkerService):
             # Commit
             yield txn.commit()
 
-        except Exception, e:
+        except Exception as e:
             # Abort
             yield txn.abort()
             raise e

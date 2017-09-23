@@ -51,7 +51,7 @@ class CalendarServerLogAnalyzer(object):
                     line = self.anonymizeLine(line)
                 print(line, end="")
 
-        except Exception, e:
+        except Exception as e:
             print("Exception: %s for %s" % (e, line,))
             raise
 
@@ -162,6 +162,6 @@ if __name__ == "__main__":
 
             CalendarServerLogAnalyzer().anonymizeLogFile(arg)
 
-    except Exception, e:
+    except Exception as e:
         sys.exit(str(e))
         print(traceback.print_exc())

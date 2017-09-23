@@ -94,7 +94,7 @@ def execSQL(title, stmt, verbose=False):
         out = subprocess.check_output(cmdArgs, stderr=subprocess.STDOUT)
         if verbose:
             print(out)
-    except subprocess.CalledProcessError, e:
+    except subprocess.CalledProcessError as e:
         if verbose:
             print(e.output)
         raise CheckSchemaError(
@@ -119,7 +119,7 @@ def getSchemaVersion(verbose=False):
 
     try:
         version = int(out[0][0])
-    except ValueError, e:
+    except ValueError as e:
         raise CheckSchemaError(
             "Failed to parse schema version: %s" % (e,)
         )
@@ -273,7 +273,7 @@ def main():
                 "verbose",
             ],
         )
-    except GetoptError, e:
+    except GetoptError as e:
         usage(e)
 
     verbose = False
@@ -310,7 +310,7 @@ def main():
     # Retrieve the db_version number of the installed schema
     try:
         db_version = getSchemaVersion(verbose=verbose)
-    except CheckSchemaError, e:
+    except CheckSchemaError as e:
         db_version = 0
 
     # Retrieve the version number from the schema file
