@@ -391,7 +391,7 @@ def postgresPreflight(connection, **kwargs):
     # vulnerable to certain types of SQL injection.
     c.execute("set standard_conforming_strings=on")
 
-    # Abort any second that takes more than 30 seconds (default) to
+    # Abort any statement that takes more than 30 seconds (default) to
     # execute. This is necessary as a temporary workaround since it's
     # hypothetically possible that different database operations could
     # block each other, while executing SQL in the same process (in the
