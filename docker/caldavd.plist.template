@@ -1,0 +1,2264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<!--
+    Copyright (c) 2006-2017 Apple Inc. All rights reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+  -->
+
+<plist version="1.0">
+<dict>
+	<!-- Public network address information
+
+	     This is the server's public network address, which is provided to clients
+	     in URLs and the like.  It may or may not be the network address that the
+	     server is listening to directly, though it is by default.  For example, it
+	     may be the address of a load balancer or proxy which forwards connections
+	     to the server. -->
+
+	<!-- Network host name. -->
+	<key>ServerHostName</key>
+	<string></string>
+
+	<!-- Docker: Must be above 1024 for OpenShift -->
+	<!-- HTTP port (0 to disable HTTP) -->
+	<key>HTTPPort</key>
+	<integer>8080</integer>
+		
+	<!-- SSL port (0 to disable HTTPS) -->
+	<key>SSLPort</key>
+	<integer>0</integer>
+
+	<!-- Whether to listen on SSL port(s) -->
+	<key>EnableSSL</key>
+	<false/>
+
+	<!-- Whether the service is offloading TLS duty to a proxy -->
+	<key>BehindTLSProxy</key>
+	<false/>
+
+	<!-- If True, all nonSSL requests redirected to an SSL Port -->
+	<key>RedirectHTTPToHTTPS</key>
+	<false/>
+
+	<!-- SSLv2_METHOD, SSLv3_METHOD, SSLv23_METHOD, TLSv1_METHOD -->
+	<key>SSLMethod</key>
+	<string>SSLv23_METHOD</string>
+
+	<key>SSLCiphers</key>
+	<string>RC4-SHA:HIGH:!ADH</string>
+
+	<!-- Max-age value for Strict-Transport-Security header; set to 0 to disable
+	     header. -->
+	<key>StrictTransportSecuritySeconds</key>
+	<integer>604800</integer>
+
+	<!-- Network address configuration information.
+
+	     This configures the actual network address that the server binds to. -->
+
+	<key>SocketFiles</key>
+	<dict>
+		<key>Enabled</key>
+		<false/>
+
+		<!-- Socket file to listen for secure requests on -->
+		<key>Secured</key>
+		<string>secured.sock</string>
+
+		<!-- Socket file to listen for insecure requests on -->
+		<key>Unsecured</key>
+		<string>unsecured.sock</string>
+
+		<key>Owner</key>
+		<string></string>
+
+		<key>Group</key>
+		<string></string>
+
+		<key>Permissions</key>
+		<integer>504</integer>
+	</dict>
+
+	<key>SocketRoot</key>
+	<string>/tmp/calendarserver</string>
+
+	<!-- List of IP addresses to bind to [empty = all] -->
+	<key>BindAddresses</key>
+	<array>
+	</array>
+
+	<!-- List of port numbers to bind to for HTTP [empty = same as "Port"] -->
+	<key>BindHTTPPorts</key>
+	<array>
+	</array>
+
+	<!-- List of port numbers to bind to for SSL [empty = same as "SSLPort"] -->
+	<key>BindSSLPorts</key>
+	<array>
+	</array>
+
+	<!-- File descriptors to inherit for HTTP requests [empty = don't inherit] -->
+	<key>InheritFDs</key>
+	<array>
+	</array>
+
+	<!-- File descriptors to inherit for HTTPS requests [empty = don't inherit] -->
+	<key>InheritSSLFDs</key>
+	<array>
+	</array>
+
+	<!-- Use a 'meta' FD, i.e. an FD to transmit other FDs to slave processes. -->
+	<key>UseMetaFD</key>
+	<true/>
+
+	<!-- Inherited file descriptor to call recvmsg() on to receive sockets (none =
+	     don't inherit) -->
+	<key>MetaFD</key>
+	<integer>0</integer>
+
+	<!-- Database configuration information.
+
+	     Defines what kind of database to use: file (deprecated) or SQL. File-based
+	     DB is only supported for migration purposes - it cannot be used for a real
+	     service.
+
+	     For an SQL-based DB, configuration of connection parameters and various
+	     timeouts is provided. -->
+
+	<!-- True: database; False: files (deprecated) -->
+	<key>UseDatabase</key>
+	<true/>
+
+	<!-- Possible values: empty, meaning 'spawn postgres yourself', or 'postgres'
+	     or 'oracle', meaning 'connect to a postgres or Oracle database as
+	     specified by the 'DSN' configuration key. -->
+	<key>DBType</key>
+	<string>postgres</string>
+
+	<!-- Features supported by the database
+
+	     'skip-locked': SKIP LOCKED available with SELECT (remove if using postgres
+	     &lt; v9.5) -->
+	<key>DBFeatures</key>
+	<array>
+		<string>skip-locked</string>
+	</array>
+
+	<!-- The username to use when DBType is empty -->
+	<!-- <key>SpawnedDBUser</key>
+	<string>caldav</string> -->
+
+	<!-- Used to connect to an external database if DBType is non-empty -->
+	<key>DatabaseConnection</key>
+	<dict>
+		<!-- Database connection endpoint -->
+		<key>endpoint</key>
+		<string>$POSTGRES_HOST</string>
+		<!-- <string>tcp:postgres:5432</string> -->
+
+		<!-- Name of database or Oracle SID -->
+		<key>database</key>
+		<string>$POSTGRES_DB</string>
+		<!-- <string>postgres</string> -->
+
+		<!-- User name to connect as -->
+		<key>user</key>
+		<string>$POSTGRES_USER</string>
+		<!-- <string>postgres</string> -->
+
+		<!-- Password to use -->
+		<key>password</key>
+		<string>$POSTGRES_PASS</string>
+		<!-- <string>password</string> -->
+
+		<!-- Set to True to require SSL (pg8000 only). -->
+		<key>ssl</key>
+		<false/>
+	</dict>
+
+	<!-- Use a shared database connection pool in the master process, rather than
+	     having each client make its connections directly. -->
+	<key>SharedConnectionPool</key>
+	<false/>
+
+	<!-- Internally used by database to tell slave processes to inherit a file
+	     descriptor and use it as an AMP connection over a UNIX socket; see
+	     twext.enterprise.adbapi2.ConnectionPoolConnection -->
+	<key>DBAMPFD</key>
+	<integer>0</integer>
+
+	<!-- Set to True to prevent the server or utility tools from running if the
+	     database needs a schema upgrade. -->
+	<key>FailIfUpgradeNeeded</key>
+	<true/>
+
+	<!-- Set to True to check the current database schema against the schema file
+	     matching the database schema version. -->
+	<key>CheckExistingSchema</key>
+	<false/>
+
+	<!-- When upgrading, only upgrade homes where the owner UID starts with the
+	     specified prefix. The upgrade will only be partial and only apply to
+	     upgrade pieces that affect entire homes. The upgrade will need to be run
+	     again without this prefix set to complete the overall upgrade. -->
+	<key>UpgradeHomePrefix</key>
+	<string></string>
+
+	<!-- Timeout transactions that take longer than the specified number of
+	     seconds. Zero means no timeouts. 5 minute default. -->
+	<key>TransactionTimeoutSeconds</key>
+	<integer>300</integer>
+
+	<!-- When a transactions times out tell HTTP clients clients to retry after
+	     this amount of time -->
+	<key>TransactionHTTPRetrySeconds</key>
+	<integer>300</integer>
+
+	<!-- Work queue configuration information -->
+
+	<key>WorkQueue</key>
+	<dict>
+		<!-- Interval in seconds for job queue polling -->
+		<key>queuePollInterval</key>
+		<real>0.1</real>
+
+		<!-- Number of seconds before an assigned job is considered overdue -->
+		<key>queueOverdueTimeout</key>
+		<integer>300</integer>
+
+		<!-- Array of array that describe the threshold and new polling interval for
+		     job queue polling back off -->
+		<key>queuePollingBackoff</key>
+		<array>
+			<array>
+				<integer>60</integer>
+				<integer>60</integer>
+			</array>
+			<array>
+				<integer>5</integer>
+				<integer>1</integer>
+			</array>
+		</array>
+
+		<!-- Queue capacity (percentage) which causes job processing to halt -->
+		<key>overloadLevel</key>
+		<integer>95</integer>
+
+		<!-- Queue capacity (percentage) at which only high priority items are run -->
+		<key>highPriorityLevel</key>
+		<integer>80</integer>
+
+		<!-- Queue capacity (percentage) at which only high/medium priority items are
+		     run -->
+		<key>mediumPriorityLevel</key>
+		<integer>50</integer>
+
+		<!-- This is used to help with concurrency problems when the underlying DB
+		     does not support a proper "LIMIT" term with the query (Oracle). It should
+		     be set to no more than 1 plus the number of app-servers in use. For a
+		     single app-server, always use 1. -->
+		<key>rowLimit</key>
+		<integer>1</integer>
+
+		<!-- When a job fails, reschedule it this number of seconds in the future -->
+		<key>failureRescheduleInterval</key>
+		<integer>60</integer>
+
+		<!-- When a job can't run because of a lock, reschedule it this number of
+		     seconds in the future -->
+		<key>lockRescheduleInterval</key>
+		<integer>60</integer>
+
+		<!-- dict of work table name's, whose values are dicts containing "priority"
+		     and "weight" items to use for newly created work. -->
+		<key>workParameters</key>
+		<dict>
+		</dict>
+	</dict>
+
+	<!-- Types of service provided -->
+
+	<!-- Enable CalDAV service -->
+	<key>EnableCalDAV</key>
+	<true/>
+
+	<!-- Enable CardDAV service -->
+	<key>EnableCardDAV</key>
+	<true/>
+
+	<!-- When True override all other services and set the server into podding-only
+	     mode -->
+	<key>MigrationOnly</key>
+	<false/>
+
+	<!-- Data store -->
+
+	<!-- The top level directory, contains (by default) ConfigRoot and DataRoot -->
+	<key>ServerRoot</key>
+	<string>/var/db/caldavd</string>
+
+	<!-- Data directory, parent to DatabaseRoot, AttachmentsRoot, and others -->
+	<key>DataRoot</key>
+	<string>Data</string>
+
+	<!-- Database directory, contains PostgreSQL cluster -->
+	<key>DatabaseRoot</key>
+	<string>Database</string>
+
+	<!-- Attachments directory, where file attachments are stored -->
+	<key>AttachmentsRoot</key>
+	<string>Attachments</string>
+
+	<!-- Documents directory, contains files to be served as HTTP resources at the
+	     root level -->
+	<key>DocumentRoot</key>
+	<string>Documents</string>
+
+	<!-- Config directory, contains additional config files -->
+	<key>ConfigRoot</key>
+	<string>Config</string>
+
+	<!-- Log directory, contains access.log, error.log and others -->
+	<key>LogRoot</key>
+	<string>/var/log/caldavd</string>
+
+	<!-- Run-time directory, contains PID files and UNIX socket files -->
+	<key>RunRoot</key>
+	<string>/var/run/caldavd</string>
+
+	<!-- WebCal directory, contains HTML implementing the web calendar -->
+	<key>WebCalendarRoot</key>
+	<string>/Applications/Server.app/Contents/ServerRoot/usr/share/collabd/webcal/public</string>
+
+	<!-- Quotas -->
+
+	<!-- Attachments -->
+	<!-- User attachment quota (in bytes - default 100MB) -->
+	<key>UserQuota</key>
+	<integer>104857600</integer>
+
+	<!-- Maximum size for a single attachment (in bytes - default 10MB) -->
+	<key>MaximumAttachmentSize</key>
+	<integer>10485760</integer>
+
+	<!-- Maximum number of attachments per instance -->
+	<key>MaximumAttachmentsPerInstance</key>
+	<integer>5</integer>
+
+	<!-- Resource data -->
+	<!-- Maximum number of calendars/address books allowed in a home -->
+	<key>MaxCollectionsPerHome</key>
+	<integer>50</integer>
+
+	<!-- Maximum number of resources in a calendar/address book -->
+	<key>MaxResourcesPerCollection</key>
+	<integer>10000</integer>
+
+	<!-- Maximum resource size (in bytes) -->
+	<key>MaxResourceSize</key>
+	<integer>1048576</integer>
+
+	<!-- Maximum number of unique attendees -->
+	<key>MaxAttendeesPerInstance</key>
+	<integer>100</integer>
+
+	<!-- Maximum number of instances the server will index -->
+	<key>MaxAllowedInstances</key>
+	<integer>3000</integer>
+
+	<!-- Set to URL path of wiki authentication service, e.g. "/auth", in order to
+	     use javascript authentication dialog.  Empty string indicates standard
+	     browser authentication dialog should be used. -->
+	<key>WebCalendarAuthPath</key>
+	<string></string>
+
+	<!-- Define mappings of URLs to file system objects (directories or files) -->
+	<key>Aliases</key>
+	<array>
+	</array>
+
+	<!-- Directory service
+
+	     A directory service provides information about principals (e.g. users,
+	     groups, locations and resources) to the server. -->
+
+	<key>DirectoryService</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<key>type</key>
+		<string>xml</string>
+
+		<key>params</key>
+		<dict>
+			<key>recordTypes</key>
+			<array>
+				<string>users</string>
+				<string>groups</string>
+			</array>
+
+			<key>xmlFile</key>
+			<string>accounts.xml</string>
+		</dict>
+	</dict>
+
+	<key>DirectoryRealmName</key>
+	<string></string>
+
+	<!-- Apply an additional filter for attendee lookups where names must start
+	     with the search tokens rather than just contain them. -->
+	<key>DirectoryFilterStartsWith</key>
+	<false/>
+
+	<!-- Locations and Resources service
+
+	     Supplements the directory service with information about locations and
+	     resources. -->
+
+	<key>ResourceService</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<key>type</key>
+		<string>xml</string>
+
+		<key>params</key>
+		<dict>
+			<key>recordTypes</key>
+			<array>
+				<string>locations</string>
+				<string>resources</string>
+				<string>addresses</string>
+			</array>
+
+			<key>xmlFile</key>
+			<string>resources.xml</string>
+		</dict>
+	</dict>
+
+	<!-- Augment service
+
+	     Augments for the directory service records to add calendar specific
+	     attributes. -->
+
+	<key>AugmentService</key>
+	<dict>
+		<key>type</key>
+		<string>xml</string>
+
+		<key>params</key>
+		<dict>
+			<key>xmlFiles</key>
+			<array>
+			</array>
+
+			<key>statSeconds</key>
+			<integer>15</integer>
+		</dict>
+	</dict>
+
+	<!-- Proxies -->
+
+	<!-- Allows for initialization of the proxy database from an XML file -->
+	<key>ProxyLoadFromFile</key>
+	<string></string>
+
+	<!-- Special principals -->
+
+	<!-- Principals with "DAV:all" access (relative URLs) -->
+	<key>AdminPrincipals</key>
+	<array>
+	</array>
+
+	<!-- Principals with "DAV:read" access (relative URLs) -->
+	<key>ReadPrincipals</key>
+	<array>
+	</array>
+
+	<!-- Create "proxy access" principals -->
+	<key>EnableProxyPrincipals</key>
+	<true/>
+
+	<!-- Permissions -->
+
+	<!-- Allow unauthenticated read access to / -->
+	<key>EnableAnonymousReadRoot</key>
+	<true/>
+
+	<!-- Allow unauthenticated read access to hierarchy -->
+	<key>EnableAnonymousReadNav</key>
+	<false/>
+
+	<!-- Allow listing of principal collections -->
+	<key>EnablePrincipalListings</key>
+	<true/>
+
+	<!-- Render calendar collections as a monolithic iCalendar object -->
+	<key>EnableMonolithicCalendars</key>
+	<true/>
+
+	<!-- Client controls -->
+
+	<!-- List of regexes for clients to disallow -->
+	<key>RejectClients</key>
+	<array>
+	</array>
+
+	<!-- Authentication -->
+
+	<key>Authentication</key>
+	<dict>
+		<!-- Clear text; best avoided -->
+		<key>Basic</key>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+
+			<!-- Advertised over non-SSL? -->
+			<key>AllowedOverWireUnencrypted</key>
+			<false/>
+		</dict>
+
+		<!-- Digest challenge/response -->
+		<key>Digest</key>
+		<dict>
+			<key>Enabled</key>
+			<true/>
+
+			<key>Algorithm</key>
+			<string>md5</string>
+
+			<key>Qop</key>
+			<string></string>
+
+			<!-- Advertised over non-SSL? -->
+			<key>AllowedOverWireUnencrypted</key>
+			<true/>
+		</dict>
+
+		<!-- Kerberos/SPNEGO -->
+		<key>Kerberos</key>
+		<dict>
+			<key>Enabled</key>
+			<false/>
+
+			<key>ServicePrincipal</key>
+			<string></string>
+
+			<!-- Advertised over non-SSL? -->
+			<key>AllowedOverWireUnencrypted</key>
+			<true/>
+		</dict>
+
+		<!-- TLS Client Certificate -->
+		<key>ClientCertificate</key>
+		<dict>
+			<key>Enabled</key>
+			<false/>
+
+			<!-- Advertised over non-SSL? -->
+			<key>AllowedOverWireUnencrypted</key>
+			<true/>
+
+			<!-- Always require a client cert -->
+			<key>Required</key>
+			<true/>
+
+			<!-- Array of acceptable client cert CA file names -->
+			<key>CAFiles</key>
+			<array>
+			</array>
+
+			<!-- Send the list of acceptable CAs to the client -->
+			<key>SendCAsToClient</key>
+			<true/>
+		</dict>
+
+		<key>Wiki</key>
+		<dict>
+			<key>Enabled</key>
+			<false/>
+
+			<key>Cookie</key>
+			<string>cc.collabd_session_guid</string>
+
+			<key>EndpointDescriptor</key>
+			<string>unix:path=/var/run/collabd</string>
+		</dict>
+	</dict>
+
+	<!-- Logging -->
+
+	<!-- Apache-style access log -->
+	<key>AccessLogFile</key>
+	<string>access.log</string>
+
+	<!-- Server activity log (the verbosity is controlled by DefaultLogLevel and
+	     LogLevels keys) -->
+	<key>ErrorLogFile</key>
+	<string>error.log</string>
+
+	<!-- Agent activity log (only applies to Server.app edition) -->
+	<key>AgentLogFile</key>
+	<string>agent.log</string>
+
+	<!-- Utility log (used for command line utilities; the name will be dynamically
+	     changed to that of the utility being run) -->
+	<key>UtilityLogFile</key>
+	<string>utility.log</string>
+
+	<!-- True = use log file, False = stdout -->
+	<key>ErrorLogEnabled</key>
+	<true/>
+
+	<!-- Rotate error log after so many megabytes -->
+	<key>ErrorLogRotateMB</key>
+	<integer>10</integer>
+
+	<!-- Retain this many error log files -->
+	<key>ErrorLogMaxRotatedFiles</key>
+	<integer>5</integer>
+
+	<!-- Rotate error log when service starts -->
+	<key>ErrorLogRotateOnStart</key>
+	<false/>
+
+	<key>PIDFile</key>
+	<string>caldavd.pid</string>
+
+	<key>RotateAccessLog</key>
+	<false/>
+
+	<key>EnableExtendedAccessLog</key>
+	<true/>
+
+	<key>EnableExtendedTimingAccessLog</key>
+	<false/>
+
+	<!-- Controls the verbosity of ErrorLogFile (valid values are error, warn,
+	     info, debug; default is info) -->
+	<key>DefaultLogLevel</key>
+	<string></string>
+
+	<!-- Allows overriding log levels on a per-package, per-module, or even per-
+	     class basis -->
+	<key>LogLevels</key>
+	<dict>
+	</dict>
+
+	<!-- Used internally to track which worker process is logging a message -->
+	<key>LogID</key>
+	<string></string>
+
+	<key>AccountingCategories</key>
+	<dict>
+		<!-- Log regular HTTP requests -->
+		<key>HTTP</key>
+		<false/>
+
+		<!-- Log non-freebusy iTIP details -->
+		<key>iTIP</key>
+		<false/>
+
+		<!-- Log freebusy iTIP details -->
+		<key>iTIP-VFREEBUSY</key>
+		<false/>
+
+		<!-- Log extra details about implicit scheduling errors -->
+		<key>Implicit Errors</key>
+		<false/>
+
+		<!-- Log extra details about auto-accept iTIP processing -->
+		<key>AutoScheduling</key>
+		<false/>
+
+		<!-- Log iSchedule HTTP requests (including cross-pod) -->
+		<key>iSchedule</key>
+		<false/>
+
+		<!-- Log cross-pod conduit HTTP requests -->
+		<key>xPod</key>
+		<false/>
+
+		<!-- Log invalid recurrence instance details -->
+		<key>Invalid Instance</key>
+		<false/>
+
+		<!-- Log cross-pod migration details -->
+		<key>migration</key>
+		<false/>
+	</dict>
+
+	<key>AccountingPrincipals</key>
+	<array>
+	</array>
+
+	<!-- The parent directory for accounting log directories (by default, relative
+	     to LogRoot) -->
+	<key>AccountingLogRoot</key>
+	<string>accounting</string>
+
+	<key>Stats</key>
+	<dict>
+		<key>EnableUnixStatsSocket</key>
+		<false/>
+
+		<key>UnixStatsSocket</key>
+		<string>caldavd-stats.sock</string>
+
+		<key>EnableTCPStatsSocket</key>
+		<false/>
+
+		<key>TCPStatsPort</key>
+		<integer>8100</integer>
+	</dict>
+
+	<key>LogDatabase</key>
+	<dict>
+		<key>LabelsInSQL</key>
+		<false/>
+
+		<key>Statistics</key>
+		<false/>
+
+		<key>StatisticsLogFile</key>
+		<string>sqlstats.log</string>
+
+		<key>SQLStatements</key>
+		<false/>
+
+		<key>TransactionWaitSeconds</key>
+		<integer>0</integer>
+	</dict>
+
+	<!-- SSL/TLS -->
+
+	<!-- Public key -->
+	<key>SSLCertificate</key>
+	<string></string>
+
+	<!-- Private key -->
+	<key>SSLPrivateKey</key>
+	<string></string>
+
+	<!-- Certificate Authority Chain -->
+	<key>SSLAuthorityChain</key>
+	<string></string>
+
+	<key>SSLPassPhraseDialog</key>
+	<string>/etc/apache2/getsslpassphrase</string>
+
+	<key>SSLCertAdmin</key>
+	<string>/Applications/Server.app/Contents/ServerRoot/usr/sbin/certadmin</string>
+
+	<!-- Keychain identity to use in place of cert files -->
+	<key>SSLKeychainIdentity</key>
+	<string></string>
+
+	<!-- Process management -->
+
+	<!-- Username and Groupname to drop privileges to, if empty privileges will not
+	     be dropped. -->
+	<key>UserName</key>
+	<string></string>
+
+	<key>GroupName</key>
+	<string></string>
+
+	<!-- Multi-process -->
+	<key>ProcessType</key>
+	<string>Combined</string>
+
+	<key>MultiProcess</key>
+	<dict>
+		<key>ProcessCount</key>
+		<integer>0</integer>
+
+		<key>MinProcessCount</key>
+		<integer>2</integer>
+
+		<key>PerCPU</key>
+		<integer>1</integer>
+
+		<key>PerGB</key>
+		<integer>1</integer>
+
+		<key>StaggeredStartup</key>
+		<dict>
+			<key>Enabled</key>
+			<false/>
+
+			<key>Interval</key>
+			<integer>15</integer>
+		</dict>
+	</dict>
+
+	<!-- How large a spawned process is allowed to get before it's stopped -->
+	<key>MemoryLimiter</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<!-- How often to check memory sizes (in seconds) -->
+		<key>Seconds</key>
+		<integer>60</integer>
+
+		<!-- Memory limit (RSS in bytes) -->
+		<key>Bytes</key>
+		<integer>2147483648</integer>
+
+		<!-- True: only take into account resident memory; False: include virtual
+		     memory -->
+		<key>ResidentOnly</key>
+		<true/>
+	</dict>
+
+	<!-- If enabled, will honor macOS Server ACLs to control access -->
+	<key>EnableSACLs</key>
+	<false/>
+
+	<!-- Make all data read-only -->
+	<key>EnableReadOnlyServer</key>
+	<false/>
+
+	<!-- Standard (or draft) WebDAV extensions -->
+
+	<!-- POST ;add-member extension -->
+	<key>EnableAddMember</key>
+	<true/>
+
+	<!-- REPORT collection-sync -->
+	<key>EnableSyncReport</key>
+	<true/>
+
+	<!-- REPORT collection-sync on home collections -->
+	<key>EnableSyncReportHome</key>
+	<true/>
+
+	<!-- Sync token includes config component -->
+	<key>EnableConfigSyncToken</key>
+	<true/>
+
+	<!-- /.well-known resource -->
+	<key>EnableWellKnown</key>
+	<true/>
+
+	<!-- Extended calendar-query REPORT -->
+	<key>EnableCalendarQueryExtended</key>
+	<true/>
+
+	<!-- Support Managed Attachments -->
+	<key>EnableManagedAttachments</key>
+	<false/>
+
+	<!-- server-info document -->
+	<key>EnableServerInfo</key>
+	<false/>
+
+	<!-- Generic CalDAV/CardDAV extensions -->
+
+	<!-- Allow clients to send/receive JSON jCal and jCard format data -->
+	<key>EnableJSONData</key>
+	<true/>
+
+	<!-- Non-standard CalDAV extensions -->
+
+	<!-- Calendar Drop Box -->
+	<key>EnableDropBox</key>
+	<false/>
+
+	<!-- Private Events -->
+	<key>EnablePrivateEvents</key>
+	<false/>
+
+	<!-- Old Timezone service -->
+	<key>EnableTimezoneService</key>
+	<false/>
+
+	<!-- New standard timezone service -->
+	<key>TimezoneService</key>
+	<dict>
+		<!-- Overall on/off switch -->
+		<key>Enabled</key>
+		<true/>
+
+		<!-- URI where service is hosted -->
+		<key>URI</key>
+		<string>/stdtimezones</string>
+
+		<!-- Can be "primary" or "secondary" -->
+		<key>Mode</key>
+		<string>primary</string>
+
+		<!-- Path to directory containing a zoneinfo - if None use default package
+		     path secondary service MUST define its own writable path -->
+		<key>BasePath</key>
+		<string></string>
+
+		<!-- Path to db cache info - if None use default package path secondary
+		     service MUST define its own writable path if not None -->
+		<key>XMLInfoPath</key>
+		<string></string>
+
+		<!-- User friendly JSON output -->
+		<key>PrettyPrintJSON</key>
+		<true/>
+
+		<key>SecondaryService</key>
+		<dict>
+			<!-- Only one of these should be used when a secondary service is used -->
+			<!-- Domain/IP of secondary service to discover -->
+			<key>Host</key>
+			<string></string>
+
+			<!-- HTTP(s) URI to secondary service -->
+			<key>URI</key>
+			<string></string>
+
+			<key>UpdateIntervalMinutes</key>
+			<integer>1440</integer>
+		</dict>
+	</dict>
+
+	<!-- Strip out VTIMEZONES that are known -->
+	<key>EnableTimezonesByReference</key>
+	<true/>
+
+	<!-- Use timezone data from twistedcaldav.zoneinfo - don't copy to Data
+	     directory -->
+	<key>UsePackageTimezones</key>
+	<false/>
+
+	<!-- POST batch uploads -->
+	<key>EnableBatchUpload</key>
+	<true/>
+
+	<!-- Maximum number of resources in a batch POST -->
+	<key>MaxResourcesBatchUpload</key>
+	<integer>100</integer>
+
+	<!-- Maximum size of a batch POST (10 MB) -->
+	<key>MaxBytesBatchUpload</key>
+	<integer>10485760</integer>
+
+	<key>Sharing</key>
+	<dict>
+		<!-- Overall on/off switch -->
+		<key>Enabled</key>
+		<true/>
+
+		<!-- External (non-principal) sharees allowed -->
+		<key>AllowExternalUsers</key>
+		<false/>
+
+		<key>Calendars</key>
+		<dict>
+			<!-- Calendar on/off switch -->
+			<key>Enabled</key>
+			<true/>
+
+			<key>IgnorePerUserProperties</key>
+			<array>
+				<string>X-APPLE-STRUCTURED-LOCATION</string>
+			</array>
+
+			<key>CollectionProperties</key>
+			<dict>
+				<key>Shadowable</key>
+				<array>
+					<string>{urn:ietf:params:xml:ns:caldav}calendar-description</string>
+				</array>
+
+				<key>ProxyOverride</key>
+				<array>
+					<string>{urn:ietf:params:xml:ns:caldav}calendar-description</string>
+					<string>{com.apple.ical:}calendarcolor</string>
+					<string>{http://apple.com/ns/ical/}calendar-color</string>
+					<string>{http://apple.com/ns/ical/}calendar-order</string>
+				</array>
+
+				<key>Global</key>
+				<array>
+				</array>
+			</dict>
+
+			<key>Groups</key>
+			<dict>
+				<!-- Calendar sharing to groups on/off switch -->
+				<key>Enabled</key>
+				<true/>
+
+				<key>ReconciliationDelaySeconds</key>
+				<integer>5</integer>
+			</dict>
+		</dict>
+
+		<key>AddressBooks</key>
+		<dict>
+			<!-- Address Book sharing on/off switch -->
+			<key>Enabled</key>
+			<false/>
+
+			<key>CollectionProperties</key>
+			<dict>
+				<key>Shadowable</key>
+				<array>
+					<string>{urn:ietf:params:xml:ns:carddav}addressbook-description</string>
+				</array>
+
+				<key>ProxyOverride</key>
+				<array>
+				</array>
+
+				<key>Global</key>
+				<array>
+				</array>
+			</dict>
+
+			<key>Groups</key>
+			<dict>
+				<!-- Address Book Group sharing on/off switch -->
+				<key>Enabled</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+
+	<!-- Only allow calendars to be created with a single component type If this is
+	     on, it will also trigger an upgrade behavior that will split existing
+	     calendars into multiples based on component type. If on, it will also
+	     cause new accounts to provision with separate calendars for events and
+	     tasks. -->
+	<key>RestrictCalendarsToOneComponentType</key>
+	<true/>
+
+	<!-- Set of supported iCalendar components -->
+	<key>SupportedComponents</key>
+	<array>
+		<string>VEVENT</string>
+		<string>VTODO</string>
+	</array>
+
+	<!-- Enable Trash Collection -->
+	<key>EnableTrashCollection</key>
+	<false/>
+
+	<!-- Expose Trash Collection as a resource -->
+	<key>ExposeTrashCollection</key>
+	<false/>
+
+	<!-- Perform upgrades - currently only the database to filesystem migration -
+	     but in the future, hopefully all relevant upgrades - in parallel in
+	     subprocesses. -->
+	<key>ParallelUpgrades</key>
+	<false/>
+
+	<!-- During the upgrade phase of startup, rather than skipping homes found both
+	     on the filesystem and in the database, merge the data from the filesystem
+	     into the database homes. -->
+	<key>MergeUpgrades</key>
+	<false/>
+
+	<!-- Support for default alarms generated by the server -->
+	<key>EnableDefaultAlarms</key>
+	<true/>
+
+	<!-- Remove duplicate alarms on PUT -->
+	<key>RemoveDuplicateAlarms</key>
+	<true/>
+
+	<!-- Remove duplicate private comments on PUT -->
+	<key>RemoveDuplicatePrivateComments</key>
+	<false/>
+
+	<key>HostedStatus</key>
+	<dict>
+		<!-- Decorate ATTENDEEs with the following parameter to indicate where the
+		     ATTENDEE is hosted, locally or externally.  It's configurable and
+		     extensible in case we want to add more values.  A value of empty string
+		     means no decoration. -->
+		<key>Enabled</key>
+		<false/>
+
+		<key>Parameter</key>
+		<string>X-APPLE-HOSTED-STATUS</string>
+
+		<key>Values</key>
+		<dict>
+			<key>local</key>
+			<string></string>
+
+			<key>external</key>
+			<string>EXTERNAL</string>
+		</dict>
+	</dict>
+
+	<key>RevisionCleanup</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<!-- Number of days that a client sync report token is valid -->
+		<key>SyncTokenLifetimeDays</key>
+		<real>14.0</real>
+
+		<!-- Number of days between revision cleanups -->
+		<key>CleanupPeriodDays</key>
+		<real>2.0</real>
+	</dict>
+
+	<key>InboxCleanup</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<!-- Number of days before deleting a new inbox item -->
+		<key>ItemLifetimeDays</key>
+		<real>14.0</real>
+
+		<!-- Number of days between inbox cleanups -->
+		<key>CleanupPeriodDays</key>
+		<real>2.0</real>
+
+		<!-- Number of seconds before CleanupOneInboxWork starts after
+		     InboxCleanupWork -->
+		<key>StartDelaySeconds</key>
+		<integer>300</integer>
+
+		<!-- Number of seconds between each CleanupOneInboxWork (fractional) -->
+		<key>StaggerSeconds</key>
+		<real>0.5</real>
+
+		<!-- Number of items above which inbox removals will be deferred to a work
+		     item -->
+		<key>InboxRemoveWorkThreshold</key>
+		<integer>5</integer>
+
+		<!-- Number of seconds between each InboxRemoveWork -->
+		<key>RemovalStaggerSeconds</key>
+		<real>0.5</real>
+	</dict>
+
+	<!-- CardDAV Features -->
+	<key>DirectoryAddressBook</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<key>type</key>
+		<string>opendirectory</string>
+
+		<key>params</key>
+		<dict>
+			<key>queryPeopleRecords</key>
+			<true/>
+
+			<key>peopleNode</key>
+			<string>/Search/Contacts</string>
+
+			<key>queryUserRecords</key>
+			<true/>
+
+			<key>userNode</key>
+			<string>/Search/Contacts</string>
+
+			<key>maxDSQueryRecords</key>
+			<integer>0</integer>
+
+			<key>queryDSLocal</key>
+			<false/>
+
+			<key>ignoreSystemRecords</key>
+			<true/>
+
+			<key>dsLocalCacheTimeout</key>
+			<integer>30</integer>
+
+			<key>liveQuery</key>
+			<true/>
+
+			<key>fakeETag</key>
+			<true/>
+
+			<key>cacheQuery</key>
+			<false/>
+
+			<key>cacheTimeout</key>
+			<integer>30</integer>
+
+			<key>standardizeSyntheticUIDs</key>
+			<false/>
+
+			<key>addDSAttrXProperties</key>
+			<false/>
+
+			<key>appleInternalServer</key>
+			<false/>
+
+			<key>additionalAttributes</key>
+			<array>
+			</array>
+
+			<key>allowedAttributes</key>
+			<array>
+			</array>
+		</dict>
+
+		<key>name</key>
+		<string>directory</string>
+
+		<key>MaxQueryResults</key>
+		<integer>1000</integer>
+	</dict>
+
+	<!-- /directory resource exists -->
+	<key>EnableSearchAddressBook</key>
+	<false/>
+
+	<!-- Anonymous users may access directory address book -->
+	<key>AnonymousDirectoryAddressBookAccess</key>
+	<false/>
+
+	<!-- /XXX CardDAV -->
+
+	<!-- Web-based administration -->
+	<key>EnableWebAdmin</key>
+	<true/>
+
+	<!-- JSON control API - only for testing -->
+	<key>EnableControlAPI</key>
+	<false/>
+
+	<!-- Scheduling related options -->
+
+	<key>Scheduling</key>
+	<dict>
+		<key>CalDAV</key>
+		<dict>
+			<!-- Domain for mailto calendar user addresses on this server -->
+			<key>EmailDomain</key>
+			<string></string>
+
+			<!-- Domain for http calendar user addresses on this server -->
+			<key>HTTPDomain</key>
+			<string></string>
+
+			<!-- Regex patterns to match local calendar user addresses -->
+			<key>AddressPatterns</key>
+			<array>
+			</array>
+
+			<!-- Whether to maintain compatibility with non-implicit mode -->
+			<key>OldDraftCompatibility</key>
+			<true/>
+
+			<!-- Whether to support older clients that do not use Schedule-Tag feature -->
+			<key>ScheduleTagCompatibility</key>
+			<true/>
+
+			<!-- Private comments from attendees to organizer -->
+			<key>EnablePrivateComments</key>
+			<true/>
+
+			<!-- Names of iCalendar properties that are preserved when an Attendee does
+			     an invite PUT -->
+			<key>PerAttendeeProperties</key>
+			<array>
+				<string>X-APPLE-NEEDS-REPLY</string>
+				<string>X-APPLE-TRAVEL-DURATION</string>
+				<string>X-APPLE-TRAVEL-START</string>
+				<string>X-APPLE-TRAVEL-RETURN-DURATION</string>
+				<string>X-APPLE-TRAVEL-RETURN</string>
+			</array>
+
+			<!-- Names of X- iCalendar properties that are sent from ORGANIZER to
+			     ATTENDEE -->
+			<key>OrganizerPublicProperties</key>
+			<array>
+				<string>X-APPLE-DROPBOX</string>
+				<string>X-APPLE-STRUCTURED-LOCATION</string>
+			</array>
+
+			<!-- Names of X- iCalendar parameters that are sent from ORGANIZER to
+			     ATTENDEE -->
+			<key>OrganizerPublicParameters</key>
+			<array>
+			</array>
+
+			<!-- Names of X- iCalendar properties that are sent from ATTENDEE to
+			     ORGANIZER These are also implicitly added to OrganizerPublicProperties -->
+			<key>AttendeePublicProperties</key>
+			<array>
+			</array>
+
+			<!-- Names of X- iCalendar parameters that are sent from ATTENDEE to
+			     ORGANIZER These are also implicitly added to OrganizerPublicParameters -->
+			<key>AttendeePublicParameters</key>
+			<array>
+			</array>
+		</dict>
+
+		<key>iSchedule</key>
+		<dict>
+			<!-- iSchedule protocol -->
+			<key>Enabled</key>
+			<false/>
+
+			<!-- Reg-ex patterns to match iSchedule-able calendar user addresses -->
+			<key>AddressPatterns</key>
+			<array>
+			</array>
+
+			<!-- iSchedule server configurations -->
+			<key>RemoteServers</key>
+			<string>remoteservers.xml</string>
+
+			<!-- Capabilities serial number -->
+			<key>SerialNumber</key>
+			<integer>1</integer>
+
+			<!-- File where a fake Bind zone exists for creating fake DNS results -->
+			<key>DNSDebug</key>
+			<string></string>
+
+			<!-- DKIM options -->
+			<key>DKIM</key>
+			<dict>
+				<!-- DKIM signing/verification enabled -->
+				<key>Enabled</key>
+				<true/>
+
+				<!-- Domain for DKIM (defaults to ServerHostName) -->
+				<key>Domain</key>
+				<string></string>
+
+				<!-- Selector for public key -->
+				<key>KeySelector</key>
+				<string>ischedule</string>
+
+				<!-- Signature algorithm (one of rsa-sha1 or rsa-sha256) -->
+				<key>SignatureAlgorithm</key>
+				<string>rsa-sha256</string>
+
+				<!-- This server's public key stored in DNS -->
+				<key>UseDNSKey</key>
+				<true/>
+
+				<!-- This server's public key stored in HTTP /.well-known -->
+				<key>UseHTTPKey</key>
+				<true/>
+
+				<!-- This server's public key manually exchanged with others -->
+				<key>UsePrivateExchangeKey</key>
+				<true/>
+
+				<!-- Expiration time for signature verification -->
+				<key>ExpireSeconds</key>
+				<integer>3600</integer>
+
+				<!-- File where private key is stored -->
+				<key>PrivateKeyFile</key>
+				<string></string>
+
+				<!-- File where public key is stored -->
+				<key>PublicKeyFile</key>
+				<string></string>
+
+				<!-- Directory where private exchange public keys are stored -->
+				<key>PrivateExchanges</key>
+				<string></string>
+
+				<!-- Turn on protocol level debugging to return detailed information to the
+				     requestor -->
+				<key>ProtocolDebug</key>
+				<false/>
+			</dict>
+		</dict>
+
+		<key>iMIP</key>
+		<dict>
+			<!-- Server-to-iMIP protocol -->
+			<key>Enabled</key>
+			<false/>
+
+			<key>Sending</key>
+			<dict>
+				<!-- SMTP server to relay messages through -->
+				<key>Server</key>
+				<string></string>
+
+				<!-- SMTP server port to relay messages through -->
+				<key>Port</key>
+				<integer>587</integer>
+
+				<!-- 'From' address for server -->
+				<key>Address</key>
+				<string></string>
+
+				<key>UseSSL</key>
+				<true/>
+
+				<!-- For account sending mail -->
+				<key>Username</key>
+				<string></string>
+
+				<!-- For account sending mail -->
+				<key>Password</key>
+				<string></string>
+
+				<!-- Messages for events older than this may days are not sent -->
+				<key>SuppressionDays</key>
+				<integer>7</integer>
+			</dict>
+
+			<key>Receiving</key>
+			<dict>
+				<!-- Server to retrieve email messages from -->
+				<key>Server</key>
+				<string></string>
+
+				<!-- Server port to retrieve email messages from -->
+				<key>Port</key>
+				<integer>0</integer>
+
+				<key>UseSSL</key>
+				<true/>
+
+				<!-- Type of message access server: 'pop' or 'imap' -->
+				<key>Type</key>
+				<string></string>
+
+				<!-- How often to fetch mail -->
+				<key>PollingSeconds</key>
+				<integer>30</integer>
+
+				<!-- For account receiving mail -->
+				<key>Username</key>
+				<string></string>
+
+				<!-- For account receiving mail -->
+				<key>Password</key>
+				<string></string>
+			</dict>
+
+			<!-- Regex patterns to match iMIP-able calendar user addresses -->
+			<key>AddressPatterns</key>
+			<array>
+			</array>
+
+			<!-- Directory containing HTML templates for email invitations (invite.html,
+			     cancel.html) -->
+			<key>MailTemplatesDirectory</key>
+			<string>/Applications/Server.app/Contents/ServerRoot/usr/share/caldavd/share/email_templates</string>
+
+			<!-- Directory containing language-specific subdirectories containing date-
+			     specific icons for email invitations -->
+			<key>MailIconsDirectory</key>
+			<string>/Applications/Server.app/Contents/ServerRoot/usr/share/caldavd/share/date_icons</string>
+
+			<!-- How many days invitations are valid -->
+			<key>InvitationDaysToLive</key>
+			<integer>90</integer>
+		</dict>
+
+		<key>Options</key>
+		<dict>
+			<!-- Allow groups to be Organizers -->
+			<key>AllowGroupAsOrganizer</key>
+			<false/>
+
+			<!-- Allow locations to be Organizers -->
+			<key>AllowLocationAsOrganizer</key>
+			<false/>
+
+			<!-- Allow resources to be Organizers -->
+			<key>AllowResourceAsOrganizer</key>
+			<false/>
+
+			<!-- Allow locations to have events without an Organizer -->
+			<key>AllowLocationWithoutOrganizer</key>
+			<true/>
+
+			<!-- Allow resources to have events without an Organizer -->
+			<key>AllowResourceWithoutOrganizer</key>
+			<true/>
+
+			<!-- Track who the last modifier of an unscheduled location event is -->
+			<key>TrackUnscheduledLocationData</key>
+			<true/>
+
+			<!-- Track who the last modifier of an unscheduled resource event is -->
+			<key>TrackUnscheduledResourceData</key>
+			<true/>
+
+			<!-- Add fake email addresses to work around client bug -->
+			<key>FakeResourceLocationEmail</key>
+			<false/>
+
+			<!-- Maximum number of attendees to request freebusy for -->
+			<key>LimitFreeBusyAttendees</key>
+			<integer>30</integer>
+
+			<!-- Number of attendees to do batched refreshes: 0 - no batching -->
+			<key>AttendeeRefreshBatch</key>
+			<integer>5</integer>
+
+			<!-- Number of attendees above which attendee refreshes are suppressed: 0 -
+			     no limit -->
+			<key>AttendeeRefreshCountLimit</key>
+			<integer>50</integer>
+
+			<!-- Time for implicit UID lock timeout -->
+			<key>UIDLockTimeoutSeconds</key>
+			<integer>60</integer>
+
+			<!-- Expiration time for UID lock, -->
+			<key>UIDLockExpirySeconds</key>
+			<integer>300</integer>
+
+			<!-- Host names matched in http(s) CUAs -->
+			<key>PrincipalHostAliases</key>
+			<array>
+			</array>
+
+			<!-- Add a time stamp when an Attendee changes their PARTSTAT -->
+			<key>TimestampAttendeePartStatChanges</key>
+			<true/>
+
+			<!-- Delegates can get extra info in a freebusy request -->
+			<key>DelegeteRichFreeBusy</key>
+			<true/>
+
+			<!-- Any user can get extra info for rooms/resources in a freebusy request -->
+			<key>RoomResourceRichFreeBusy</key>
+			<true/>
+
+			<key>AutoSchedule</key>
+			<dict>
+				<!-- Auto-scheduling will never occur if set to False -->
+				<key>Enabled</key>
+				<true/>
+
+				<!-- Override augments setting and always auto-schedule -->
+				<key>Always</key>
+				<false/>
+
+				<!-- Allow auto-schedule for users -->
+				<key>AllowUsers</key>
+				<false/>
+
+				<!-- Default mode for auto-schedule processing, one of: "none"            -
+				     no auto-scheduling "accept-always"   - always accept, ignore busy time
+				     "decline-always"  - always decline, ignore free time "accept-if-free"
+				     - accept if free, do nothing if busy "decline-if-busy" - decline if
+				     busy, do nothing if free "automatic"       - accept if free, decline if
+				     busy -->
+				<key>DefaultMode</key>
+				<string>automatic</string>
+
+				<!-- How far into the future to check for booking conflicts -->
+				<key>FutureFreeBusyDays</key>
+				<integer>1095</integer>
+			</dict>
+
+			<key>WorkQueues</key>
+			<dict>
+				<!-- Work queues for scheduling enabled -->
+				<key>Enabled</key>
+				<true/>
+
+				<!-- Number of seconds delay for a queued scheduling request/cancel -->
+				<key>RequestDelaySeconds</key>
+				<integer>5</integer>
+
+				<!-- Number of seconds delay for a queued scheduling reply -->
+				<key>ReplyDelaySeconds</key>
+				<integer>1</integer>
+
+				<!-- Time delay for sending an auto reply iTIP message -->
+				<key>AutoReplyDelaySeconds</key>
+				<integer>5</integer>
+
+				<!-- Time after an iTIP REPLY for first batched attendee refresh -->
+				<key>AttendeeRefreshBatchDelaySeconds</key>
+				<integer>5</integer>
+
+				<!-- Time between attendee batch refreshes -->
+				<key>AttendeeRefreshBatchIntervalSeconds</key>
+				<integer>5</integer>
+
+				<!-- Delay in seconds before a work item is executed again after a temp
+				     failure -->
+				<key>TemporaryFailureDelay</key>
+				<integer>60</integer>
+
+				<!-- Max number of temp failure retries before treating as a permanent
+				     failure -->
+				<key>MaxTemporaryFailures</key>
+				<integer>10</integer>
+			</dict>
+
+			<!-- This controls automatic splitting of large recurring events by the
+			     server. The ability for clients to split events using POST ?action=split
+			     is always enabled -->
+
+			<key>Splitting</key>
+			<dict>
+				<!-- False for now whilst we experiment with this -->
+				<key>Enabled</key>
+				<false/>
+
+				<!-- Consider splitting when greater than 100KB -->
+				<key>Size</key>
+				<integer>102400</integer>
+
+				<!-- Number of days in the past where the split will occur -->
+				<key>PastDays</key>
+				<integer>14</integer>
+
+				<!-- How many seconds to delay the split work item -->
+				<key>Delay</key>
+				<integer>60</integer>
+			</dict>
+		</dict>
+	</dict>
+
+	<key>FreeBusyURL</key>
+	<dict>
+		<!-- Per-user free-busy-url protocol -->
+		<key>Enabled</key>
+		<false/>
+
+		<!-- Number of days into the future to generate f-b data if no explicit time-
+		     range is specified -->
+		<key>TimePeriod</key>
+		<integer>14</integer>
+
+		<!-- Allow anonymous read access to free-busy URL -->
+		<key>AnonymousAccess</key>
+		<false/>
+	</dict>
+
+	<!-- Notifications -->
+
+	<key>Notifications</key>
+	<dict>
+		<key>Enabled</key>
+		<false/>
+
+		<key>CoalesceSeconds</key>
+		<integer>3</integer>
+
+		<key>Services</key>
+		<dict>
+			<key>APNS</key>
+			<dict>
+				<key>Enabled</key>
+				<false/>
+
+				<key>SubscriptionURL</key>
+				<string>apns</string>
+
+				<!-- How often the client should re-register (2 days) -->
+				<key>SubscriptionRefreshIntervalSeconds</key>
+				<integer>172800</integer>
+
+				<!-- How often a purge is done (12 hours) -->
+				<key>SubscriptionPurgeIntervalSeconds</key>
+				<integer>43200</integer>
+
+				<!-- How old a subscription must be before it's purged (14 days) -->
+				<key>SubscriptionPurgeSeconds</key>
+				<integer>1209600</integer>
+
+				<key>ProviderHost</key>
+				<string>gateway.push.apple.com</string>
+
+				<key>ProviderPort</key>
+				<integer>2195</integer>
+
+				<key>FeedbackHost</key>
+				<string>feedback.push.apple.com</string>
+
+				<key>FeedbackPort</key>
+				<integer>2196</integer>
+
+				<!-- 8 hours -->
+				<key>FeedbackUpdateSeconds</key>
+				<integer>28800</integer>
+
+				<key>Environment</key>
+				<string>PRODUCTION</string>
+
+				<key>EnableStaggering</key>
+				<false/>
+
+				<key>StaggerSeconds</key>
+				<integer>3</integer>
+
+				<key>CalDAV</key>
+				<dict>
+					<key>Enabled</key>
+					<false/>
+
+					<key>CertificatePath</key>
+					<string>Certificates/apns:com.apple.calendar.cert.pem</string>
+
+					<key>PrivateKeyPath</key>
+					<string>Certificates/apns:com.apple.calendar.key.pem</string>
+
+					<key>AuthorityChainPath</key>
+					<string>Certificates/apns:com.apple.calendar.chain.pem</string>
+
+					<key>Passphrase</key>
+					<string></string>
+
+					<key>KeychainIdentity</key>
+					<string>apns:com.apple.calendar</string>
+
+					<key>Topic</key>
+					<string></string>
+				</dict>
+
+				<key>CardDAV</key>
+				<dict>
+					<key>Enabled</key>
+					<false/>
+
+					<key>CertificatePath</key>
+					<string>Certificates/apns:com.apple.contact.cert.pem</string>
+
+					<key>PrivateKeyPath</key>
+					<string>Certificates/apns:com.apple.contact.key.pem</string>
+
+					<key>AuthorityChainPath</key>
+					<string>Certificates/apns:com.apple.contact.chain.pem</string>
+
+					<key>Passphrase</key>
+					<string></string>
+
+					<key>KeychainIdentity</key>
+					<string>apns:com.apple.contact</string>
+
+					<key>Topic</key>
+					<string></string>
+				</dict>
+			</dict>
+
+			<key>AMP</key>
+			<dict>
+				<key>Enabled</key>
+				<false/>
+
+				<key>Port</key>
+				<integer>62311</integer>
+
+				<key>EnableStaggering</key>
+				<false/>
+
+				<key>StaggerSeconds</key>
+				<integer>3</integer>
+			</dict>
+		</dict>
+	</dict>
+
+	<key>DirectoryProxy</key>
+	<dict>
+		<key>Enabled</key>
+		<false/>
+
+		<key>SocketPath</key>
+		<string>directory-proxy.sock</string>
+
+		<key>InSidecarCachingSeconds</key>
+		<integer>120</integer>
+	</dict>
+
+	<key>DirectoryCaching</key>
+	<dict>
+		<!-- How long to cache in worker and in memcached -->
+		<key>CachingSeconds</key>
+		<integer>60</integer>
+
+		<key>NegativeCachingEnabled</key>
+		<true/>
+
+		<!-- 0 = purging turned off -->
+		<key>LookupsBetweenPurges</key>
+		<integer>10000</integer>
+	</dict>
+
+	<!-- Support multiple hosts within a domain -->
+
+	<key>Servers</key>
+	<dict>
+		<!-- Multiple servers enabled or not -->
+		<key>Enabled</key>
+		<false/>
+
+		<!-- File path for server information -->
+		<key>ConfigFile</key>
+		<string>localservers.xml</string>
+
+		<!-- Pool size for connections between servers -->
+		<key>MaxClients</key>
+		<integer>5</integer>
+
+		<!-- Name for top-level inbox resource -->
+		<key>InboxName</key>
+		<string>podding</string>
+
+		<!-- Name for top-level cross-pod resource -->
+		<key>ConduitName</key>
+		<string>conduit</string>
+	</dict>
+
+	<!-- Performance tuning -->
+
+	<!-- Set the maximum number of outstanding requests to this server. -->
+	<key>MaxRequests</key>
+	<integer>3</integer>
+
+	<key>MaxAccepts</key>
+	<integer>1</integer>
+
+	<!-- The maximum number of outstanding database connections per database
+	     connection pool. When SharedConnectionPool (see above) is set to True,
+	     this is the total number of outgoing database connections allowed to the
+	     entire server; when SharedConnectionPool is False - this is the default -
+	     this is the number of database connections used per worker process. -->
+	<key>MaxDBConnectionsPerPool</key>
+	<integer>10</integer>
+
+	<key>ListenBacklog</key>
+	<integer>2024</integer>
+
+	<!-- Max. time between request lines -->
+	<key>IncomingDataTimeOut</key>
+	<integer>60</integer>
+
+	<!-- Max. time between pipelined requests -->
+	<key>PipelineIdleTimeOut</key>
+	<integer>15</integer>
+
+	<!-- Max. time for response processing -->
+	<key>IdleConnectionTimeOut</key>
+	<integer>360</integer>
+
+	<!-- Max. time for client close -->
+	<key>CloseConnectionTimeOut</key>
+	<integer>15</integer>
+
+	<key>UIDReservationTimeOut</key>
+	<integer>1800</integer>
+
+	<key>MaxMultigetWithDataHrefs</key>
+	<integer>5000</integer>
+
+	<key>MaxQueryWithDataResults</key>
+	<integer>1000</integer>
+
+	<!-- How many results to return for principal search REPORT requests -->
+	<key>MaxPrincipalSearchReportResults</key>
+	<integer>500</integer>
+
+	<!-- How many seconds to wait for principal search REPORT results -->
+	<key>PrincipalSearchReportTimeout</key>
+	<integer>10</integer>
+
+	<!-- Client fixes per user-agent match -->
+
+	<key>ClientFixes</key>
+	<dict>
+		<key>ForceAttendeeTRANSP</key>
+		<array>
+			<string>iOS/8\\.0(\\..*)?</string>
+			<string>iOS/8\\.1(\\..*)?</string>
+			<string>iOS/8\\.2(\\..*)?</string>
+		</array>
+	</dict>
+
+	<!-- Localization -->
+
+	<key>Localization</key>
+	<dict>
+		<key>TranslationsDirectory</key>
+		<string>/Applications/Server.app/Contents/ServerRoot/usr/share/caldavd/share/translations</string>
+
+		<!-- will be relative to DataRoot -->
+		<key>LocalesDirectory</key>
+		<string>locales</string>
+
+		<key>Language</key>
+		<string></string>
+	</dict>
+
+	<!-- Implementation details
+
+	     The following are specific to how the server is built, and useful for
+	     development, but shouldn't be needed by users. -->
+
+	<!-- Twisted -->
+	<key>Twisted</key>
+	<dict>
+		<key>reactor</key>
+		<string>select</string>
+	</dict>
+
+	<!-- Umask -->
+	<key>umask</key>
+	<integer>18</integer>
+
+	<!-- A TCP port used for communication between the child and master processes
+	     (bound to 127.0.0.1). Specify 0 to let OS assign a port. -->
+	<key>ControlPort</key>
+	<integer>0</integer>
+
+	<!-- A unix socket used for communication between the child and master
+	     processes. If blank, then an AF_INET socket is used instead. -->
+	<key>ControlSocket</key>
+	<string>caldavd.sock</string>
+
+	<!-- Support for Content-Encoding compression options as specified in RFC2616
+	     Section 3.5 Defaults off, because it weakens TLS (CRIME attack). -->
+	<key>ResponseCompression</key>
+	<false/>
+
+	<!-- The retry-after value (in seconds) to return with a 503 error -->
+	<key>HTTPRetryAfter</key>
+	<integer>180</integer>
+
+	<!-- Profiling options -->
+	<key>Profiling</key>
+	<dict>
+		<key>Enabled</key>
+		<false/>
+
+		<key>BaseDirectory</key>
+		<string>/tmp/stats</string>
+	</dict>
+
+	<key>Memcached</key>
+	<dict>
+		<key>MaxClients</key>
+		<integer>5</integer>
+
+		<key>Pools</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<!-- A unix socket used for communication with memcached. If MemcacheSocket
+				     is empty string, an AF_INET socket is used. -->
+				<key>MemcacheSocket</key>
+				<string></string>
+
+				<key>ClientEnabled</key>
+				<true/>
+
+				<!-- The server is handled outside our containers -->
+				<key>ServerEnabled</key>
+				<false/>
+
+				<key>BindAddress</key>
+				<string>$MEMCACHED_HOST</string>
+				<!-- <string>memcached</string> -->
+
+				<key>Port</key>
+				<integer>$MEMCACHED_PORT</integer>
+				<!-- <integer>11211</integer> -->
+
+				<!-- Possible types: "OpenDirectoryBacker", "ImplicitUIDLock",
+				     "RefreshUIDLock", "DIGESTCREDENTIALS", "resourceInfoDB", "pubsubnodes",
+				     "FBCache", "ScheduleAddressMapper", "SQL.props", "SQL.calhome",
+				     "SQL.adbkhome", -->
+				<key>HandleCacheTypes</key>
+				<array>
+					<string>Default</string>
+				</array>
+			</dict>
+
+			<!-- "Shared": { "ClientEnabled": True, "ServerEnabled": True, "BindAddress":
+			     "127.0.0.1", "Port": 11211, "HandleCacheTypes": [ "ProxyDB",
+			     "DelegatesDB", "PrincipalToken", ] }, -->
+		</dict>
+
+		<!-- Find in PATH -->
+		<key>memcached</key>
+		<string>memcached</string>
+
+		<!-- Megabytes -->
+		<key>MaxMemory</key>
+		<integer>0</integer>
+
+		<key>Options</key>
+		<array>
+		</array>
+
+		<key>ProxyDBKeyNormalization</key>
+		<true/>
+	</dict>
+
+	<key>Postgres</key>
+	<dict>
+		<key>DatabaseName</key>
+		<string>caldav</string>
+
+		<key>ClusterName</key>
+		<string>cluster</string>
+
+		<key>LogFile</key>
+		<string>postgres.log</string>
+
+		<key>LogRotation</key>
+		<false/>
+
+		<key>SocketDirectory</key>
+		<string></string>
+
+		<key>SocketName</key>
+		<string></string>
+
+		<key>ListenAddresses</key>
+		<array>
+		</array>
+
+		<!-- Time out transactions -->
+		<key>TxnTimeoutSeconds</key>
+		<integer>30</integer>
+
+		<!-- BuffersToConnectionsRatio * MaxConnections Note: don't set this, it will
+		     be computed dynamically See _updateMultiProcess( ) below for details -->
+		<key>SharedBuffers</key>
+		<integer>0</integer>
+
+		<!-- Dynamically computed based on ProcessCount, etc. Note: don't set this, it
+		     will be computed dynamically See _updateMultiProcess( ) below for details -->
+		<key>MaxConnections</key>
+		<integer>0</integer>
+
+		<!-- how many extra connections to leave for utilities -->
+		<key>ExtraConnections</key>
+		<integer>3</integer>
+
+		<key>BuffersToConnectionsRatio</key>
+		<real>1.5</real>
+
+		<key>Options</key>
+		<array>
+			<string>-c standard_conforming_strings=on</string>
+		</array>
+
+		<!-- If the DBType is '', and we're spawning postgres ourselves, where is the
+		     pg_ctl tool to spawn it with? -->
+		<key>Ctl</key>
+		<string>pg_ctl</string>
+
+		<!-- If the DBType is '', and we're spawning postgres ourselves, where is the
+		     initdb tool to create its database cluster with? -->
+		<key>Init</key>
+		<string>initdb</string>
+	</dict>
+
+	<key>QueryCaching</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<key>MemcachedPool</key>
+		<string>Default</string>
+
+		<key>ExpireSeconds</key>
+		<integer>3600</integer>
+	</dict>
+
+	<key>GroupCaching</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<key>UpdateSeconds</key>
+		<integer>300</integer>
+
+		<key>UseDirectoryBasedDelegates</key>
+		<false/>
+
+		<key>InitialSchedulingDelaySeconds</key>
+		<integer>10</integer>
+
+		<key>BatchSize</key>
+		<integer>100</integer>
+
+		<key>BatchSchedulingIntervalSeconds</key>
+		<integer>2</integer>
+	</dict>
+
+	<key>GroupAttendees</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<key>ReconciliationDelaySeconds</key>
+		<integer>5</integer>
+
+		<!-- 1 hour -->
+		<key>AutoUpdateSecondsFromNow</key>
+		<integer>3600</integer>
+	</dict>
+
+	<key>AutomaticPurging</key>
+	<dict>
+		<key>Enabled</key>
+		<true/>
+
+		<!-- 7 days -->
+		<key>PollingIntervalSeconds</key>
+		<integer>604800</integer>
+
+		<!-- No staggering -->
+		<key>CheckStaggerSeconds</key>
+		<integer>0</integer>
+
+		<!-- 7 days -->
+		<key>PurgeIntervalSeconds</key>
+		<integer>604800</integer>
+
+		<key>HomePurgeDelaySeconds</key>
+		<integer>60</integer>
+
+		<!-- 7 days -->
+		<key>GroupPurgeIntervalSeconds</key>
+		<integer>604800</integer>
+	</dict>
+
+	<key>Manhole</key>
+	<dict>
+		<key>Enabled</key>
+		<false/>
+
+		<!-- Set to False for telnet -->
+		<key>UseSSH</key>
+		<true/>
+
+		<!-- Master listens here, children increment -->
+		<key>StartingPortNumber</key>
+		<integer>5000</integer>
+
+		<!-- Directory Proxy listens here -->
+		<key>DPSPortNumber</key>
+		<integer>4999</integer>
+
+		<!-- Path to password file with lines of user:pass -->
+		<key>PasswordFilePath</key>
+		<string></string>
+
+		<!-- Relative to DataRoot -->
+		<key>sshKeyName</key>
+		<string>manhole.key</string>
+
+		<key>sshKeySize</key>
+		<integer>4096</integer>
+	</dict>
+
+	<key>EnableKeepAlive</key>
+	<false/>
+
+	<key>EnableResponseCache</key>
+	<true/>
+
+	<!-- Minutes -->
+	<key>ResponseCacheTimeout</key>
+	<integer>30</integer>
+
+	<key>EnableFreeBusyCache</key>
+	<true/>
+
+	<key>FreeBusyCacheDaysBack</key>
+	<integer>7</integer>
+
+	<key>FreeBusyCacheDaysForward</key>
+	<integer>84</integer>
+
+	<key>FreeBusyIndexLowerLimitDays</key>
+	<integer>365</integer>
+
+	<key>FreeBusyIndexExpandAheadDays</key>
+	<integer>365</integer>
+
+	<key>FreeBusyIndexExpandMaxDays</key>
+	<integer>1825</integer>
+
+	<key>FreeBusyIndexDelayedExpand</key>
+	<false/>
+
+	<key>FreeBusyIndexSmartUpdate</key>
+	<true/>
+
+	<!-- The RootResource uses a twext property store. Specify the class here -->
+	<key>RootResourcePropStoreClass</key>
+	<string>txweb2.dav.xattrprops.xattrPropertyStore</string>
+
+	<!-- Used in the command line utilities to specify which service class to use
+	     to carry out work. -->
+	<key>UtilityServiceClass</key>
+	<string></string>
+
+	<!-- Inbox items created more than MigratedInboxDaysCutoff days in the past are
+	     removed during migration -->
+	<key>MigratedInboxDaysCutoff</key>
+	<integer>60</integer>
+
+	<!-- The default timezone for the server; on OS X you can leave this empty and
+	     the system's timezone will be used.  If empty and not on OS X it will
+	     default to America/Los_Angeles. -->
+	<key>DefaultTimezone</key>
+	<string></string>
+
+	<!-- After this many seconds of no admin requests, shutdown the agent.  Zero
+	     means no automatic shutdown. -->
+	<key>AgentInactivityTimeoutSeconds</key>
+	<integer>300</integer>
+
+	<!-- Program to execute if the service cannot start; for example in OS X we
+	     want to call serveradmin to disable the service so launchd does not keep
+	     respawning it.  Empty string to disable this feature. -->
+	<key>ServiceDisablingProgram</key>
+	<string></string>
+
+	<!-- Program to execute to post an alert to the administrator; for example in
+	     OS X we want to call calendarserver_alert &lt;alert-type&gt; &lt;args&gt; -->
+	<key>AlertPostingProgram</key>
+	<string></string>
+
+	<!-- These three keys are relative to ConfigRoot: -->
+
+	<!-- Config to read first and merge -->
+	<key>ImportConfig</key>
+	<string></string>
+
+	<!-- Other plists to parse after this one; note that an Include can change the
+	     ServerRoot and/or ConfigRoot, thereby affecting the locations of the
+	     following Includes in the list. (Useful for service directory relocation) -->
+	<key>Includes</key>
+	<array>
+	</array>
+
+	<!-- Which config file calendarserver_config should  write to for changes;
+	     empty string means the main config file -->
+	<key>WritableConfigFile</key>
+	<string></string>
+</dict>
+</plist>
