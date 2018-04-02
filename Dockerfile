@@ -47,4 +47,4 @@ USER 1000
 # This entry point simply creates /etc/caldavd/caldavd.plist,
 # using the given ENV as placeholders,
 # and then runs `caldavd -X -L`
-CMD [ "/home/ccs/docker/docker_cmd.sh" ]
+CMD [ "/home/ccs/contrib/docker/docker_cmd.sh" ]
