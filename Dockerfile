@@ -1,10 +1,10 @@
 FROM ubuntu:16.04
 
-LABEL maintainer                    "giorgio.azzinnaro@gmail.com"
-LABEL io.openshift.tags             caldavd,ccs
-LABEL io.openshift.wants            memcached,postgres
-LABEL io.k8s.description            "Calendar and Contacts Server is a CalDAV implementation"
-LABEL io.openshift.expose-services  8080:http
+LABEL maintainer                    = "giorgio.azzinnaro@gmail.com"                               \
+      io.openshift.tags             = caldavd,ccs                                                 \
+      io.openshift.wants            = memcached,postgres                                          \
+      io.k8s.description            = "Calendar and Contacts Server is a CalDAV implementation"   \
+      io.openshift.expose-services  = 8080:http4
 
 # Straight from CCS GitHub install guide
 # except for gettext-base, which we need for "envsubst"
@@ -34,13 +34,12 @@ VOLUME [ "/var/db/caldavd" ]
 EXPOSE 8080
 
 # Some sensible defaults for config
-ENV POSTGRES_HOST   tcp:postgres:5432
-ENV POSTGRES_DB     postgres
-ENV POSTGRES_USER   postgres
-ENV POSTGRES_PASS   password
-
-ENV MEMCACHED_HOST  memcached
-ENV MEMCACHED_PORT  11211
+ENV POSTGRES_HOST   = tcp:postgres:5432 \
+    POSTGRES_DB     = postgres          \
+    POSTGRES_USER   = postgres          \
+    POSTGRES_PASS   = password          \
+    MEMCACHED_HOST  = memcached         \
+    MEMCACHED_PORT  = 11211
 
 # To avoid errors with OpenShift, could be any
 USER 1000
