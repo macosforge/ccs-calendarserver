@@ -400,7 +400,7 @@
 		<true/>
 
 		<key>type</key>
-		<string>xml</string>
+		<string>ldap</string>
 
 		<key>params</key>
 		<dict>
@@ -410,8 +410,17 @@
 				<string>groups</string>
 			</array>
 
-			<key>xmlFile</key>
-			<string>accounts.xml</string>
+			<key>uri</key>
+			<string>$LDAP_URI</string>
+
+			<key>credentials</key>
+			<dict>
+			<key>dn</key>
+			<string>$LDAP_DN</string>
+
+			<key>password</key>
+			<string>$LDAP_PASS</string>
+			</dict>
 		</dict>
 	</dict>
 
