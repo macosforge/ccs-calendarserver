@@ -34,15 +34,15 @@ VOLUME [ "/var/db/caldavd" ]
 EXPOSE 8080
 
 # Some sensible defaults for config
-ENV POSTGRES_HOST   = tcp:postgres:5432             \
-    POSTGRES_DB     = postgres                      \
-    POSTGRES_USER   = postgres                      \
-    POSTGRES_PASS   = password                      \
-    MEMCACHED_HOST  = memcached                     \
-    MEMCACHED_PORT  = 11211                         \
-    LDAP_URI        = ldap://openldap               \
-    LDAP_DN         = "cn=admin,dc=example,dc=org"  \
-    LDAP_PASS       = admin
+ENV POSTGRES_HOST   tcp:postgres:5432
+ENV POSTGRES_DB     postgres
+ENV POSTGRES_USER   postgres
+ENV POSTGRES_PASS   password
+ENV MEMCACHED_HOST  memcached
+ENV MEMCACHED_PORT  11211
+ENV LDAP_URI        ldap://openldap
+ENV LDAP_DN         "cn=admin,dc=example,dc=org"
+ENV LDAP_PASS       admin
 
 # To avoid errors with OpenShift, could be any
 USER 1000
