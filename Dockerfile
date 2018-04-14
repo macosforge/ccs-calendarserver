@@ -11,7 +11,7 @@ LABEL maintainer                    = "giorgio.azzinnaro@gmail.com"             
 RUN apt-get update &&                                       \
     apt-get -y install build-essential                      \
         python-setuptools python-pip python-dev             \
-        git curl gettext-base                               \
+        git curl gettext-base libnss-wrapper                \
         libssl-dev libreadline6-dev libkrb5-dev libffi-dev  \
         libldap2-dev libsasl2-dev zlib1g-dev
 
@@ -25,7 +25,7 @@ RUN pip install -r requirements-default.txt
 
 # Create all runtime directories and ensure right permissions for OC
 RUN mkdir -p /var/db/caldavd /var/log/caldavd /var/run/caldavd && \
-    chmod -R a+wX /home/ccs /var/db/caldavd /var/log/caldavd /var/run/caldavd
+    chmod -R g+rwX /home/ccs /var/db/caldavd /var/log/caldavd /var/run/caldavd
 
 # TODO Check if everything is in this dir
 VOLUME [ "/var/db/caldavd" ]
@@ -41,7 +41,7 @@ ENV POSTGRES_PASS   password
 ENV MEMCACHED_HOST  memcached
 ENV MEMCACHED_PORT  11211
 ENV LDAP_URI        ldap://openldap
-ENV LDAP_DN         "cn=admin,dc=example,dc=org"
+ENV LDAP_DN         cn=admin,dc=example,dc=org
 ENV LDAP_PASS       admin
 
 # To avoid errors with OpenShift, could be any
