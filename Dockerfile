@@ -4,7 +4,7 @@ LABEL maintainer                    = "giorgio.azzinnaro@gmail.com"             
       io.openshift.tags             = caldavd,ccs                                                 \
       io.openshift.wants            = memcached,postgres                                          \
       io.k8s.description            = "Calendar and Contacts Server is a CalDAV implementation"   \
-      io.openshift.expose-services  = 8080:http4
+      io.openshift.expose-services  = 8080:http
 
 # Straight from CCS GitHub install guide
 # except for gettext-base, which we need for "envsubst"
