@@ -2,16 +2,8 @@
 
 # This is because OpenShift runs with random UIDs,
 # and ccs expects the UID to be in /etc/passwd
-PASSWD_TEMP_FILE="/home/ccs/contrib/docker/passwd.template"
-PASSWD_FILE="/tmp/passwd"
-
-export USER_ID=$(id -u)
-export GROUP_ID=$(id -g)
-envsubst < $PASSWD_TEMP_FILE > $PASSWD_FILE
-
-export LD_PRELOAD=/usr/lib/libnss_wrapper.so
-export NSS_WRAPPER_PASSWD=$PASSWD_FILE
-export NSS_WRAPPER_GROUP=/etc/group
+# Must be done at runtime because of the dynamic UID
+echo "ccs:x:$(id -u):$(id -g):Calendar and Contacts Server:/home/ccs:/bin/bash" >> /etc/passwd
 
 # Just get our conf file
 CCS_CONF_TEMP_FILE="/home/ccs/contrib/docker/caldavd.plist.template"

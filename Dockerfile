@@ -11,7 +11,7 @@ LABEL maintainer                    = "giorgio.azzinnaro@gmail.com"             
 RUN apt-get update &&                                       \
     apt-get -y install build-essential                      \
         python-setuptools python-pip python-dev             \
-        git curl gettext-base libnss-wrapper                \
+        git curl gettext-base                               \
         libssl-dev libreadline6-dev libkrb5-dev libffi-dev  \
         libldap2-dev libsasl2-dev zlib1g-dev
 
@@ -24,8 +24,9 @@ WORKDIR /home/ccs
 RUN pip install -r requirements-default.txt 
 
 # Create all runtime directories and ensure right permissions for OC
-RUN mkdir -p /var/db/caldavd /var/log/caldavd /var/run/caldavd && \
-    chmod -R g+rwX /home/ccs /var/db/caldavd /var/log/caldavd /var/run/caldavd
+RUN mkdir -p /var/db/caldavd /var/log/caldavd /var/run/caldavd &&                   \
+    chmod -R g+rwX /home/ccs /var/db/caldavd /var/log/caldavd /var/run/caldavd &&   \
+    chmod g=u /etc/passwd
 
 # TODO Check if everything is in this dir
 VOLUME [ "/var/db/caldavd" ]
