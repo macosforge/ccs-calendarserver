@@ -1,0 +1,78 @@
+version: "3.4"
+
+services:
+  ccs:
+    image: ccs
+    restart: always
+    environment:
+      VIRTUAL_HOST: "127.0.0.1"
+      #LETSENCRYPT_HOST: "example.com"
+      #LETSENCRYPT_EMAIL: "mail@example.com"
+      POSTGRES_HOST: 'tcp:postgres:5432'
+      POSTGRES_DB: ccs
+      POSTGRES_USER: caldavd
+      POSTGRES_PASS: test1234
+    volumes:
+     - ccsdata:/var/db/caldavd
+     - ccsconf:/etc/caldavd
+    networks:
+      - ccsnet
+      - proxynet
+    depends_on:
+      - postgres
+      - memcached
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ccs
+      POSTGRES_USER: caldavd
+      POSTGRES_PASSWORD: test1234
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    restart: always
+    networks:
+      - ccsnet
+  memcached:
+    image: memcached:1.5-alpine
+    networks:
+      - ccsnet
+  proxy:
+    image: jwilder/nginx-proxy:alpine
+    restart: always
+    labels: 
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+    volumes:
+      - "proxycerts:/etc/nginx/certs:ro"
+      - "proxyvhosts:/etc/nginx/vhost.d"
+      - "proxyhtml:/usr/share/nginx/html"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - proxynet
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    environment:
+      NGINX_PROXY_CONTAINER: proxy
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "proxycerts:/etc/nginx/certs"
+      - "proxyvhosts:/etc/nginx/vhost.d"
+      - "proxyhtml:/usr/share/nginx/html"
+    depends_on:
+      - proxy
+
+volumes:
+  dbdata:
+  ccsdata:
+  ccsconf:
+  proxycerts:
+  proxyvhosts:
+  proxyhtml:
+
+networks:
+  ccsnet:
+  proxynet:
