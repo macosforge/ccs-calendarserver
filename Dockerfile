@@ -31,6 +31,10 @@ RUN mkdir -p /var/db/caldavd /var/log/caldavd /var/run/caldavd &&               
 # TODO Check if everything is in this dir
 VOLUME [ "/var/db/caldavd" ]
 
+# For user defined complex configuration (e.g. accounts.xml, resources.xml)
+# A configuration file can be placed at /etc/caldavd/caldavd.ext.plist
+VOLUME [ "/etc/caldavd" ]
+
 # This can be edited in docker/caldavd.plist.template > HTTPPort
 EXPOSE 8080
 
@@ -41,14 +45,11 @@ ENV POSTGRES_USER   postgres
 ENV POSTGRES_PASS   password
 ENV MEMCACHED_HOST  memcached
 ENV MEMCACHED_PORT  11211
-ENV LDAP_URI        ldap://openldap
-ENV LDAP_DN         cn=admin,dc=example,dc=org
-ENV LDAP_PASS       admin
 
 # To avoid errors with OpenShift, could be any
 USER 1000
 
-# This entry point simply creates /etc/caldavd/caldavd.plist,
-# using the given ENV as placeholders,
-# and then runs `caldavd -X -L`
-CMD [ "/home/ccs/contrib/docker/docker_cmd.sh" ]
+# This entry point simply creates /tmp/caldavd.plist,
+# using the given ENV as placeholders
+ENTRYPOINT [ "/home/ccs/contrib/docker/docker_entrypoint.sh" ]
+CMD [ "caldavd", "-X", "-L", "-f", "$CCS_CONF_FILE" ]
