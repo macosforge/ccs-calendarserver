@@ -1,9 +1,12 @@
-version: "3"
+version: "3.3"
+
+configs:
+  sql_seed:
+    file: ../../txdav/common/datastore/sql_schema/current.sql
 
 services:
   ccs:
     image: giorgioazzinnaro/ccs-calendarserver
-    restart: always
     environment:
       POSTGRES_HOST: 'tcp:postgres:5432'
       POSTGRES_DB: ccs
@@ -16,9 +19,12 @@ services:
      - ccsconf:/etc/caldavd
     networks:
       - ccsnet
+    ports:
+      - "8080:8080"
     depends_on:
       - postgres
       - memcached
+    restart: always
 
   postgres:
     image: postgres
@@ -29,7 +35,9 @@ services:
       POSTGRES_PASSWORD: test1234
     volumes:
       - "postgresdata:/var/lib/postgresql/data"
-    restart: always
+    configs:
+      - source: sql_seed
+        target: /docker-entrypoint-initdb.d/ccs.sql
     networks:
       - ccsnet
 
