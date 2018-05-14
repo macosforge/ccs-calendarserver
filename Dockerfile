@@ -69,4 +69,4 @@ USER 1000
 # This entry point simply creates /tmp/caldavd.plist,
 # using the given ENV as placeholders
 ENTRYPOINT [ "/home/ccs/contrib/docker/docker_entrypoint.sh" ]
-CMD [ "caldavd", "-X", "-L", "-f", "$CCS_CONF_FILE" ]
+CMD [ "caldavd", "-X", "-L", "-f", "/tmp/caldavd.plist" ]
