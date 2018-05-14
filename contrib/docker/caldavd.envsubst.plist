@@ -36,6 +36,66 @@
 <plist version="1.0">
 <dict>
 
+	<!-- Docker: Must be above 1024 for OpenShift -->
+	<!-- HTTP port (0 to disable HTTP) -->
+	<key>HTTPPort</key>
+	<integer>8080</integer>
+
+	<!-- True: database; False: files (deprecated) -->
+	<key>UseDatabase</key>
+	<true/>
+
+	<!-- Possible values: empty, meaning 'spawn postgres yourself', or 'postgres'
+	     or 'oracle', meaning 'connect to a postgres or Oracle database as
+	     specified by the 'DSN' configuration key. -->
+	<key>DBType</key>
+	<string>postgres</string>
+
+	<!-- Features supported by the database
+
+	     'skip-locked': SKIP LOCKED available with SELECT (remove if using postgres
+	     &lt; v9.5) -->
+	<key>DBFeatures</key>
+	<array>
+		<string>skip-locked</string>
+	</array>
+
+	<!-- Set to True to prevent the server or utility tools from running if the
+	     database needs a schema upgrade. -->
+	<key>FailIfUpgradeNeeded</key>
+	<true/>
+
+	<!-- Set to True to check the current database schema against the schema file
+	     matching the database schema version. -->
+	<key>CheckExistingSchema</key>
+	<true/>
+
+	<!-- Data store -->
+
+	<!-- The top level directory, contains (by default) ConfigRoot and DataRoot -->
+	<key>ServerRoot</key>
+	<string>/var/db/caldavd</string>
+
+	<!-- Config directory, contains additional config files -->
+	<key>ConfigRoot</key>
+	<string>/etc/caldavd</string>
+
+	<!-- These three keys are relative to ConfigRoot: -->
+
+	<!-- Other plists to parse after this one; note that an Include can change the
+	     ServerRoot and/or ConfigRoot, thereby affecting the locations of the
+	     following Includes in the list. (Useful for service directory relocation) -->
+	<key>Includes</key>
+	<array>
+		<string>/etc/caldavd/caldavd.ext.plist</string>
+		<string>/etc/caldavd/caldavd.writable.plist</string>
+	</array>
+
+	<!-- Which config file calendarserver_config should  write to for changes;
+	     empty string means the main config file -->
+	<key>WritableConfigFile</key>
+	<string>/etc/caldavd/caldavd.writable.plist</string>
+
 	<!-- Used to connect to an external database if DBType is non-empty -->
 	<key>DatabaseConnection</key>
 	<dict>
@@ -62,86 +122,6 @@
 		<!-- Set to True to require SSL (pg8000 only). -->
 		<key>ssl</key>
 		<false/>
-	</dict>
-
-	<!-- Directory service
-
-	     A directory service provides information about principals (e.g. users,
-	     groups, locations and resources) to the server. -->
-
-	<!-- XML File Directory Service -->
-	<key>DirectoryService</key>
-	<dict>
-	  <key>type</key>
-	  <string>xml</string>
-	  
-	  <key>params</key>
-	  <dict>
-
-	    <key>xmlFile</key>
-	    <string>/etc/caldavd/accounts.xml</string>
-	    <key>recordTypes</key>
-	    <array>
-	      <string>users</string>
-	      <string>groups</string>
-	    </array>
-	  </dict>
-	</dict>
-
-	<key>DirectoryRealmName</key>
-	<string></string>
-
-	<!-- Apply an additional filter for attendee lookups where names must start
-	     with the search tokens rather than just contain them. -->
-	<key>DirectoryFilterStartsWith</key>
-	<false/>
-
-	<!-- Locations and Resources service
-
-	     Supplements the directory service with information about locations and
-	     resources. -->
-
-	<key>ResourceService</key>
-	<dict>
-		<key>Enabled</key>
-		<true/>
-
-		<key>type</key>
-		<string>xml</string>
-
-		<key>params</key>
-		<dict>
-			<key>recordTypes</key>
-			<array>
-				<string>locations</string>
-				<string>resources</string>
-				<string>addresses</string>
-			</array>
-
-			<key>xmlFile</key>
-			<string>resources.xml</string>
-		</dict>
-	</dict>
-
-	<!-- Augment service
-
-	     Augments for the directory service records to add calendar specific
-	     attributes. -->
-
-	<key>AugmentService</key>
-	<dict>
-		<key>type</key>
-		<string>xml</string>
-
-		<key>params</key>
-		<dict>
-			<key>xmlFiles</key>
-			<array>
-			</array>
-
-			<key>statSeconds</key>
-			<integer>15</integer>
-		</dict>
 	</dict>
 
 	<key>Memcached</key>
@@ -203,25 +183,5 @@
 		<key>ProxyDBKeyNormalization</key>
 		<true/>
 	</dict>
-
-	<!-- These three keys are relative to ConfigRoot: -->
-
-	<!-- Config to read first and merge -->
-	<key>ImportConfig</key>
-	<string>/home/ccs/contrib/caldavd.base.plist</string>
-
-	<!-- Other plists to parse after this one; note that an Include can change the
-	     ServerRoot and/or ConfigRoot, thereby affecting the locations of the
-	     following Includes in the list. (Useful for service directory relocation) -->
-	<key>Includes</key>
-	<array>
-	<string>/etc/caldavd/caldavd.ext.plist</string>
-	<string>/etc/caldavd/caldavd.writable.plist</string>
-	</array>
-
-	<!-- Which config file calendarserver_config should  write to for changes;
-	     empty string means the main config file -->
-	<key>WritableConfigFile</key>
-	<string>/etc/caldavd/caldavd.writable.plist</string>
 </dict>
 </plist>

@@ -13,7 +13,15 @@ CCS_CONF_TEMP_FILE="/home/ccs/contrib/docker/caldavd.envsubst.plist"
 # /tmp usually is
 export CCS_CONF_FILE="/tmp/caldavd.plist"
 
+# This file may be added by the user in a volume
+CCS_USER_CONF_FILE="/etc/caldavd/caldavd.ext.plist"
+
 # Replace any env variable as they come from docker run
 envsubst < $CCS_CONF_TEMP_FILE > $CCS_CONF_FILE
+
+# Replace env variables in user defined config if exists
+if [ -f $CCS_USER_CONF_FILE ]; then
+    envsubst < $CCS_USER_CONF_FILE > $CCS_USER_CONF_FILE
+fi
 
 exec "$@"

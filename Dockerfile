@@ -8,12 +8,22 @@ LABEL maintainer                    = "giorgio.azzinnaro@gmail.com"             
 
 # Straight from CCS GitHub install guide
 # except for gettext-base, which we need for "envsubst"
-RUN apt-get update &&                                       \
-    apt-get -y install build-essential                      \
-        python-setuptools python-pip python-dev             \
-        git curl gettext-base                               \
-        libssl-dev libreadline6-dev libkrb5-dev libffi-dev  \
-        libldap2-dev libsasl2-dev zlib1g-dev
+RUN apt-get update &&       \
+    apt-get -y install      \
+        build-essential     \
+        curl                \
+        gettext-base        \
+        git                 \
+        libffi-dev          \
+        libkrb5-dev         \
+        libldap2-dev        \
+        libreadline6-dev    \
+        libsasl2-dev        \
+        libssl-dev          \
+        python-dev          \
+        python-pip          \
+        python-setuptools   \
+        zlib1g-dev
 
 # All of the source code is in here
 ADD . /home/ccs
@@ -24,9 +34,16 @@ WORKDIR /home/ccs
 RUN pip install -r requirements-default.txt 
 
 # Create all runtime directories and ensure right permissions for OC
-RUN mkdir -p /var/db/caldavd /var/log/caldavd /var/run/caldavd &&                   \
-    chmod -R g+rwX /home/ccs /var/db/caldavd /var/log/caldavd /var/run/caldavd &&   \
-    chmod g=u /etc/passwd
+RUN mkdir -p        /var/db/caldavd     \
+                    /var/log/caldavd    \
+                    /var/run/caldavd    \
+                    /etc/caldavd &&     \
+    chmod -R g+rwX  /home/ccs           \
+                    /var/db/caldavd     \
+                    /var/log/caldavd    \
+                    /var/run/caldavd    \
+                    /etc/caldavd &&     \
+    chmod g=u       /etc/passwd
 
 # TODO Check if everything is in this dir
 VOLUME [ "/var/db/caldavd" ]

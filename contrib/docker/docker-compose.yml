@@ -1,0 +1,49 @@
+version: "3.4"
+
+services:
+  ccs:
+    image: giorgioazzinnaro/ccs-calendarserver
+    restart: always
+    environment:
+      POSTGRES_HOST: 'tcp:postgres:5432'
+      POSTGRES_DB: ccs
+      POSTGRES_USER: caldavd
+      POSTGRES_PASS: test1234
+      MEMCACHED_HOST: memcached
+      MEMCACHED_PORT: 11211
+    volumes:
+     - ccsdata:/var/db/caldavd
+     - ccsconf:/etc/caldavd
+    networks:
+      - ccsnet
+    depends_on:
+      - postgres
+      - memcached
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ccs
+      POSTGRES_USER: caldavd
+      POSTGRES_PASSWORD: test1234
+    volumes:
+      - "postgresdata:/var/lib/postgresql/data"
+    restart: always
+    networks:
+      - ccsnet
+
+  memcached:
+    image: memcached:1.5
+    networks:
+      - ccsnet
+
+
+volumes:
+  postgresdata:
+  ccsdata:
+  ccsconf:
+
+
+networks:
+  ccsnet:
