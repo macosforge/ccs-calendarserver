@@ -19,9 +19,13 @@ CCS_USER_CONF_FILE="/etc/caldavd/caldavd.ext.plist"
 # Replace any env variable as they come from docker run
 envsubst < $CCS_CONF_TEMP_FILE > $CCS_CONF_FILE
 
+# Doesn't work in-place,
+# doesn't make much sense to have either:
+# as the user is already defining their config...
+#
 # Replace env variables in user defined config if exists
-if [ -f $CCS_USER_CONF_FILE ]; then
-    envsubst < $CCS_USER_CONF_FILE > $CCS_USER_CONF_FILE
-fi
+# if [ -f $CCS_USER_CONF_FILE ]; then
+#     envsubst < $CCS_USER_CONF_FILE > $CCS_USER_CONF_FILE
+# fi
 
 exec "$@"

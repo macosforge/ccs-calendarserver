@@ -1,0 +1,58 @@
+
+version: "3.3"
+
+configs:
+  sql_seed:
+    file: ../../../../txdav/common/datastore/sql_schema/current.sql
+
+services:
+  ccs:
+    image: giorgioazzinnaro/ccs-calendarserver
+    environment:
+      POSTGRES_HOST: 'tcp:postgres:5432'
+      POSTGRES_DB: ccs
+      POSTGRES_USER: caldavd
+      POSTGRES_PASS: test1234
+      MEMCACHED_HOST: memcached
+      MEMCACHED_PORT: 11211
+    volumes:
+     - ccsdata:/var/db/caldavd
+     - ./conf:/etc/caldavd
+    networks:
+      - ccsnet
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - memcached
+    restart: always
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ccs
+      POSTGRES_USER: caldavd
+      POSTGRES_PASSWORD: test1234
+    volumes:
+      - "postgresdata:/var/lib/postgresql/data"
+    configs:
+      - source: sql_seed
+        target: /docker-entrypoint-initdb.d/ccs.sql
+    networks:
+      - ccsnet
+
+  memcached:
+    image: memcached:1.5
+    networks:
+      - ccsnet
+
+
+volumes:
+  postgresdata:
+  ccsdata:
+  ccsconf:
+
+
+networks:
+  ccsnet:

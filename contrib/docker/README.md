@@ -29,5 +29,16 @@ __TODO__
 Configuration of CCS is done in multiple layers:
 
 1. `caldavd.envsubst.plist`, on which env variable are replaced by `docker_entrypoint.sh`. This takes care of loading:
-2. `/etc/caldavd/caldavd.ext.plist`, which may be added via a *VOLUME*, envsubst is applied.
-3. `/etc/caldavd/caldavd.writable.plist`, as a writable config file is required by CCS
+2. `/etc/caldavd/caldavd.ext.plist`, which may be added via a *VOLUME*, envsubst is __NOT__ applied to this.
+3. `/etc/caldavd/caldavd.writable.plist`, as a writable config file is required by CCS.
+
+
+### XML example
+In `contrib/docker/samples/xml` is a sample Docker stack where
+XML is used to define accounts.
+
+### LDAP example
+__TODO__
+
+In `contrib/docker/samples/ldap` a stack with Apache DS is defined
+to test getting resources via LDAP.
