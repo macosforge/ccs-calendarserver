@@ -87,3 +87,16 @@ Start the server using the bin/run script, and use the -n option to bypass depen
     Starting server...
 
 The server should then start up and bind to port 8008 for HTTP and 8443 for HTTPS. You should then be able to connect to the server using your web browser (eg. Safari, Firefox) or with a CalDAV client (eg. Calendar).
+
+
+==========================
+Docker
+==========================
+
+A Dockerfile is provided to build an image that may be run in production.
+An example docker-compose file is provided in contrib/docker.
+
+PostgreSQL and Memcached are required as external services.
+
+Configuration may be altered to make use of an LDAP server,
+or XML files, as noted above.
