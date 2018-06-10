@@ -38,9 +38,91 @@
       <key>params</key>
       <dict>
         <key>xmlFile</key>
-        <string>/etc/caldavd/accounts.xml</string>
+        <string>/etc/caldavd/accounts-test.xml</string>
       </dict>
     </dict>
 
+    <!-- The realm to use for Digest Auth -->
+    <key>DirectoryRealmName</key>
+    <string>Test Realm</string>
+
+    <!-- Resource and Location Service -->
+    <key>ResourceService</key>
+    <dict>
+      <key>Enabled</key>
+      <true/>
+      <key>type</key>
+      <string>xml</string>
+
+      <key>params</key>
+      <dict>
+        <key>xmlFile</key>
+        <string>/etc/caldavd/resources-test.xml</string>
+      </dict>
+    </dict>
+
+    <!-- XML File Augment Service -->
+    <key>AugmentService</key>
+    <dict>
+      <key>type</key>
+      <string>xml</string>
+
+      <key>params</key>
+      <dict>
+        <key>xmlFiles</key>
+        <array>
+	      <string>/etc/caldavd/augments-test.xml</string>
+        </array>
+      </dict>
+    </dict>
+
+    <key>ProxyLoadFromFile</key>
+    <string>/etc/caldavd/proxies-test.xml</string>
+
+
+    <!--
+        Special principals
+
+        These principals are granted special access and/or perform
+        special roles on the server.
+      -->
+
+    <!-- Principals with "DAV:all" access (relative URLs) -->
+    <key>AdminPrincipals</key>
+    <array>
+      <string>/principals/__uids__/0C8BDE62-E600-4696-83D3-8B5ECABDFD2E/</string>
+    </array>
+
+    <!-- Principals with "DAV:read" access (relative URLs) -->
+    <key>ReadPrincipals</key>
+    <array>
+      <!-- <string>/principals/__uids__/983C8238-FB6B-4D92-9242-89C0A39E5F81/</string> -->
+    </array>
+
+    <!-- Create "proxy access" principals -->
+    <key>EnableProxyPrincipals</key>
+    <true/>
+
+
+    <!--
+        Permissions
+      -->
+
+    <!-- Anonymous read access for root resource -->
+    <key>EnableAnonymousReadRoot</key>
+    <true/>
+
+    <!-- Anonymous read access for resource hierarchy -->
+    <key>EnableAnonymousReadNav</key>
+    <false/>
+
+    <!-- Enables directory listings for principals -->
+    <key>EnablePrincipalListings</key>
+    <true/>
+
+    <!-- Render calendar collections as a monolithic iCalendar object -->
+    <key>EnableMonolithicCalendars</key>
+    <true/>
+    
   </dict>
 </plist>
