@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Copyright (c) 2006-2017 Apple Inc. All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ -->
+
+<!DOCTYPE accounts SYSTEM "accounts.dtd">
+
+<directory realm="Test Realm Resources">
+<record type="location">
+  <uid>pretend</uid>
+  <short-name>pretend</short-name>
+  <full-name>Pretend Conference Room</full-name>
+  <associated-address>il1</associated-address>
+</record>
+<record type="address">
+  <uid>il1</uid>
+  <short-name>il1</short-name>
+  <full-name>IL1</full-name>
+  <street-address>1 Infinite Loop, Cupertino, CA 95014</street-address>
+  <geographic-location>geo:37.331741,-122.030333</geographic-location>
+</record>
+<record type="location">
+  <uid>fantastic</uid>
+  <short-name>fantastic</short-name>
+  <full-name>Fantastic Conference Room</full-name>
+  <associated-address>il2</associated-address>
+</record>
+<record type="address">
+  <uid>il2</uid>
+  <short-name>il2</short-name>
+  <full-name>IL2</full-name>
+  <street-address>2 Infinite Loop, Cupertino, CA 95014</street-address>
+  <geographic-location>geo:37.332633,-122.030502</geographic-location>
+</record>
+<record type="location">
+  <uid>delegatedroom</uid>
+  <short-name>delegatedroom</short-name>
+  <full-name>Delegated Conference Room</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000001</uid>
+    <guid>30000000-0000-0000-0000-000000000001</guid>
+    <short-name>location01</short-name>
+    <full-name>Location 01</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000002</uid>
+    <guid>30000000-0000-0000-0000-000000000002</guid>
+    <short-name>location02</short-name>
+    <full-name>Location 02</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000003</uid>
+    <guid>30000000-0000-0000-0000-000000000003</guid>
+    <short-name>location03</short-name>
+    <full-name>Location 03</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000004</uid>
+    <guid>30000000-0000-0000-0000-000000000004</guid>
+    <short-name>location04</short-name>
+    <full-name>Location 04</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000005</uid>
+    <guid>30000000-0000-0000-0000-000000000005</guid>
+    <short-name>location05</short-name>
+    <full-name>Location 05</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000006</uid>
+    <guid>30000000-0000-0000-0000-000000000006</guid>
+    <short-name>location06</short-name>
+    <full-name>Location 06</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000007</uid>
+    <guid>30000000-0000-0000-0000-000000000007</guid>
+    <short-name>location07</short-name>
+    <full-name>Location 07</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000008</uid>
+    <guid>30000000-0000-0000-0000-000000000008</guid>
+    <short-name>location08</short-name>
+    <full-name>Location 08</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000009</uid>
+    <guid>30000000-0000-0000-0000-000000000009</guid>
+    <short-name>location09</short-name>
+    <full-name>Location 09</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000010</uid>
+    <guid>30000000-0000-0000-0000-000000000010</guid>
+    <short-name>location10</short-name>
+    <full-name>Location 10</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000011</uid>
+    <guid>30000000-0000-0000-0000-000000000011</guid>
+    <short-name>location11</short-name>
+    <full-name>Location 11</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000012</uid>
+    <guid>30000000-0000-0000-0000-000000000012</guid>
+    <short-name>location12</short-name>
+    <full-name>Location 12</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000013</uid>
+    <guid>30000000-0000-0000-0000-000000000013</guid>
+    <short-name>location13</short-name>
+    <full-name>Location 13</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000014</uid>
+    <guid>30000000-0000-0000-0000-000000000014</guid>
+    <short-name>location14</short-name>
+    <full-name>Location 14</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000015</uid>
+    <guid>30000000-0000-0000-0000-000000000015</guid>
+    <short-name>location15</short-name>
+    <full-name>Location 15</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000016</uid>
+    <guid>30000000-0000-0000-0000-000000000016</guid>
+    <short-name>location16</short-name>
+    <full-name>Location 16</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000017</uid>
+    <guid>30000000-0000-0000-0000-000000000017</guid>
+    <short-name>location17</short-name>
+    <full-name>Location 17</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000018</uid>
+    <guid>30000000-0000-0000-0000-000000000018</guid>
+    <short-name>location18</short-name>
+    <full-name>Location 18</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000019</uid>
+    <guid>30000000-0000-0000-0000-000000000019</guid>
+    <short-name>location19</short-name>
+    <full-name>Location 19</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000020</uid>
+    <guid>30000000-0000-0000-0000-000000000020</guid>
+    <short-name>location20</short-name>
+    <full-name>Location 20</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000021</uid>
+    <guid>30000000-0000-0000-0000-000000000021</guid>
+    <short-name>location21</short-name>
+    <full-name>Location 21</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000022</uid>
+    <guid>30000000-0000-0000-0000-000000000022</guid>
+    <short-name>location22</short-name>
+    <full-name>Location 22</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000023</uid>
+    <guid>30000000-0000-0000-0000-000000000023</guid>
+    <short-name>location23</short-name>
+    <full-name>Location 23</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000024</uid>
+    <guid>30000000-0000-0000-0000-000000000024</guid>
+    <short-name>location24</short-name>
+    <full-name>Location 24</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000025</uid>
+    <guid>30000000-0000-0000-0000-000000000025</guid>
+    <short-name>location25</short-name>
+    <full-name>Location 25</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000026</uid>
+    <guid>30000000-0000-0000-0000-000000000026</guid>
+    <short-name>location26</short-name>
+    <full-name>Location 26</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000027</uid>
+    <guid>30000000-0000-0000-0000-000000000027</guid>
+    <short-name>location27</short-name>
+    <full-name>Location 27</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000028</uid>
+    <guid>30000000-0000-0000-0000-000000000028</guid>
+    <short-name>location28</short-name>
+    <full-name>Location 28</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000029</uid>
+    <guid>30000000-0000-0000-0000-000000000029</guid>
+    <short-name>location29</short-name>
+    <full-name>Location 29</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000030</uid>
+    <guid>30000000-0000-0000-0000-000000000030</guid>
+    <short-name>location30</short-name>
+    <full-name>Location 30</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000031</uid>
+    <guid>30000000-0000-0000-0000-000000000031</guid>
+    <short-name>location31</short-name>
+    <full-name>Location 31</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000032</uid>
+    <guid>30000000-0000-0000-0000-000000000032</guid>
+    <short-name>location32</short-name>
+    <full-name>Location 32</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000033</uid>
+    <guid>30000000-0000-0000-0000-000000000033</guid>
+    <short-name>location33</short-name>
+    <full-name>Location 33</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000034</uid>
+    <guid>30000000-0000-0000-0000-000000000034</guid>
+    <short-name>location34</short-name>
+    <full-name>Location 34</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000035</uid>
+    <guid>30000000-0000-0000-0000-000000000035</guid>
+    <short-name>location35</short-name>
+    <full-name>Location 35</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000036</uid>
+    <guid>30000000-0000-0000-0000-000000000036</guid>
+    <short-name>location36</short-name>
+    <full-name>Location 36</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000037</uid>
+    <guid>30000000-0000-0000-0000-000000000037</guid>
+    <short-name>location37</short-name>
+    <full-name>Location 37</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000038</uid>
+    <guid>30000000-0000-0000-0000-000000000038</guid>
+    <short-name>location38</short-name>
+    <full-name>Location 38</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000039</uid>
+    <guid>30000000-0000-0000-0000-000000000039</guid>
+    <short-name>location39</short-name>
+    <full-name>Location 39</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000040</uid>
+    <guid>30000000-0000-0000-0000-000000000040</guid>
+    <short-name>location40</short-name>
+    <full-name>Location 40</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000041</uid>
+    <guid>30000000-0000-0000-0000-000000000041</guid>
+    <short-name>location41</short-name>
+    <full-name>Location 41</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000042</uid>
+    <guid>30000000-0000-0000-0000-000000000042</guid>
+    <short-name>location42</short-name>
+    <full-name>Location 42</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000043</uid>
+    <guid>30000000-0000-0000-0000-000000000043</guid>
+    <short-name>location43</short-name>
+    <full-name>Location 43</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000044</uid>
+    <guid>30000000-0000-0000-0000-000000000044</guid>
+    <short-name>location44</short-name>
+    <full-name>Location 44</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000045</uid>
+    <guid>30000000-0000-0000-0000-000000000045</guid>
+    <short-name>location45</short-name>
+    <full-name>Location 45</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000046</uid>
+    <guid>30000000-0000-0000-0000-000000000046</guid>
+    <short-name>location46</short-name>
+    <full-name>Location 46</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000047</uid>
+    <guid>30000000-0000-0000-0000-000000000047</guid>
+    <short-name>location47</short-name>
+    <full-name>Location 47</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000048</uid>
+    <guid>30000000-0000-0000-0000-000000000048</guid>
+    <short-name>location48</short-name>
+    <full-name>Location 48</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000049</uid>
+    <guid>30000000-0000-0000-0000-000000000049</guid>
+    <short-name>location49</short-name>
+    <full-name>Location 49</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000050</uid>
+    <guid>30000000-0000-0000-0000-000000000050</guid>
+    <short-name>location50</short-name>
+    <full-name>Location 50</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000051</uid>
+    <guid>30000000-0000-0000-0000-000000000051</guid>
+    <short-name>location51</short-name>
+    <full-name>Location 51</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000052</uid>
+    <guid>30000000-0000-0000-0000-000000000052</guid>
+    <short-name>location52</short-name>
+    <full-name>Location 52</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000053</uid>
+    <guid>30000000-0000-0000-0000-000000000053</guid>
+    <short-name>location53</short-name>
+    <full-name>Location 53</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000054</uid>
+    <guid>30000000-0000-0000-0000-000000000054</guid>
+    <short-name>location54</short-name>
+    <full-name>Location 54</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000055</uid>
+    <guid>30000000-0000-0000-0000-000000000055</guid>
+    <short-name>location55</short-name>
+    <full-name>Location 55</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000056</uid>
+    <guid>30000000-0000-0000-0000-000000000056</guid>
+    <short-name>location56</short-name>
+    <full-name>Location 56</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000057</uid>
+    <guid>30000000-0000-0000-0000-000000000057</guid>
+    <short-name>location57</short-name>
+    <full-name>Location 57</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000058</uid>
+    <guid>30000000-0000-0000-0000-000000000058</guid>
+    <short-name>location58</short-name>
+    <full-name>Location 58</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000059</uid>
+    <guid>30000000-0000-0000-0000-000000000059</guid>
+    <short-name>location59</short-name>
+    <full-name>Location 59</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000060</uid>
+    <guid>30000000-0000-0000-0000-000000000060</guid>
+    <short-name>location60</short-name>
+    <full-name>Location 60</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000061</uid>
+    <guid>30000000-0000-0000-0000-000000000061</guid>
+    <short-name>location61</short-name>
+    <full-name>Location 61</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000062</uid>
+    <guid>30000000-0000-0000-0000-000000000062</guid>
+    <short-name>location62</short-name>
+    <full-name>Location 62</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000063</uid>
+    <guid>30000000-0000-0000-0000-000000000063</guid>
+    <short-name>location63</short-name>
+    <full-name>Location 63</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000064</uid>
+    <guid>30000000-0000-0000-0000-000000000064</guid>
+    <short-name>location64</short-name>
+    <full-name>Location 64</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000065</uid>
+    <guid>30000000-0000-0000-0000-000000000065</guid>
+    <short-name>location65</short-name>
+    <full-name>Location 65</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000066</uid>
+    <guid>30000000-0000-0000-0000-000000000066</guid>
+    <short-name>location66</short-name>
+    <full-name>Location 66</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000067</uid>
+    <guid>30000000-0000-0000-0000-000000000067</guid>
+    <short-name>location67</short-name>
+    <full-name>Location 67</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000068</uid>
+    <guid>30000000-0000-0000-0000-000000000068</guid>
+    <short-name>location68</short-name>
+    <full-name>Location 68</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000069</uid>
+    <guid>30000000-0000-0000-0000-000000000069</guid>
+    <short-name>location69</short-name>
+    <full-name>Location 69</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000070</uid>
+    <guid>30000000-0000-0000-0000-000000000070</guid>
+    <short-name>location70</short-name>
+    <full-name>Location 70</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000071</uid>
+    <guid>30000000-0000-0000-0000-000000000071</guid>
+    <short-name>location71</short-name>
+    <full-name>Location 71</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000072</uid>
+    <guid>30000000-0000-0000-0000-000000000072</guid>
+    <short-name>location72</short-name>
+    <full-name>Location 72</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000073</uid>
+    <guid>30000000-0000-0000-0000-000000000073</guid>
+    <short-name>location73</short-name>
+    <full-name>Location 73</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000074</uid>
+    <guid>30000000-0000-0000-0000-000000000074</guid>
+    <short-name>location74</short-name>
+    <full-name>Location 74</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000075</uid>
+    <guid>30000000-0000-0000-0000-000000000075</guid>
+    <short-name>location75</short-name>
+    <full-name>Location 75</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000076</uid>
+    <guid>30000000-0000-0000-0000-000000000076</guid>
+    <short-name>location76</short-name>
+    <full-name>Location 76</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000077</uid>
+    <guid>30000000-0000-0000-0000-000000000077</guid>
+    <short-name>location77</short-name>
+    <full-name>Location 77</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000078</uid>
+    <guid>30000000-0000-0000-0000-000000000078</guid>
+    <short-name>location78</short-name>
+    <full-name>Location 78</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000079</uid>
+    <guid>30000000-0000-0000-0000-000000000079</guid>
+    <short-name>location79</short-name>
+    <full-name>Location 79</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000080</uid>
+    <guid>30000000-0000-0000-0000-000000000080</guid>
+    <short-name>location80</short-name>
+    <full-name>Location 80</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000081</uid>
+    <guid>30000000-0000-0000-0000-000000000081</guid>
+    <short-name>location81</short-name>
+    <full-name>Location 81</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000082</uid>
+    <guid>30000000-0000-0000-0000-000000000082</guid>
+    <short-name>location82</short-name>
+    <full-name>Location 82</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000083</uid>
+    <guid>30000000-0000-0000-0000-000000000083</guid>
+    <short-name>location83</short-name>
+    <full-name>Location 83</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000084</uid>
+    <guid>30000000-0000-0000-0000-000000000084</guid>
+    <short-name>location84</short-name>
+    <full-name>Location 84</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000085</uid>
+    <guid>30000000-0000-0000-0000-000000000085</guid>
+    <short-name>location85</short-name>
+    <full-name>Location 85</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000086</uid>
+    <guid>30000000-0000-0000-0000-000000000086</guid>
+    <short-name>location86</short-name>
+    <full-name>Location 86</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000087</uid>
+    <guid>30000000-0000-0000-0000-000000000087</guid>
+    <short-name>location87</short-name>
+    <full-name>Location 87</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000088</uid>
+    <guid>30000000-0000-0000-0000-000000000088</guid>
+    <short-name>location88</short-name>
+    <full-name>Location 88</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000089</uid>
+    <guid>30000000-0000-0000-0000-000000000089</guid>
+    <short-name>location89</short-name>
+    <full-name>Location 89</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000090</uid>
+    <guid>30000000-0000-0000-0000-000000000090</guid>
+    <short-name>location90</short-name>
+    <full-name>Location 90</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000091</uid>
+    <guid>30000000-0000-0000-0000-000000000091</guid>
+    <short-name>location91</short-name>
+    <full-name>Location 91</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000092</uid>
+    <guid>30000000-0000-0000-0000-000000000092</guid>
+    <short-name>location92</short-name>
+    <full-name>Location 92</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000093</uid>
+    <guid>30000000-0000-0000-0000-000000000093</guid>
+    <short-name>location93</short-name>
+    <full-name>Location 93</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000094</uid>
+    <guid>30000000-0000-0000-0000-000000000094</guid>
+    <short-name>location94</short-name>
+    <full-name>Location 94</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000095</uid>
+    <guid>30000000-0000-0000-0000-000000000095</guid>
+    <short-name>location95</short-name>
+    <full-name>Location 95</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000096</uid>
+    <guid>30000000-0000-0000-0000-000000000096</guid>
+    <short-name>location96</short-name>
+    <full-name>Location 96</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000097</uid>
+    <guid>30000000-0000-0000-0000-000000000097</guid>
+    <short-name>location97</short-name>
+    <full-name>Location 97</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000098</uid>
+    <guid>30000000-0000-0000-0000-000000000098</guid>
+    <short-name>location98</short-name>
+    <full-name>Location 98</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000099</uid>
+    <guid>30000000-0000-0000-0000-000000000099</guid>
+    <short-name>location99</short-name>
+    <full-name>Location 99</full-name>
+</record>
+<record type="location">
+    <uid>30000000-0000-0000-0000-000000000100</uid>
+    <guid>30000000-0000-0000-0000-000000000100</guid>
+    <short-name>location100</short-name>
+    <full-name>Location 100</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000001</uid>
+    <guid>40000000-0000-0000-0000-000000000001</guid>
+    <short-name>resource01</short-name>
+    <full-name>Resource 01</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000002</uid>
+    <guid>40000000-0000-0000-0000-000000000002</guid>
+    <short-name>resource02</short-name>
+    <full-name>Resource 02</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000003</uid>
+    <guid>40000000-0000-0000-0000-000000000003</guid>
+    <short-name>resource03</short-name>
+    <full-name>Resource 03</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000004</uid>
+    <guid>40000000-0000-0000-0000-000000000004</guid>
+    <short-name>resource04</short-name>
+    <full-name>Resource 04</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000005</uid>
+    <guid>40000000-0000-0000-0000-000000000005</guid>
+    <short-name>resource05</short-name>
+    <full-name>Resource 05</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000006</uid>
+    <guid>40000000-0000-0000-0000-000000000006</guid>
+    <short-name>resource06</short-name>
+    <full-name>Resource 06</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000007</uid>
+    <guid>40000000-0000-0000-0000-000000000007</guid>
+    <short-name>resource07</short-name>
+    <full-name>Resource 07</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000008</uid>
+    <guid>40000000-0000-0000-0000-000000000008</guid>
+    <short-name>resource08</short-name>
+    <full-name>Resource 08</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000009</uid>
+    <guid>40000000-0000-0000-0000-000000000009</guid>
+    <short-name>resource09</short-name>
+    <full-name>Resource 09</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000010</uid>
+    <guid>40000000-0000-0000-0000-000000000010</guid>
+    <short-name>resource10</short-name>
+    <full-name>Resource 10</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000011</uid>
+    <guid>40000000-0000-0000-0000-000000000011</guid>
+    <short-name>resource11</short-name>
+    <full-name>Resource 11</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000012</uid>
+    <guid>40000000-0000-0000-0000-000000000012</guid>
+    <short-name>resource12</short-name>
+    <full-name>Resource 12</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000013</uid>
+    <guid>40000000-0000-0000-0000-000000000013</guid>
+    <short-name>resource13</short-name>
+    <full-name>Resource 13</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000014</uid>
+    <guid>40000000-0000-0000-0000-000000000014</guid>
+    <short-name>resource14</short-name>
+    <full-name>Resource 14</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000015</uid>
+    <guid>40000000-0000-0000-0000-000000000015</guid>
+    <short-name>resource15</short-name>
+    <full-name>Resource 15</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000016</uid>
+    <guid>40000000-0000-0000-0000-000000000016</guid>
+    <short-name>resource16</short-name>
+    <full-name>Resource 16</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000017</uid>
+    <guid>40000000-0000-0000-0000-000000000017</guid>
+    <short-name>resource17</short-name>
+    <full-name>Resource 17</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000018</uid>
+    <guid>40000000-0000-0000-0000-000000000018</guid>
+    <short-name>resource18</short-name>
+    <full-name>Resource 18</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000019</uid>
+    <guid>40000000-0000-0000-0000-000000000019</guid>
+    <short-name>resource19</short-name>
+    <full-name>Resource 19</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000020</uid>
+    <guid>40000000-0000-0000-0000-000000000020</guid>
+    <short-name>resource20</short-name>
+    <full-name>Resource 20</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000021</uid>
+    <guid>40000000-0000-0000-0000-000000000021</guid>
+    <short-name>resource21</short-name>
+    <full-name>Resource 21</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000022</uid>
+    <guid>40000000-0000-0000-0000-000000000022</guid>
+    <short-name>resource22</short-name>
+    <full-name>Resource 22</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000023</uid>
+    <guid>40000000-0000-0000-0000-000000000023</guid>
+    <short-name>resource23</short-name>
+    <full-name>Resource 23</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000024</uid>
+    <guid>40000000-0000-0000-0000-000000000024</guid>
+    <short-name>resource24</short-name>
+    <full-name>Resource 24</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000025</uid>
+    <guid>40000000-0000-0000-0000-000000000025</guid>
+    <short-name>resource25</short-name>
+    <full-name>Resource 25</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000026</uid>
+    <guid>40000000-0000-0000-0000-000000000026</guid>
+    <short-name>resource26</short-name>
+    <full-name>Resource 26</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000027</uid>
+    <guid>40000000-0000-0000-0000-000000000027</guid>
+    <short-name>resource27</short-name>
+    <full-name>Resource 27</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000028</uid>
+    <guid>40000000-0000-0000-0000-000000000028</guid>
+    <short-name>resource28</short-name>
+    <full-name>Resource 28</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000029</uid>
+    <guid>40000000-0000-0000-0000-000000000029</guid>
+    <short-name>resource29</short-name>
+    <full-name>Resource 29</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000030</uid>
+    <guid>40000000-0000-0000-0000-000000000030</guid>
+    <short-name>resource30</short-name>
+    <full-name>Resource 30</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000031</uid>
+    <guid>40000000-0000-0000-0000-000000000031</guid>
+    <short-name>resource31</short-name>
+    <full-name>Resource 31</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000032</uid>
+    <guid>40000000-0000-0000-0000-000000000032</guid>
+    <short-name>resource32</short-name>
+    <full-name>Resource 32</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000033</uid>
+    <guid>40000000-0000-0000-0000-000000000033</guid>
+    <short-name>resource33</short-name>
+    <full-name>Resource 33</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000034</uid>
+    <guid>40000000-0000-0000-0000-000000000034</guid>
+    <short-name>resource34</short-name>
+    <full-name>Resource 34</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000035</uid>
+    <guid>40000000-0000-0000-0000-000000000035</guid>
+    <short-name>resource35</short-name>
+    <full-name>Resource 35</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000036</uid>
+    <guid>40000000-0000-0000-0000-000000000036</guid>
+    <short-name>resource36</short-name>
+    <full-name>Resource 36</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000037</uid>
+    <guid>40000000-0000-0000-0000-000000000037</guid>
+    <short-name>resource37</short-name>
+    <full-name>Resource 37</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000038</uid>
+    <guid>40000000-0000-0000-0000-000000000038</guid>
+    <short-name>resource38</short-name>
+    <full-name>Resource 38</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000039</uid>
+    <guid>40000000-0000-0000-0000-000000000039</guid>
+    <short-name>resource39</short-name>
+    <full-name>Resource 39</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000040</uid>
+    <guid>40000000-0000-0000-0000-000000000040</guid>
+    <short-name>resource40</short-name>
+    <full-name>Resource 40</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000041</uid>
+    <guid>40000000-0000-0000-0000-000000000041</guid>
+    <short-name>resource41</short-name>
+    <full-name>Resource 41</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000042</uid>
+    <guid>40000000-0000-0000-0000-000000000042</guid>
+    <short-name>resource42</short-name>
+    <full-name>Resource 42</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000043</uid>
+    <guid>40000000-0000-0000-0000-000000000043</guid>
+    <short-name>resource43</short-name>
+    <full-name>Resource 43</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000044</uid>
+    <guid>40000000-0000-0000-0000-000000000044</guid>
+    <short-name>resource44</short-name>
+    <full-name>Resource 44</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000045</uid>
+    <guid>40000000-0000-0000-0000-000000000045</guid>
+    <short-name>resource45</short-name>
+    <full-name>Resource 45</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000046</uid>
+    <guid>40000000-0000-0000-0000-000000000046</guid>
+    <short-name>resource46</short-name>
+    <full-name>Resource 46</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000047</uid>
+    <guid>40000000-0000-0000-0000-000000000047</guid>
+    <short-name>resource47</short-name>
+    <full-name>Resource 47</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000048</uid>
+    <guid>40000000-0000-0000-0000-000000000048</guid>
+    <short-name>resource48</short-name>
+    <full-name>Resource 48</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000049</uid>
+    <guid>40000000-0000-0000-0000-000000000049</guid>
+    <short-name>resource49</short-name>
+    <full-name>Resource 49</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000050</uid>
+    <guid>40000000-0000-0000-0000-000000000050</guid>
+    <short-name>resource50</short-name>
+    <full-name>Resource 50</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000051</uid>
+    <guid>40000000-0000-0000-0000-000000000051</guid>
+    <short-name>resource51</short-name>
+    <full-name>Resource 51</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000052</uid>
+    <guid>40000000-0000-0000-0000-000000000052</guid>
+    <short-name>resource52</short-name>
+    <full-name>Resource 52</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000053</uid>
+    <guid>40000000-0000-0000-0000-000000000053</guid>
+    <short-name>resource53</short-name>
+    <full-name>Resource 53</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000054</uid>
+    <guid>40000000-0000-0000-0000-000000000054</guid>
+    <short-name>resource54</short-name>
+    <full-name>Resource 54</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000055</uid>
+    <guid>40000000-0000-0000-0000-000000000055</guid>
+    <short-name>resource55</short-name>
+    <full-name>Resource 55</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000056</uid>
+    <guid>40000000-0000-0000-0000-000000000056</guid>
+    <short-name>resource56</short-name>
+    <full-name>Resource 56</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000057</uid>
+    <guid>40000000-0000-0000-0000-000000000057</guid>
+    <short-name>resource57</short-name>
+    <full-name>Resource 57</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000058</uid>
+    <guid>40000000-0000-0000-0000-000000000058</guid>
+    <short-name>resource58</short-name>
+    <full-name>Resource 58</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000059</uid>
+    <guid>40000000-0000-0000-0000-000000000059</guid>
+    <short-name>resource59</short-name>
+    <full-name>Resource 59</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000060</uid>
+    <guid>40000000-0000-0000-0000-000000000060</guid>
+    <short-name>resource60</short-name>
+    <full-name>Resource 60</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000061</uid>
+    <guid>40000000-0000-0000-0000-000000000061</guid>
+    <short-name>resource61</short-name>
+    <full-name>Resource 61</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000062</uid>
+    <guid>40000000-0000-0000-0000-000000000062</guid>
+    <short-name>resource62</short-name>
+    <full-name>Resource 62</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000063</uid>
+    <guid>40000000-0000-0000-0000-000000000063</guid>
+    <short-name>resource63</short-name>
+    <full-name>Resource 63</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000064</uid>
+    <guid>40000000-0000-0000-0000-000000000064</guid>
+    <short-name>resource64</short-name>
+    <full-name>Resource 64</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000065</uid>
+    <guid>40000000-0000-0000-0000-000000000065</guid>
+    <short-name>resource65</short-name>
+    <full-name>Resource 65</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000066</uid>
+    <guid>40000000-0000-0000-0000-000000000066</guid>
+    <short-name>resource66</short-name>
+    <full-name>Resource 66</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000067</uid>
+    <guid>40000000-0000-0000-0000-000000000067</guid>
+    <short-name>resource67</short-name>
+    <full-name>Resource 67</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000068</uid>
+    <guid>40000000-0000-0000-0000-000000000068</guid>
+    <short-name>resource68</short-name>
+    <full-name>Resource 68</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000069</uid>
+    <guid>40000000-0000-0000-0000-000000000069</guid>
+    <short-name>resource69</short-name>
+    <full-name>Resource 69</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000070</uid>
+    <guid>40000000-0000-0000-0000-000000000070</guid>
+    <short-name>resource70</short-name>
+    <full-name>Resource 70</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000071</uid>
+    <guid>40000000-0000-0000-0000-000000000071</guid>
+    <short-name>resource71</short-name>
+    <full-name>Resource 71</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000072</uid>
+    <guid>40000000-0000-0000-0000-000000000072</guid>
+    <short-name>resource72</short-name>
+    <full-name>Resource 72</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000073</uid>
+    <guid>40000000-0000-0000-0000-000000000073</guid>
+    <short-name>resource73</short-name>
+    <full-name>Resource 73</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000074</uid>
+    <guid>40000000-0000-0000-0000-000000000074</guid>
+    <short-name>resource74</short-name>
+    <full-name>Resource 74</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000075</uid>
+    <guid>40000000-0000-0000-0000-000000000075</guid>
+    <short-name>resource75</short-name>
+    <full-name>Resource 75</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000076</uid>
+    <guid>40000000-0000-0000-0000-000000000076</guid>
+    <short-name>resource76</short-name>
+    <full-name>Resource 76</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000077</uid>
+    <guid>40000000-0000-0000-0000-000000000077</guid>
+    <short-name>resource77</short-name>
+    <full-name>Resource 77</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000078</uid>
+    <guid>40000000-0000-0000-0000-000000000078</guid>
+    <short-name>resource78</short-name>
+    <full-name>Resource 78</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000079</uid>
+    <guid>40000000-0000-0000-0000-000000000079</guid>
+    <short-name>resource79</short-name>
+    <full-name>Resource 79</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000080</uid>
+    <guid>40000000-0000-0000-0000-000000000080</guid>
+    <short-name>resource80</short-name>
+    <full-name>Resource 80</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000081</uid>
+    <guid>40000000-0000-0000-0000-000000000081</guid>
+    <short-name>resource81</short-name>
+    <full-name>Resource 81</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000082</uid>
+    <guid>40000000-0000-0000-0000-000000000082</guid>
+    <short-name>resource82</short-name>
+    <full-name>Resource 82</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000083</uid>
+    <guid>40000000-0000-0000-0000-000000000083</guid>
+    <short-name>resource83</short-name>
+    <full-name>Resource 83</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000084</uid>
+    <guid>40000000-0000-0000-0000-000000000084</guid>
+    <short-name>resource84</short-name>
+    <full-name>Resource 84</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000085</uid>
+    <guid>40000000-0000-0000-0000-000000000085</guid>
+    <short-name>resource85</short-name>
+    <full-name>Resource 85</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000086</uid>
+    <guid>40000000-0000-0000-0000-000000000086</guid>
+    <short-name>resource86</short-name>
+    <full-name>Resource 86</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000087</uid>
+    <guid>40000000-0000-0000-0000-000000000087</guid>
+    <short-name>resource87</short-name>
+    <full-name>Resource 87</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000088</uid>
+    <guid>40000000-0000-0000-0000-000000000088</guid>
+    <short-name>resource88</short-name>
+    <full-name>Resource 88</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000089</uid>
+    <guid>40000000-0000-0000-0000-000000000089</guid>
+    <short-name>resource89</short-name>
+    <full-name>Resource 89</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000090</uid>
+    <guid>40000000-0000-0000-0000-000000000090</guid>
+    <short-name>resource90</short-name>
+    <full-name>Resource 90</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000091</uid>
+    <guid>40000000-0000-0000-0000-000000000091</guid>
+    <short-name>resource91</short-name>
+    <full-name>Resource 91</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000092</uid>
+    <guid>40000000-0000-0000-0000-000000000092</guid>
+    <short-name>resource92</short-name>
+    <full-name>Resource 92</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000093</uid>
+    <guid>40000000-0000-0000-0000-000000000093</guid>
+    <short-name>resource93</short-name>
+    <full-name>Resource 93</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000094</uid>
+    <guid>40000000-0000-0000-0000-000000000094</guid>
+    <short-name>resource94</short-name>
+    <full-name>Resource 94</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000095</uid>
+    <guid>40000000-0000-0000-0000-000000000095</guid>
+    <short-name>resource95</short-name>
+    <full-name>Resource 95</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000096</uid>
+    <guid>40000000-0000-0000-0000-000000000096</guid>
+    <short-name>resource96</short-name>
+    <full-name>Resource 96</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000097</uid>
+    <guid>40000000-0000-0000-0000-000000000097</guid>
+    <short-name>resource97</short-name>
+    <full-name>Resource 97</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000098</uid>
+    <guid>40000000-0000-0000-0000-000000000098</guid>
+    <short-name>resource98</short-name>
+    <full-name>Resource 98</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000099</uid>
+    <guid>40000000-0000-0000-0000-000000000099</guid>
+    <short-name>resource99</short-name>
+    <full-name>Resource 99</full-name>
+</record>
+<record type="resource">
+    <uid>40000000-0000-0000-0000-000000000100</uid>
+    <guid>40000000-0000-0000-0000-000000000100</guid>
+    <short-name>resource100</short-name>
+    <full-name>Resource 100</full-name>
+</record>
+</directory>
