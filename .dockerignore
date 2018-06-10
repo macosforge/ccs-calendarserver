@@ -1,0 +1,23 @@
+*.egg-info/
+*.o
+*.py[co]
+*.so
+_trial_temp*/
+build/
+dropin.cache
+*~
+*.lock
+.git
+.gitignore
+.gitmodules
+*.pyc
+.develop/
+data/
+bin/calendarserver_*
+calendarserver/version.py
+conf/caldavd-dev.plist
+subprojects/
+_run/
+
+# Otherwise any change to the Dockerfile itself means a complete rebuild
+Dockerfile
