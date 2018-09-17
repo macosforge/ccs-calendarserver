@@ -24,7 +24,7 @@ repository. To participate, go to:
 and join the appropriate mailing lists.  We also use IRC, as described
 here:
 
-  https://trac.calendarserver.org/wiki/IRC
+  https://www.calendarserver.org/IRC.html
 
 There are many ways to join the project.  One may write code, test the
 software and file bugs, write documentation, etc.
