@@ -78,7 +78,7 @@ class CommonUIDProvisioningResource(object):
             )
             returnValue(None)
 
-        assert len(name) > 4, "Directory record has an invalid GUID: %r" % (
+        assert len(name) > 4, "Directory record has an invalid GUID (too short): %r" % (
             name,)
 
         if record.thisServer():
