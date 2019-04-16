@@ -30,3 +30,5 @@ Twisted==16.6.0
 
     incremental==16.10.1
     constantly==15.1
+
+TxSNI==0.1.9

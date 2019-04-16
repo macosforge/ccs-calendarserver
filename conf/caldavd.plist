@@ -300,6 +300,18 @@
         SSL/TLS
       -->
 
+    <!-- Whether or not to enable SNI for CCS. If yes, configure DefaultSSLBundle & SSLDir. If not, configure the rest of the keys here -->
+    <key>SNIMode</key>
+    <false/>
+
+    <!-- "Default" combined key/cert/CAcert file to use when SNI is active -->
+    <key>DefaultSSLBundle</key>
+    <string></string>
+
+    <!-- Combined key/cert/CAcert SSL bundle directory when SNI is active (indexed by host) -->
+    <key>SSLDir</key>
+    <string></string>
+
     <!-- Public key -->
     <key>SSLCertificate</key>
     <string></string>
