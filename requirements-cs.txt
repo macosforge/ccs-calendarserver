@@ -17,7 +17,7 @@
                 #setuptools
 
         # [DAL] extra
-              sqlparse==0.2.0
+              sqlparse==0.2.4
 
         # [OpenDirectory] extra
             #pyobjc-framework-OpenDirectory  # Use system module
