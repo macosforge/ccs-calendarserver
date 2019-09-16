@@ -132,7 +132,7 @@ class FreeBusyURLResource (ReadOnlyNoCopyResourceMixIn, CalDAVResource):
 
     def http_GET(self, request):
         """
-        The free-busy URL POST method.
+        The free-busy URL GET method.
         """
         return self._processFBURL(request)
 
