@@ -2,7 +2,7 @@
 # Twisted dependency for OS X systems (uses pySecureTransport).
 ##
 
-Twisted==16.6.0
+Twisted==19.7.0
     #zope.interface
     pycrypto==2.6.1
     incremental==16.10.1
