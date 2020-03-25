@@ -1,0 +1,73 @@
+#!/bin/sh
+# kFreeBSD do not accept scripts as interpreters, using #!/bin/sh and sourcing.
+if [ true != "$INIT_D_SCRIPT_SOURCED" ] ; then
+    set "$0" "$@"; INIT_D_SCRIPT_SOURCED=true . /lib/init/init-d-script
+fi
+### BEGIN INIT INFO
+# Provides:          skeleton
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Calendar and Contacts Server daaemon
+# Description:       This file is prepared to start Calendar and Contacts Server
+#                    as a daemon.
+#                    single forking daemon capable of writing a pid
+#                    file.  To get other behavoirs, implemend
+#                    do_start(), do_stop() or other functions to
+#                    override the defaults in /lib/init/init-d-script.
+### END INIT INFO
+
+# Author: Tamás Nacsák <tnacsak@me.com>
+# Thanks to cpc11-cdif12-2-0-cust1 at UbuntuWiki https://wiki.ubuntu.com/CalendarServer/GutsyRecipe 
+# who prepared the basis, what had to be actualised only
+
+DESC="Calendar and Contacts Server"
+DAEMON=/opt/var/CalendarServer/ccs-calendarserver/bin/run
+
+. /lib/lsb/init-functions
+
+CALDAVD="/opt/var/CalendarServer/ccs-calendarserver/bin/run"
+CALDAVD_USER="caldavd"
+CALDAVD_OPTS="-n"
+PIDFILE="/opt/caldavd/CalendarServer/ccs-calendarserver/caldavd.pid"
+NAME=caldavd
+
+test -x $CALDAVD || exit 0
+
+case "$1" in
+  start)
+        log_daemon_msg "Starting Calendar Server" "$NAME"
+        if start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --chuid $CALDAVD_USER --exec $CALDAVD -- $CALDAVD_OPTS; then
+            log_end_msg 0
+        else
+            log_end_msg 1
+        fi
+        ;;
+  stop)
+        log_daemon_msg "Stopping Calendar Server" "$NAME"
+        if start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE; then
+            log_end_msg 0
+        else
+            log_end_msg 1
+        fi
+        ;;
+  restart)
+        log_daemon_msg "Restarting Calendar Server" "$NAME"
+        start-stop-daemon --stop --quiet --oknodo --retry 30 --pidfile $PIDFILE
+        if start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --chuid $CALDAVD_USER --exec $CALDAVD -- $CALDAVD_OPTS; then
+            log_end_msg 0
+        else
+            log_end_msg 1
+        fi
+        ;;
+  status)
+        status_of_proc -p "$CALDAVD" "$NAME" && exit 0 || exit $?
+        ;;
+  *)
+        log_action_msg "Usage: /etc/init.d/caldavd {start|stop|restart|status}"
+        exit 1
+esac
+
+exit 0
+
