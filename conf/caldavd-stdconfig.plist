@@ -742,6 +742,17 @@
 
 	<!-- SSL/TLS -->
 
+	<key>SNIMode</key>
+	<false/>
+
+	<!-- Directory for housing combined key/cert/CAcert files indexed by hostname -->
+	<key>SSLDir</key>
+	<string></string>
+
+	<!-- Combined key/cert/CAcert file to fall back to when no hostname provided -->
+	<key>DefaultSSLBundle</key>
+	<string></string>
+
 	<!-- Public key -->
 	<key>SSLCertificate</key>
 	<string></string>

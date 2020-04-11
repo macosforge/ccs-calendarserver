@@ -64,7 +64,18 @@ from twext.python.log import Logger
 from twext.internet.fswatch import (
     DirectoryChangeListener, IDirectoryChangeListenee
 )
+
+# Old ChainingOpenSSLContextFactory from twext is being replaced with txsni so that we get SNI support
 from twext.internet.ssl import ChainingOpenSSLContextFactory
+
+# SNI support imports.. see DomainTLSDirectoryMap class for why I needed certificateOptionsFromPileOfPEM
+from txsni.snimap import SNIMap
+from txsni.maputils import Cache
+from twisted.python.filepath import FilePath
+from txsni.only_noticed_pypi_pem_after_i_wrote_this import (
+    certificateOptionsFromPileOfPEM
+)
+
 from twext.internet.tcp import MaxAcceptTCPServer, MaxAcceptSSLServer
 from twext.enterprise.adbapi2 import ConnectionPool
 from twext.enterprise.ienterprise import POSTGRES_DIALECT, ORACLE_DIALECT, DatabaseType
@@ -750,6 +761,28 @@ class StoreNotAvailable(Exception):
     Raised when we want to give up because the store is not available
     """
 
+# Mostly copied from TxSNI's HostDirectoryMap, but modified so as to be
+# somewhat more "intelligent" when no certificate exists for a domain
+# (then it falls back to "default" cert)
+class SSLDirectoryMap(object):
+    def __init__(self, directoryPath, defaultBundle):
+        self.directoryPath = directoryPath
+	self.defaultBundle = defaultBundle
+
+
+    def __getitem__(self, hostname):
+        # Check to see if hostname set for request, if not, use default cert
+        filePath = self.defaultBundle
+        if hostname is not None:
+            filePath = self.directoryPath.child(hostname).siblingExtension(".pem")
+        if filePath.isfile():
+            return certificateOptionsFromPileOfPEM(filePath.getContent())
+        else:
+            # Attempt fallback to default cert, as it is at least "better than nothing"
+            if self.defaultBundle.isfile():
+                return certificateOptionsFromPileOfPEM(self.defaultBundle.getContent());
+	        from pprint import pformat
+	        raise KeyError("No pem file found for " + hostname + " when looking in '" + pformat(filePath) + "'")
 
 class CalDAVServiceMaker (object):
     log = Logger()
@@ -858,6 +891,8 @@ class CalDAVServiceMaker (object):
         Create an SSL context factory for use with any SSL socket talking to
         this server.
         """
+	if config.SNIMode:
+		return SNIMap(Cache(SSLDirectoryMap(FilePath(config.SSLDir), FilePath(config.DefaultSSLBundle))))
         return ChainingOpenSSLContextFactory(
             config.SSLPrivateKey,
             config.SSLCertificate,
@@ -871,6 +906,7 @@ class CalDAVServiceMaker (object):
             clientCACertFileNames=config.Authentication.ClientCertificate.CAFiles,
             sendCAsToClient=config.Authentication.ClientCertificate.SendCAsToClient,
         )
+
 
     def makeService_Slave(self, options):
         """

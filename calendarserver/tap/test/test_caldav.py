@@ -682,6 +682,42 @@ class SlaveServiceTests(CalDAVServiceMakerTestBase):
             context.certificateFileName,
         )
 
+class SNIModeServiceTests(CalDAVServiceMakerTestBase):
+    """
+    Test various configurations of SNI Mode
+    """
+
+    def configure(self):
+        super(SNIModeServiceTests, self).configure()
+        config.ProcessType = "Slave"
+        config.HTTPPort = 8008
+        config.SSLPort = 8443
+        config.EnableSSL = True
+        config.SNIMode = True
+        pemDir = os.path.join(sourceRoot, "twistedcaldav/test/data")
+        pemDefault = os.path.join(sourceRoot, "twistedcaldav/test/data/server.pem")
+        config.SSLDir = pemDir
+        config.DefaultSSLBundle = pemDefault
+
+    def test_SNIConfiguration(self):
+        """
+        Test that the configuration of the SSLServer reflect the fact we're using SNI
+        """
+        service = CalDAVServiceMaker().makeService(self.options)
+        service = service.getServiceNamed(CalDAVService.connectionServiceName)
+
+        sslService = None
+        for s in service.services:
+            if isinstance(s, internet.SSLServer):
+                sslService = s
+                break
+
+        self.failIf(sslService is None, "No SSL/TLS Service found")
+
+        context = sslService.args[2]
+
+        from txsni.snimap import SNIMap
+        self.assertTrue(isinstance( context, SNIMap ))
 
 class NoSSLTests(CalDAVServiceMakerTestBase):
 

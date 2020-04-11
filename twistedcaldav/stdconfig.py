@@ -489,6 +489,9 @@ DEFAULT_CONFIG = {
     #
     # SSL/TLS
     #
+    "SNIMode": False,
+    "SSLDir": "", # Directory for housing combined key/cert/CAcert files indexed by hostname
+    "DefaultSSLBundle": "", # Combined key/cert/CAcert file to fall back to when no hostname provided
     "SSLCertificate": "",  # Public key
     "SSLPrivateKey": "",  # Private key
     "SSLAuthorityChain": "",  # Certificate Authority Chain
